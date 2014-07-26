@@ -1,0 +1,1106 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: 	  <http://www.w3.org/2002/07/owl#> . 
+@prefix foaf:     <http://xmlns.com/foaf/0.1/#> .
+@prefix a:        <http://www.example.org/OWL2InstanceData#> .
+@prefix ex: 	  <http://www.example.org/ex#> .
+@prefix : 	      <http://www.example.org/ex#> .
+
+
+# ---------------
+# classes:
+	
+	foaf:Person
+		a rdfs:Class, owl:Class ;
+		rdfs:subClassOf owl:Thing .
+
+# -----
+
+# ---------------
+# ObjectIntersectionOf
+
+
+	# example ( 2 class expressions )
+	# -----		
+	# ObjectIntersectionOf( a:CE1 a:CE2 ) 
+    a:ObjectIntersectionOf_C1
+	    rdf:type owl:Class ;
+        owl:intersectionOf ( a:CE1 a:CE2 ) .
+	a:ObjectIntersectionOf_I1
+		rdf:type owl:Thing ;
+		rdf:type a:ObjectIntersectionOf_C1 ;
+		rdf:type a:CE1 ;
+	    rdf:type a:CE2 .
+	# --> ObjectIntersectionOf( a:CE1 a:CE2 ) 
+	
+	# example ( 3 class expressions )
+	# -----	
+	# ObjectIntersectionOf( a:CE1 a:CE2 a:CE3 ) 
+    a:ObjectIntersectionOf_C2 
+	    rdf:type owl:Class ;
+        owl:intersectionOf ( a:CE1 a:CE2 a:CE3 ) .
+	a:ObjectIntersectionOf_I2
+		rdf:type owl:Thing ;
+		rdf:type a:ObjectIntersectionOf_C2 ;
+		rdf:type a:CE1 ;
+	    rdf:type a:CE2 ;
+	    rdf:type a:CE3 .
+	# --> ObjectIntersectionOf( a:CE1 a:CE2 a:CE3 ) 
+	
+# -----
+
+# ---------------
+# ObjectUnionOf
+
+
+	# example ( 2 class expressions )
+	# -----		
+	# ObjectUnionOf( a:CE1 a:CE2 ) 
+    a:ObjectUnionOf_C1
+	    rdf:type owl:Class ;
+        owl:unionOf ( a:CE1 a:CE2 ) .
+	a:ObjectUnionOf_I1
+		rdf:type owl:Thing ;
+		rdf:type a:ObjectUnionOf_C1 ;
+	#	rdf:type a:CE1 ;
+	    rdf:type a:CE2 .
+	# --> ObjectUnionOf( a:CE1 a:CE2 ) 
+	
+	# example ( 3 class expressions )
+	# -----	
+	# ObjectUnionOf( a:CE1 a:CE2 a:CE3 ) 
+    a:ObjectUnionOf_C2 
+	    rdf:type owl:Class ;
+        owl:unionOf ( a:CE1 a:CE2 a:CE3 ) .
+	a:ObjectUnionOf_I2
+		rdf:type owl:Thing ;
+		rdf:type a:ObjectUnionOf_C2 ;
+	#	rdf:type a:CE1 ;
+	#   rdf:type a:CE2 .
+	    rdf:type a:CE3 .
+	# --> ObjectUnionOf( a:CE1 a:CE2 a:CE3 ) 
+	
+# -----
+
+# ---------------
+# ObjectComplementOf
+
+
+	# example 
+	# -----		
+	# ObjectComplementOf( a:CE1 )
+    a:ObjectComplementOf_C1 
+	    rdf:type owl:Class ;
+        owl:complementOf a:CE1 .
+	a:ObjectComplementOf_I1
+		rdf:type owl:Thing ;
+		rdf:type a:ObjectComplementOf_C1 .
+	#	rdf:type a:CE1 .
+	# --> ObjectComplementOf ( a:CE1 )
+	
+# -----
+
+# ---------------
+# ObjectOneOf
+
+	
+	# 1 Individual
+	# -----
+	# EquivalentClasses( a:ObjectOneOf_C1 ObjectOneOf( a:ObjectOneOf_I1_1 ) )
+	a:ObjectOneOf_C1 owl:equivalentClass a:ObjectOneOf_EC1 .
+	a:ObjectOneOf_EC1 
+		rdf:type owl:Class ;
+	    owl:oneOf ( a:ObjectOneOf_I1_1 ) . 
+	a:ObjectOneOf_I1_1
+		rdf:type owl:Thing ;
+		rdf:type a:ObjectOneOf_C1 .
+#	a:ObjectOneOf_I1_2
+#		rdf:type owl:Thing ;
+#		rdf:type a:ObjectOneOf_C1 .
+		
+	# 2 Individuals
+	# -----
+	# EquivalentClasses( a:ObjectOneOf_C2 ObjectOneOf( a:ObjectOneOf_I2_1 a:ObjectOneOf_I2_2 ) )
+	a:ObjectOneOf_C2 owl:equivalentClass a:ObjectOneOf_EC2 .
+	a:ObjectOneOf_EC2 
+		rdf:type owl:Class ;
+	    owl:oneOf ( a:ObjectOneOf_I2_1 a:ObjectOneOf_I2_2 ) . 
+	a:ObjectOneOf_I2_1
+		rdf:type owl:Thing ;
+		rdf:type a:ObjectOneOf_C2 .
+#	a:ObjectOneOf_I2_3
+#		rdf:type owl:Thing ;
+#		rdf:type a:ObjectOneOf_C2 .
+		
+	# 3 Individuals
+	# -----
+	# EquivalentClasses( a:ObjectOneOf_C3 ObjectOneOf( a:ObjectOneOf_I3_1 a:ObjectOneOf_I3_2 a:ObjectOneOf_I3_3 ) )
+	a:ObjectOneOf_C3 owl:equivalentClass a:ObjectOneOf_EC3 .
+	a:ObjectOneOf_EC3 
+		rdf:type owl:Class ;
+	    owl:oneOf ( a:ObjectOneOf_I3_1 a:ObjectOneOf_I3_2 a:ObjectOneOf_I3_3 ) . 
+	a:ObjectOneOf_I3_1
+		rdf:type owl:Thing ;
+		rdf:type a:ObjectOneOf_C3 .
+#	a:ObjectOneOf_I3_4
+#		rdf:type owl:Thing ;
+#		rdf:type a:ObjectOneOf_C3 .
+		
+	# 4 Individuals
+	# -----
+	# EquivalentClasses( a:ObjectOneOf_C4 ObjectOneOf( a:ObjectOneOf_I4_1 a:ObjectOneOf_I4_2 a:ObjectOneOf_I4_3 a:ObjectOneOf_I4_4 ) )
+	a:ObjectOneOf_C4 owl:equivalentClass a:ObjectOneOf_EC4 .
+	a:ObjectOneOf_EC4 
+		rdf:type owl:Class ;
+	    owl:oneOf ( a:ObjectOneOf_I4_1 a:ObjectOneOf_I4_2 a:ObjectOneOf_I4_3 a:ObjectOneOf_I4_4 ) . 
+	a:ObjectOneOf_I4_1
+		rdf:type owl:Thing ;
+		rdf:type a:ObjectOneOf_C4 .
+#	a:ObjectOneOf_I4_5
+#		rdf:type owl:Thing ;
+#		rdf:type a:ObjectOneOf_C4 .
+		
+	# 5 Individuals
+	# -----
+	# EquivalentClasses( a:ObjectOneOf_C5 ObjectOneOf( a:ObjectOneOf_I5_1 a:ObjectOneOf_I5_2 a:ObjectOneOf_I5_3 a:ObjectOneOf_I5_4 a:ObjectOneOf_I5_5 ) )
+	a:ObjectOneOf_C5 owl:equivalentClass a:ObjectOneOf_EC5 .
+	a:ObjectOneOf_EC5 
+		rdf:type owl:Class ;
+	    owl:oneOf ( a:ObjectOneOf_I5_1 a:ObjectOneOf_I5_2 a:ObjectOneOf_I5_3 a:ObjectOneOf_I5_4 a:ObjectOneOf_I5_5 ) . 
+	a:ObjectOneOf_I5_1
+		rdf:type owl:Thing ;
+		rdf:type a:ObjectOneOf_C5 .
+#	a:ObjectOneOf_I5_6
+#		rdf:type owl:Thing ;
+#		rdf:type a:ObjectOneOf_C5 .
+	
+	# 6 Individuals
+	# -----
+	# EquivalentClasses( a:ObjectOneOf_C6 ObjectOneOf( a:ObjectOneOf_I6_1 a:ObjectOneOf_I6_2 a:ObjectOneOf_I6_3 a:ObjectOneOf_I6_4 a:ObjectOneOf_I6_5 a:ObjectOneOf_I6_6 ) )
+	a:ObjectOneOf_C6 owl:equivalentClass a:ObjectOneOf_EC6 .
+	a:ObjectOneOf_EC6 
+		rdf:type owl:Class ;
+	    owl:oneOf ( a:ObjectOneOf_I6_1 a:ObjectOneOf_I6_2 a:ObjectOneOf_I6_3 a:ObjectOneOf_I6_4 a:ObjectOneOf_I6_5 a:ObjectOneOf_I6_6 ) . 
+	a:ObjectOneOf_I6_1
+		rdf:type owl:Thing ;
+		rdf:type a:ObjectOneOf_C6 .
+	a:ObjectOneOf_I6_2
+		rdf:type owl:Thing ;
+		rdf:type a:ObjectOneOf_C6 .
+
+# -----
+
+# ---------------
+# DataComplementOf
+
+
+	# example 
+	# -----		
+	# DataComplementOf( xsd:positiveInteger )
+    a:DataComplementOf_DR1 
+	    rdf:type rdfs:Datatype ;
+        owl:complementOf xsd:positiveInteger .
+	a:DataComplementOf_L1
+		rdf:type rdfs:Literal ;
+		rdf:type a:DataComplementOf_DR1 .
+	#	rdf:type xsd:positiveInteger .
+	# -->
+	
+# -----
+
+# ---------------
+# DataOneOf
+
+	
+	# 1 literal
+	# -----
+	# DataOneOf( "string" ) 
+	a:DataOneOf_DR1 
+		rdf:type rdfs:Datatype ;
+		owl:oneOf ( "string" ) .
+	a:DataOneOf_I1_1
+		rdf:type owl:Thing ;
+		a:DataOneOf_DPE1_1 "string"^^a:DataOneOf_DR1 .
+#	a:DataOneOf_I1_2
+#		rdf:type owl:Thing ;
+#		a:DataOneOf_DPE1_2 "1"^^a:DataOneOf_DR1 .
+	
+	# 2 literals
+	# -----
+	# DataOneOf( "string" "1"^^xsd:integer ) 
+	a:DataOneOf_DR2 
+		rdf:type rdfs:Datatype ;
+		owl:oneOf ( "string" "1"^^xsd:integer ) .
+	a:DataOneOf_I2_1
+		rdf:type owl:Thing ;
+		a:DataOneOf_DPE2_1 "string"^^a:DataOneOf_DR2 .
+	a:DataOneOf_I2_2
+		rdf:type owl:Thing ;
+		a:DataOneOf_DPE2_2 "1"^^a:DataOneOf_DR2 .
+#	a:DataOneOf_I2_3
+#		rdf:type owl:Thing ;
+#		a:DataOneOf_DPE2_2 "true"^^a:DataOneOf_DR2 .
+		
+	# 3 literals
+	# -----
+	# DataOneOf( "string" "1"^^xsd:integer "true"^^xsd:boolean ) 
+	a:DataOneOf_DR3 
+		rdf:type rdfs:Datatype ;
+		owl:oneOf ( "string" "1"^^xsd:integer "true"^^xsd:boolean ) .
+	a:DataOneOf_I3_1
+		rdf:type owl:Thing ;
+		a:DataOneOf_DPE3_1 "string"^^a:DataOneOf_DR3 .
+	a:DataOneOf_I3_2
+		rdf:type owl:Thing ;
+		a:DataOneOf_DPE3_2 "1"^^a:DataOneOf_DR3 .
+	a:DataOneOf_I3_3
+		rdf:type owl:Thing ;
+		a:DataOneOf_DPE3_3 "true"^^a:DataOneOf_DR3 .
+#	a:DataOneOf_I3_4
+#		rdf:type owl:Thing ;
+#		a:DataOneOf_DPE3_4 "1.1"^^a:DataOneOf_DR3 .
+		
+	# 4 literals
+	# -----
+	# DataOneOf( "string" "1"^^xsd:integer "true"^^xsd:boolean "1.1"^^xsd:float ) 
+	a:DataOneOf_DR4
+		rdf:type rdfs:Datatype ;
+		owl:oneOf ( "string" "1"^^xsd:integer "true"^^xsd:boolean "1.1"^^xsd:float ) .
+	a:DataOneOf_I4_1
+		rdf:type owl:Thing ;
+		a:DataOneOf_DPE4_1 "string"^^a:DataOneOf_DR4 .
+	a:DataOneOf_I4_2
+		rdf:type owl:Thing ;
+		a:DataOneOf_DPE4_2 "1"^^a:DataOneOf_DR4 .
+	a:DataOneOf_I4_3
+		rdf:type owl:Thing ;
+		a:DataOneOf_DPE4_3 "true"^^a:DataOneOf_DR4 .
+	a:DataOneOf_I4_4
+		rdf:type owl:Thing ;
+		a:DataOneOf_DPE4_4 "1.1"^^a:DataOneOf_DR4 .
+#	a:DataOneOf_I4_5
+#		rdf:type owl:Thing ;
+#		a:DataOneOf_DPE4_5 "5.7"^^a:DataOneOf_DR4 .
+		
+	# 5 literals
+	# -----
+	# DataOneOf( "string" "1"^^xsd:integer "true"^^xsd:boolean "1.1"^^xsd:float "5.7"^^xsd:double ) 
+	a:DataOneOf_DR5
+		rdf:type rdfs:Datatype ;
+		owl:oneOf ( "string" "1"^^xsd:integer "true"^^xsd:boolean "1.1"^^xsd:float "5.7"^^xsd:double ) .
+	a:DataOneOf_I5_1
+		rdf:type owl:Thing ;
+		a:DataOneOf_DPE5_1 "string"^^a:DataOneOf_DR5 .
+	a:DataOneOf_I5_2
+		rdf:type owl:Thing ;
+		a:DataOneOf_DPE4_2 "1"^^a:DataOneOf_DR5 .
+	a:DataOneOf_I5_3
+		rdf:type owl:Thing ;
+		a:DataOneOf_DPE4_3 "true"^^a:DataOneOf_DR5 .
+	a:DataOneOf_I5_4
+		rdf:type owl:Thing ;
+		a:DataOneOf_DPE4_4 "1.1"^^a:DataOneOf_DR5 .
+	a:DataOneOf_I5_5
+		rdf:type owl:Thing ;
+		a:DataOneOf_DPE4_5 "5.7"^^a:DataOneOf_DR5 .
+#	a:DataOneOf_I5_6
+#		rdf:type owl:Thing ;
+#		a:DataOneOf_DPE5_5 "text"^^a:DataOneOf_DR5 .
+
+# -----
+
+# ---------------
+# ObjectSomeValuesFrom
+
+
+	# example 
+	# -----
+	# ObjectSomeValuesFrom( a:ObjectSomeValuesFrom_OPE a:ObjectSomeValuesFrom_CE ) 			
+	a:ObjectSomeValuesFrom_C 
+        rdf:type owl:Restriction ;
+        owl:onProperty a:ObjectSomeValuesFrom_OPE ;
+        owl:someValuesFrom a:ObjectSomeValuesFrom_CE . 
+    a:ObjectSomeValuesFrom_I1
+		rdf:type owl:Thing ;
+        rdf:type a:ObjectSomeValuesFrom_C ;
+        a:ObjectSomeValuesFrom_OPE a:ObjectSomeValuesFrom_I2 ;
+		a:ObjectSomeValuesFrom_OPE a:ObjectSomeValuesFrom_I3 .
+    a:ObjectSomeValuesFrom_I2
+		rdf:type owl:Thing ;
+        rdf:type a:ObjectSomeValuesFrom_CE .
+    a:ObjectSomeValuesFrom_I3
+		rdf:type owl:Thing ;
+        rdf:type a:ObjectSomeValuesFrom_CE_2 .
+		
+	# example ( concrete )
+	# -----
+	:ParentOfSon rdfs:subClassOf [
+		a owl:Restriction ; 
+		owl:onProperty :fatherOf ; 
+		owl:someValuesFrom :Man ] .
+	:Peter 
+		a owl:Thing ;
+		a :ParentOfSon ;
+		:fatherOf :Stewie .
+	:Stewie
+		a owl:Thing .
+#		rdf:type :Man . 
+
+# -----
+
+# ---------------
+# ObjectAllValuesFrom
+
+
+	# example 
+	# -----
+	# ObjectAllValuesFrom( a:ObjectAllValuesFrom_OPE a:ObjectAllValuesFrom_CE ) 			
+	a:ObjectAllValuesFrom_C rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty a:ObjectAllValuesFrom_OPE ;
+        owl:allValuesFrom a:ObjectAllValuesFrom_CE ] . 
+    a:ObjectAllValuesFrom_I1
+		rdf:type owl:Thing ;
+        rdf:type a:ObjectAllValuesFrom_C ;
+        a:ObjectAllValuesFrom_OPE a:ObjectAllValuesFrom_I2 ;
+		a:ObjectAllValuesFrom_OPE a:ObjectAllValuesFrom_I3 .
+    a:ObjectAllValuesFrom_I2
+		rdf:type owl:Thing ;
+        rdf:type a:ObjectAllValuesFrom_CE .
+    a:ObjectAllValuesFrom_I3
+		rdf:type owl:Thing ;
+#       rdf:type a:ObjectAllValuesFrom_CE ;
+        rdf:type a:ObjectAllValuesFrom_CE_2 .
+	
+	# example (concrete) 
+	# -----
+	# ObjectAllValuesFrom( :hasPet :Dog ) 			
+	:ObjectAllValuesFrom_C2 rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasPet ;
+        owl:allValuesFrom :Dog ] . 
+    :Peter
+		rdf:type owl:Thing ;
+        rdf:type :ObjectAllValuesFrom_C2 ;
+        :hasPet :Brian ;
+		:hasPet :Azrael .
+    :Brian
+		rdf:type owl:Thing ;
+        rdf:type :Dog .
+    :Azrael
+		rdf:type owl:Thing ;
+        rdf:type :Dog ;
+        rdf:type :Cat .
+		
+# -----
+
+# ---------------
+# ObjectHasValue
+
+
+	# example 
+	# -----
+	# ObjectHasValue( a:ObjectHasValue_OPE a:ObjectHasValue_I ) 			
+	a:ObjectHasValue_C 
+        rdf:type owl:Restriction ;
+        owl:onProperty a:ObjectHasValue_OPE ;
+        owl:hasValue a:ObjectHasValue_I . 
+    a:ObjectHasValue_I1
+		rdf:type owl:Thing ;
+        rdf:type a:ObjectHasValue_C ;
+        a:ObjectHasValue_OPE a:ObjectHasValue_I ;
+		a:ObjectHasValue_OPE a:ObjectHasValue_I2 .
+    a:ObjectHasValue_I
+		rdf:type owl:Thing ; .
+    a:ObjectHasValue_I2
+		rdf:type owl:Thing .
+		
+# -----
+
+# ---------------
+# ObjectMinCardinality
+
+
+	# example ( owl:minCardinality )
+	# -----		
+	# ObjectMinCardinality( 3 a:hasPet )
+    a:ObjectMinCardinality_CE1 
+        rdf:type owl:Restriction ;
+        owl:minCardinality "3"^^xsd:nonNegativeInteger ;
+        owl:onProperty a:hasPet . 
+    a:ObjectMinCardinality_I1
+		rdf:type owl:Thing ;
+	    rdf:type a:ObjectMinCardinality_CE1 ;
+	    a:hasPet a:ObjectMinCardinality_I2 ;
+	    a:hasPet a:ObjectMinCardinality_I3 ;
+		a:hasPet a:ObjectMinCardinality_I4 .
+	a:ObjectMinCardinality_I2
+		rdf:type owl:Thing .
+	a:ObjectMinCardinality_I3
+		rdf:type owl:Thing .
+	a:ObjectMinCardinality_I4
+		rdf:type owl:Thing .
+	# --> ObjectMinCardinality ( 3 a:hasPet owl:Thing )
+	
+	# example ( owl:minQualifiedCardinality )
+	# -----
+    # ObjectMinCardinality ( 2 a:fatherOf a:Man ) 
+    a:ObjectMinCardinality_CE2 
+        rdf:type owl:Restriction ;
+        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+        owl:onProperty a:fatherOf ;
+        owl:onClass a:Man . 
+    a:ObjectMinCardinality_I5
+		rdf:type owl:Thing ;
+	    rdf:type a:ObjectMinCardinality_CE2 ;
+	    a:fatherOf a:ObjectMinCardinality_I6 ;
+		a:fatherOf a:ObjectMinCardinality_I7 ;
+		a:fatherOf a:ObjectMinCardinality_I8 .
+    a:ObjectMinCardinality_I6
+		rdf:type owl:Thing ;
+        rdf:type a:Man .
+    a:ObjectMinCardinality_I7
+		rdf:type owl:Thing ;
+        rdf:type a:Man .
+    a:ObjectMinCardinality_I8
+		rdf:type owl:Thing .
+	# --> ObjectMinCardinality ( 2 a:fatherOf a:Man )
+	
+# -----
+
+# ---------------
+# ObjectMaxCardinality
+
+
+	# example ( owl:maxCardinality )
+	# -----		
+	# ObjectMaxCardinality( 2 a:hasPet )
+	a:ObjectMaxCardinality_CE1 
+	    rdf:type owl:Restriction ;
+	    owl:maxCardinality "2"^^xsd:nonNegativeInteger ;
+	    owl:onProperty a:hasPet . 
+	a:ObjectMaxCardinality_I1
+		rdf:type owl:Thing ;
+		rdf:type a:ObjectMaxCardinality_CE1 ;
+		a:hasPet a:ObjectMaxCardinality_I2 ;
+	#	a:hasPet a:ObjectMaxCardinality_I3 ;
+		a:hasPet a:ObjectMaxCardinality_I4 .
+	a:ObjectMaxCardinality_I2
+		rdf:type owl:Thing .
+	a:ObjectMaxCardinality_I3
+		rdf:type owl:Thing .
+	a:ObjectMaxCardinality_I4
+		rdf:type owl:Thing .
+	# --> ObjectMaxCardinality ( 2 a:hasPet owl:Thing )
+	
+	# example ( owl:maxQualifiedCardinality )
+	# -----
+    # ObjectMaxCardinality ( 1 a:fatherOf :Man ) 
+	:ObjectMaxCardinality_CE2 rdfs:subClassOf [
+	    rdf:type owl:Restriction ;
+	    owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	    owl:onProperty :fatherOf ;
+	    owl:onClass :Man ] . 
+	:ObjectMaxCardinality_I5
+		rdf:type owl:Thing ;
+		rdf:type :ObjectMaxCardinality_CE2 ;
+#		:fatherOf :ObjectMaxCardinality_I6 ;
+		:fatherOf :ObjectMaxCardinality_I7 .
+	:ObjectMaxCardinality_I6
+		rdf:type owl:Thing ;
+	    rdf:type :Man .
+	:ObjectMaxCardinality_I7
+		rdf:type owl:Thing ;
+	    rdf:type :Man .
+	# --> ObjectMaxCardinality ( 1 a:fatherOf :Man )
+	
+# -----
+
+# ---------------
+# ObjectExactCardinality
+
+
+	# example ( owl:cardinality )
+	# -----		
+	# ObjectExactCardinality( 1 a:hasPet )
+	a:ObjectExactCardinality_CE2 
+       rdf:type owl:Restriction ;
+       owl:cardinality "1"^^xsd:nonNegativeInteger ;
+       owl:onProperty a:hasPet . 
+    a:ObjectExactCardinality_I1
+		rdf:type owl:Thing ;
+	    rdf:type a:ObjectExactCardinality_CE2 ;
+	#    a:hasPet a:ObjectExactCardinality_I2 ;
+	    a:hasPet a:ObjectExactCardinality_I3 .
+	a:ObjectExactCardinality_I2
+		rdf:type owl:Thing .
+	a:ObjectExactCardinality_I3
+		rdf:type owl:Thing .
+	# --> ObjectExactCardinality ( 1 a:hasPet owl:Thing )
+	
+	# example ( owl:qualifiedCardinality )
+	# -----
+    # ObjectExactCardinality ( 1 a:hasPet a:Dog ) 
+    a:ObjectExactCardinality_CE1 
+        rdf:type owl:Restriction ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty a:hasPet ;
+        owl:onClass a:Dog . 
+    a:ObjectExactCardinality_I4
+		rdf:type owl:Thing ;
+	    rdf:type a:ObjectExactCardinality_CE1 ;
+	#    a:hasPet a:ObjectExactCardinality_I5 ;
+	    a:hasPet a:ObjectExactCardinality_I6 .
+    a:ObjectExactCardinality_I5
+		rdf:type owl:Thing ;
+        rdf:type a:Dog .
+    a:ObjectExactCardinality_I6
+		rdf:type owl:Thing ;
+        rdf:type a:Dog .
+	# --> ObjectExactCardinality ( 1 a:hasPet a:Dog )
+	
+# -----
+
+# ---------------
+# DataSomeValuesFrom
+
+
+	# example 
+	# -----
+	# ObjectSomeValuesFrom( a:DataSomeValuesFrom_DPE a:DataSomeValuesFrom_DR ) 			
+	a:DataSomeValuesFrom_C 
+        rdf:type owl:Restriction ;
+        owl:onProperty a:DataSomeValuesFrom_DPE ;
+        owl:someValuesFrom a:DataSomeValuesFrom_DR . 
+    a:DataSomeValuesFrom_I1
+		rdf:type owl:Thing ;
+        rdf:type a:DataSomeValuesFrom_C ;
+        a:DataSomeValuesFrom_DPE a:DataSomeValuesFrom_I2 ;
+        a:DataSomeValuesFrom_DPE a:DataSomeValuesFrom_I3 .
+    a:DataSomeValuesFrom_I2
+		rdf:type rdfs:Literal ;
+        rdf:type a:DataSomeValuesFrom_DR .
+    a:DataSomeValuesFrom_I3
+		rdf:type rdfs:Literal ;
+        rdf:type a:DataSomeValuesFrom_DR1 .
+		
+# -----
+
+# ---------------
+# DataAllValuesFrom
+
+
+	# example 
+	# -----
+	# DataAllValuesFrom( a:DataAllValuesFrom_DPE xsd:integer ) 			
+	a:DataAllValuesFrom_C 
+        rdf:type owl:Restriction ;
+        owl:onProperty a:DataAllValuesFrom_DPE ;
+        owl:allValuesFrom xsd:integer . 
+    a:DataAllValuesFrom_I1
+		rdf:type owl:Thing ;
+        rdf:type a:DataAllValuesFrom_C ;
+        a:DataAllValuesFrom_DPE a:DataAllValuesFrom_I2 ;
+        a:DataAllValuesFrom_DPE a:DataAllValuesFrom_I3 .
+    a:DataAllValuesFrom_I2
+		rdf:type rdfs:Literal ;
+        rdf:type xsd:integer .
+    a:DataAllValuesFrom_I3
+		rdf:type rdfs:Literal ;
+		rdf:type xsd:integer .
+    #   rdf:type a:DataAllValuesFrom_DR .
+		
+# -----
+
+# ---------------
+# DataHasValue
+
+
+	# example 
+	# -----
+	# DataHasValue( a:DataHasValue_DPE "17"^^xsd:integer ) 			
+	a:DataHasValue_C 
+        rdf:type owl:Restriction ;
+        owl:onProperty a:DataHasValue_DPE ;
+        owl:hasValue "17"^^xsd:integer . 
+    a:DataHasValue_I1
+		rdf:type owl:Thing ;
+        rdf:type a:DataHasValue_C ;
+        a:DataHasValue_DPE a:DataHasValue_I2 ;
+		a:DataHasValue_DPE a:DataHasValue_I3 ;
+		a:DataHasValue_DPE "17"^^xsd:integer ;
+		a:DataHasValue_DPE "17"^^xsd:string .
+    a:DataHasValue_I2
+		rdf:type owl:Thing ; .
+    a:DataHasValue_I3
+		rdf:type rdfs:Literal ; .
+		
+# -----
+
+# ---------------
+# DataMinCardinality
+
+	# example ( owl:minCardinality )
+	# -----	
+	# DataMinCardinality( 2 a:hasName ) 
+	a:DataMinCardinality_CE1 
+	    rdf:type owl:Restriction ;
+	    owl:minCardinality "2"^^xsd:nonNegativeInteger ;
+	    owl:onProperty a:hasName . 
+	a:DataMinCardinality_I1
+	    rdf:type owl:Thing ;
+		rdf:type a:DataMinCardinality_CE1 ;
+		a:hasName "Thomas Bosch" ;
+		a:hasName "Thomas" .
+	# --> DataMinCardinality ( 2 a:hasName rdfs:Literal )
+		
+	# example ( owl:minQualifiedCardinality )
+	# -----
+	# DataMinCardinality( 2 a:hasName xsd:string ) 
+	a:DataMinCardinality_CE2 
+	    rdf:type owl:Restriction ;
+	    owl:minCardinality "2"^^xsd:nonNegativeInteger ;
+	    owl:onProperty a:hasName ;
+		owl:onClass xsd:string .
+	a:DataMinCardinality_I2
+	    rdf:type owl:Thing ;
+		rdf:type a:DataMinCardinality_CE2 ;
+		a:hasName "Thomas Bosch"^^xsd:string ;
+		a:hasName "123"^^xsd:nonNegativeInteger ;
+		a:hasName "Thomas"^^xsd:string .
+	# --> DataMinCardinality ( 2 a:hasName xsd:string )
+		
+# -----
+
+# ---------------
+# DataMaxCardinality
+
+	# example ( owl:maxCardinality )
+	# -----	
+	# DataMaxCardinality( 1 a:hasName ) 
+	a:DataMaxCardinality_CE1 
+	    rdf:type owl:Restriction ;
+	    owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+	    owl:onProperty a:hasName . 
+	a:DataMaxCardinality_I1
+	    rdf:type owl:Thing ;
+		rdf:type a:DataMaxCardinality_CE1 ;
+	#	a:hasName "Thomas Bosch" ;
+		a:hasName "Thomas" .
+	# --> DataMaxCardinality ( 1 a:hasName rdfs:Literal )
+		
+	# example ( owl:maxQualifiedCardinality )
+	# -----
+	# DataMaxCardinality( 2 a:hasName xsd:string ) 
+	a:DataMaxCardinality_CE2 
+	    rdf:type owl:Restriction ;
+	    owl:maxQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+	    owl:onProperty a:hasName ;
+		owl:onClass xsd:string .
+	a:DataMaxCardinality_I2
+	    rdf:type owl:Thing ;
+		rdf:type a:DataMaxCardinality_CE2 ;
+		a:hasName "Thomas Bosch"^^xsd:string ;
+	#	a:hasName "Tommi" ;
+		a:hasName "123"^^xsd:nonNegativeInteger ;
+		a:hasName "Thomas"^^xsd:string .
+	# --> DataMaxCardinality ( 2 a:hasName xsd:string )
+		
+# -----
+
+# ---------------
+# DataExactCardinality
+
+	# example ( owl:cardinality )
+	# -----	
+	# DataExactCardinality( 1 a:hasName ) 
+	a:DataExactCardinality_CE1 
+	    rdf:type owl:Restriction ;
+	    owl:cardinality "1"^^xsd:nonNegativeInteger ;
+	    owl:onProperty a:hasName . 
+	a:DataExactCardinality_I1
+	    rdf:type owl:Thing ;
+		rdf:type a:DataExactCardinality_CE1 ;
+	#	a:hasName "Thomas Bosch" ;
+		a:hasName "Thomas" .
+	# --> DataExactCardinality ( 1 a:hasName rdfs:Literal )
+		
+	# example ( owl:qualifiedCardinality )
+	# -----
+	# DataExactCardinality( 2 a:hasName xsd:string ) 
+	a:DataExactCardinality_CE2 
+	    rdf:type owl:Restriction ;
+	    owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+	    owl:onProperty a:hasName ;
+		owl:onClass xsd:string .
+	a:DataExactCardinality_I2
+	    rdf:type owl:Thing ;
+		rdf:type a:DataExactCardinality_CE2 ;
+		a:hasName "Thomas Bosch"^^xsd:string ;
+	#	a:hasName "Tommi" ;
+		a:hasName "123"^^xsd:nonNegativeInteger ;
+		a:hasName "Thomas"^^xsd:string .
+	# --> DataExactCardinality ( 2 a:hasName xsd:string )
+		
+# -----
+
+# ---------------
+# SubObjectPropertyOf
+
+	# example:
+	# -----
+	# SubObjectPropertyOf( a:SubObjectPropertyOf_subOPE a:SubObjectPropertyOf_superOPE ) 
+	a:SubObjectPropertyOf_subOPE rdfs:subPropertyOf a:SubObjectPropertyOf_superOPE . 
+	a:SubObjectPropertyOf_I1
+		rdf:type owl:Thing ;
+		a:SubObjectPropertyOf_subOPE a:SubObjectPropertyOf_I2 ;
+		a:SubObjectPropertyOf_superOPE a:SubObjectPropertyOf_I2 .
+	a:SubObjectPropertyOf_I2
+		rdf:type owl:Thing .
+
+# -----
+
+# ---------------
+# ObjectPropertyChain
+
+
+	# example ( 2 OPE )
+	# -----
+	# SubObjectPropertyOf( ObjectPropertyChain( a:ObjectPropertyChain_OPE1 a:ObjectPropertyChain_OPE2 ) a:ObjectPropertyChain_superOPE1 )
+	a:ObjectPropertyChain_superOPE1 owl:propertyChainAxiom ( a:ObjectPropertyChain_OPE1 a:ObjectPropertyChain_OPE2 ) . 
+	a:ObjectPropertyChain_I1
+		rdf:type owl:Thing ;
+		a:ObjectPropertyChain_OPE1 a:ObjectPropertyChain_I2 ;
+		a:ObjectPropertyChain_superOPE1 a:ObjectPropertyChain_I3 .
+	a:ObjectPropertyChain_I2
+		rdf:type owl:Thing ;
+		a:ObjectPropertyChain_OPE2 a:ObjectPropertyChain_I3 .
+	a:ObjectPropertyChain_I3
+		rdf:type owl:Thing .
+		
+	# example ( 2 OPE ) [concrete]
+	# -----
+	:hasAunt owl:propertyChainAxiom ( :hasMother :hasSister ) . 	
+	:Stewie 
+		a owl:Thing ;
+		:hasMother :Lois ; 	
+		:hasAunt :Carol .
+	:Lois 
+		a owl:Thing ;
+		:hasSister :Carol .	
+		
+	# ----------
+
+	# example ( 3 OPE )
+	# -----
+	# SubObjectPropertyOf( ObjectPropertyChain( a:ObjectPropertyChain_OPE3 a:ObjectPropertyChain_OPE4 a:ObjectPropertyChain_OPE5 ) a:ObjectPropertyChain_superOPE2 )
+	a:ObjectPropertyChain_superOPE2 owl:propertyChainAxiom ( a:ObjectPropertyChain_OPE3 a:ObjectPropertyChain_OPE4 a:ObjectPropertyChain_OPE5 ) . 
+	a:ObjectPropertyChain_I1
+		rdf:type owl:Thing ;
+		a:ObjectPropertyChain_superOPE2 a:ObjectPropertyChain_I4 ; 
+		a:ObjectPropertyChain_OPE3 a:ObjectPropertyChain_I2 .
+	a:ObjectPropertyChain_I2
+		rdf:type owl:Thing ;
+		a:ObjectPropertyChain_OPE4 a:ObjectPropertyChain_I3 .
+	a:ObjectPropertyChain_I3
+		rdf:type owl:Thing ;
+		a:ObjectPropertyChain_OPE5 a:ObjectPropertyChain_I4 .
+	a:ObjectPropertyChain_I4
+		rdf:type owl:Thing .
+
+# -----
+
+# ---------------
+# EquivalentObjectProperties
+
+
+	# example
+	# -----
+	# EquivalentObjectProperties( a:EquivalentObjectProperties_OPE1 a:EquivalentObjectProperties_OPE2 ) 
+	a:EquivalentObjectProperties_OPE1 owl:equivalentProperty a:EquivalentObjectProperties_OPE2 .
+#	a:EquivalentObjectProperties_I1 
+#		rdf:type owl:Thing ;
+#		a:EquivalentObjectProperties_OPE1 a:EquivalentObjectProperties_I2 .
+#	a:EquivalentObjectProperties_I3 
+#		rdf:type owl:Thing ;
+#		a:EquivalentObjectProperties_OPE2 a:EquivalentObjectProperties_I4 .
+		
+	# --> a:EquivalentObjectProperties_I1 
+	#	      a:EquivalentObjectProperties_OPE1 a:EquivalentObjectProperties_I2 .
+	# --> a:EquivalentObjectProperties_I3 
+	#	      a:EquivalentObjectProperties_OPE2 a:EquivalentObjectProperties_I4 .
+
+# -----
+
+# ---------------
+# DisjointObjectProperties
+
+
+	# example
+	# -----
+	# DisjointObjectProperties( a:DisjointObjectProperties_OPE1 a:DisjointObjectProperties_OPE2 ) 
+	a:DisjointObjectProperties_OPE1 owl:propertyDisjointWith a:DisjointObjectProperties_OPE2 . 	
+	a:DisjointObjectProperties_I1 
+		rdf:type owl:Thing ;
+#		a:DisjointObjectProperties_OPE1 a:DisjointObjectProperties_I2 ; 	
+		a:DisjointObjectProperties_OPE2 a:DisjointObjectProperties_I2 .
+	a:DisjointObjectProperties_2
+		rdf:type owl:Thing .
+
+# -----
+
+# ---------------
+# InverseObjectProperties
+
+
+	# example
+	# -----
+	# InverseObjectProperties( a:InverseObjectProperties_OPE1 a:InverseObjectProperties_OPE2 ) 
+	a:InverseObjectProperties_OPE1 owl:inverseOf a:InverseObjectProperties_OPE2 .
+	a:InverseObjectProperties_I1
+		rdf:type owl:Thing ;
+        a:InverseObjectProperties_OPE1 a:InverseObjectProperties_I2 .
+	a:InverseObjectProperties_I2
+		rdf:type owl:Thing ;
+        a:InverseObjectProperties_OPE2 a:InverseObjectProperties_I1 .
+	a:InverseObjectProperties_I3
+		rdf:type owl:Thing ;
+        a:InverseObjectProperties_OPE2 a:InverseObjectProperties_I4 .
+	a:InverseObjectProperties_I4
+		rdf:type owl:Thing ;
+        a:InverseObjectProperties_OPE1 a:InverseObjectProperties_I3 .
+		
+# -----
+
+# ---------------
+# ObjectPropertyDomain
+
+	# example
+	# -----
+	# ObjectPropertyDomain( a:ObjectPropertyDomain_OPE a:CE )
+	a:ObjectPropertyDomain_OPE rdfs:domain a:CE .
+	a:ObjectPropertyDomain_I1
+		rdf:type owl:Thing ;
+		rdf:type a:CE ;
+        a:ObjectPropertyDomain_OPE a:ObjectPropertyDomain_I2 ; 
+        a:ObjectPropertyDomain_OPE a:ObjectPropertyDomain_I3 . 
+	a:ObjectPropertyDomain_I2
+		rdf:type owl:Thing .
+	a:ObjectPropertyDomain_I3
+		rdf:type owl:Thing .
+	# --> ObjectPropertyDomain( a:ObjectPropertyDomain_OPE a:CE )
+		
+# -----
+
+# ---------------
+# ObjectPropertyRange
+
+	# example
+	# -----
+	# ObjectPropertyRange( a:ObjectPropertyRange_OPE a:CE )
+	a:ObjectPropertyRange_OPE rdfs:range a:CE .
+	a:ObjectPropertyRange_I1
+		rdf:type owl:Thing ;
+        a:ObjectPropertyRange_OPE a:ObjectPropertyRange_I2 ; 
+        a:ObjectPropertyRange_OPE a:ObjectPropertyRange_I3 . 
+	a:ObjectPropertyRange_I2
+		rdf:type owl:Thing ;
+		rdf:type a:CE .
+	a:ObjectPropertyRange_I3
+	    rdf:type owl:Thing ;
+		rdf:type a:CE .
+	# --> ObjectPropertyRange( a:ObjectPropertyRange_OPE a:CE )
+		
+# -----
+
+# ---------------
+# FunctionalObjectProperty
+
+
+	# example
+	# -----
+	# FunctionalObjectProperty( a:FunctionalObjectProperty_OPE ) 
+	a:FunctionalObjectProperty_OPE rdf:type owl:FunctionalProperty .
+	a:FunctionalObjectProperty_I1 
+		rdf:type owl:Thing ;
+#		a:FunctionalObjectProperty_OPE a:FunctionalObjectProperty_2 ; 
+		a:FunctionalObjectProperty_OPE a:FunctionalObjectProperty_3 . 
+	a:FunctionalObjectProperty_I2 
+		rdf:type owl:Thing .
+	a:FunctionalObjectProperty_I3 
+		rdf:type owl:Thing .
+		
+# -----
+
+# ---------------
+# InverseFunctionalObjectProperty
+
+
+	# example
+	# -----
+	# InverseFunctionalObjectProperty ( a:InverseFunctionalObjectProperty_OPE ) 
+	a:InverseFunctionalObjectProperty_OPE rdf:type owl:InverseFunctionalProperty . 	
+	a:InverseFunctionalObjectProperty_I1
+		rdf:type owl:Thing ;
+		a:InverseFunctionalObjectProperty_OPE a:InverseFunctionalObjectProperty_I . 
+	a:InverseFunctionalObjectProperty_I2
+		rdf:type owl:Thing .
+#		a:InverseFunctionalObjectProperty_OPE a:InverseFunctionalObjectProperty_I . 
+	a:InverseFunctionalObjectProperty_I
+		rdf:type owl:Thing .
+
+# -----
+
+# ---------------
+# DataPropertyDomain
+
+	# example
+	# -----
+	# DataPropertyDomain( a:DataPropertyDomain_DPE a:DR )
+	a:DataPropertyDomain_DPE rdfs:domain a:DR .
+	a:DataPropertyDomain_I1
+		rdf:type owl:Thing ;
+		rdf:type a:DR ;
+        a:DataPropertyDomain_DPE a:DataPropertyDomain_I2 ; 
+        a:DataPropertyDomain_DPE a:DataPropertyDomain_I3 . 
+	a:DataPropertyDomain_I2
+		rdf:type rdfs:Literal .
+	a:DataPropertyDomain_I3
+		rdf:type rdfs:Literal .
+	# --> DataPropertyDomain( a:DataPropertyDomain_DPE a:DR )
+		
+# -----
+
+# ---------------
+# DataPropertyRange
+
+	# example
+	# -----
+	# DataPropertyRange( a:DataPropertyRange_DPE a:DR )
+	a:DataPropertyRange_DPE rdfs:range a:DR .
+	a:DataPropertyRange_I1
+		rdf:type owl:Thing ;
+        a:DataPropertyRange_DPE a:DataPropertyRange_I2 ; 
+        a:DataPropertyRange_DPE a:DataPropertyRange_I3 . 
+	a:DataPropertyRange_I2
+		rdf:type rdfs:Literal ;
+		rdf:type a:DR .
+	a:DataPropertyRange_I3
+		rdf:type rdfs:Literal ;
+		rdf:type a:DR .
+	# --> DataPropertyRange( a:DataPropertyRange_DPE a:DR )
+		
+# -----
+
+# ---------------
+# Disjoint Classes
+
+
+	# constraint ( 2 class expressions ):
+	# -----
+	# DisjointClasses ( a:Boy a:Girl )
+	a:Boy owl:disjointWith a:Girl . 
+		
+	# instance data:
+	# -----
+	a:Stewie 
+		a foaf:Person ;
+	#	rdf:type a:Boy ;
+		rdf:type a:Girl . 
+
+	# constraint violation:
+	# -----
+	# DisjointClasses ( a:Boy a:Girl )
+	
+	# ----------
+	
+	# constraint (3 class expressions):
+	# -----
+	# DisjointClasses ( a:Male a:Female a:Hybrid )
+	a:Male owl:disjointWith a:Female . 
+	a:Male owl:disjointWith a:Hybrid .
+	a:Hybrid owl:disjointWith a:Female . 
+		
+	# instance data:
+	# -----
+	a:M_1 
+		a foaf:Person ;
+	#	rdf:type a:Male ;
+		rdf:type a:Female .
+	a:M_2
+		a foaf:Person ;
+	#	rdf:type a:Male ;
+		rdf:type a:Hybrid .
+	a:M_3
+		a foaf:Person ;
+	#	rdf:type a:Female ;
+		rdf:type a:Hybrid .
+
+	# constraint violation:
+	# -----
+	# a:M_1: DisjointClasses ( a:Male a:Female )
+	# a:M_2: DisjointClasses ( a:Male a:Hybrid )
+	# a:M_3: DisjointClasses ( a:Female a:Hybrid )
+	
+# -----
+
+# ---------------
+# Disjoint Union
+
+
+	# example ( 2 disjoint class expressions )
+	# -----		
+	# DisjointUnion( a:DisjointUnion_C a:CE1 a:CE2 ) 
+	a:DisjointUnion_C1 owl:disjointUnionOf ( a:CE1 a:CE2 ) . 
+	a:DisjointUnion_I1 
+		rdf:type owl:Thing ;
+		rdf:type a:DisjointUnion_C1 ;
+		rdf:type a:CE1 ;
+		rdf:type a:CE2 .
+	# --> a:DisjointUnion_C1 owl:disjointUnionOf ( a:CE1 a:CE2 )
+	
+	a:DisjointUnion_I2 
+		rdf:type owl:Thing ;
+	#	rdf:type a:DisjointUnion_C1 ;
+		rdf:type a:CE1 .
+	# --> 
+	
+	a:DisjointUnion_I3 
+		rdf:type owl:Thing ;
+	#	rdf:type a:DisjointUnion_C1 ;
+		rdf:type a:CE2 .
+	# --> 
+	
+	# example ( 3 disjoint class expressions )
+	# -----
+	
+	
+# -----
+
+# ---------------
+# DatatypeDefinition
+
+
+	# example
+	# -----
+	# Declaration( Datatype( a:SSN ) ) 
+	# DatatypeDefinition( 
+	#     a:SSN
+	#	  DatatypeRestriction( xsd:string xsd:pattern "[0-9]{3}-[0-9]{2}-[0-9]{4}" ) ) 	
+	# DataPropertyRange( a:hasSSN a:SSN ) 
+	a:SSN 
+		rdf:type rdfs:Datatype ;
+		owl:equivalentClass [
+			rdf:type rdfs:Datatype ;
+			owl:onDatatype xsd:string ;
+			owl:withRestrictions ( 
+				[ xsd:pattern "[0-9]{3}-[0-9]{2}-[0-9]{4}" ] ) ] .
+	a:DatatypeDefinition_I1
+		rdf:type owl:Thing ;
+		a:hasSSN "123-45-6789"^^a:SSN .
+#	a:DatatypeDefinition_I2
+#		rdf:type owl:Thing ;
+#		a:hasSSN "123456789"^^a:SSN .
+
+# -----
