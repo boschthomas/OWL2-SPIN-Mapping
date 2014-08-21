@@ -1,0 +1,45 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# ObjectSomeValuesFrom
+
+
+	# generic
+	# -----
+	# ObjectSomeValuesFrom( :ObjectSomeValuesFrom_OPE :ObjectSomeValuesFrom_CE ) 			
+	:ObjectSomeValuesFrom_C 
+        rdf:type owl:Restriction ;
+        owl:onProperty :ObjectSomeValuesFrom_OPE ;
+        owl:someValuesFrom :ObjectSomeValuesFrom_CE . 
+    :ObjectSomeValuesFrom_I1
+		rdf:type owl:Thing ;
+        rdf:type :ObjectSomeValuesFrom_C ;
+        :ObjectSomeValuesFrom_OPE :ObjectSomeValuesFrom_I2 ;
+		:ObjectSomeValuesFrom_OPE :ObjectSomeValuesFrom_I3 .
+#   :ObjectSomeValuesFrom_I2                # commented --> constraint violation
+#		rdf:type owl:Thing ;                # commented --> constraint violation
+#       rdf:type :ObjectSomeValuesFrom_CE . # commented --> constraint violation
+    :ObjectSomeValuesFrom_I3
+		rdf:type owl:Thing ;
+        rdf:type :ObjectSomeValuesFrom_CE_2 .
+		
+	# concrete
+	# -----
+	:ParentOfSon rdfs:subClassOf [
+		a owl:Restriction ; 
+		owl:onProperty :fatherOf ; 
+		owl:someValuesFrom :Man ] .
+	:Peter 
+		a owl:Thing ;
+		a :ParentOfSon ;
+		:fatherOf :Stewie .
+	:Stewie
+#		rdf:type :Man . # commented --> constraint violation
+		a owl:Thing . 
+
+# -----

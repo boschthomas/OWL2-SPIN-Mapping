@@ -1,0 +1,34 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# Disjoint Union
+
+
+	# 2 CE
+	# -----		
+	# DisjointUnion( :DisjointUnion_C :CE1 :CE2 ) 
+	:DisjointUnion_C1 owl:disjointUnionOf ( :CE1 :CE2 ) . 
+	:DisjointUnion_I1 
+		rdf:type owl:Thing ;
+		rdf:type :DisjointUnion_C1 ;
+		rdf:type :CE1 ;
+		rdf:type :CE2 .
+	:DisjointUnion_I2 
+		rdf:type owl:Thing ;
+	#	rdf:type :DisjointUnion_C1 ;
+		rdf:type :CE1 .
+	:DisjointUnion_I3 
+		rdf:type owl:Thing ;
+	#	rdf:type :DisjointUnion_C1 ;
+		rdf:type :CE2 .
+	
+	# 3 CE 
+	# -----
+	
+	
+# -----

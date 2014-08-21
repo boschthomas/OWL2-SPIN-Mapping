@@ -1,0 +1,52 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# ObjectAllValuesFrom
+
+
+	# generic
+	# -----
+	# ObjectAllValuesFrom( :ObjectAllValuesFrom_OPE :ObjectAllValuesFrom_CE ) 			
+	:ObjectAllValuesFrom_C rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :ObjectAllValuesFrom_OPE ;
+        owl:allValuesFrom :ObjectAllValuesFrom_CE ] . 
+    :ObjectAllValuesFrom_I1
+		rdf:type owl:Thing ;
+        rdf:type :ObjectAllValuesFrom_C ;
+        :ObjectAllValuesFrom_OPE :ObjectAllValuesFrom_I2 ;
+		:ObjectAllValuesFrom_OPE :ObjectAllValuesFrom_I3 .
+    :ObjectAllValuesFrom_I2
+		rdf:type owl:Thing ;
+        rdf:type :ObjectAllValuesFrom_CE .
+    :ObjectAllValuesFrom_I3
+		rdf:type owl:Thing ;
+#       rdf:type :ObjectAllValuesFrom_CE ; # commented --> constraint violation
+        rdf:type :ObjectAllValuesFrom_CE_2 .
+	
+	# concrete
+	# -----
+	# ObjectAllValuesFrom( :hasPet :Dog ) 			
+	:ObjectAllValuesFrom_C2 rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasPet ;
+        owl:allValuesFrom :Dog ] . 
+    :Peter
+		rdf:type owl:Thing ;
+        rdf:type :ObjectAllValuesFrom_C2 ;
+        :hasPet :Brian ;
+		:hasPet :Azrael .
+    :Brian
+		rdf:type owl:Thing ;
+        rdf:type :Dog .
+    :Azrael
+		rdf:type owl:Thing ;
+#       rdf:type :Dog ; # commented --> constraint violation
+        rdf:type :Cat .
+		
+# -----

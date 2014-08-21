@@ -1,0 +1,107 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# DataOneOf
+
+	
+	# 1 literal
+	# -----
+	# DataOneOf( "string" ) 
+	:DataOneOf_DR1 
+		rdf:type rdfs:Datatype ;
+		owl:oneOf ( "string" ) .
+	:DataOneOf_I1_1
+		rdf:type owl:Thing ;
+		:DataOneOf_DPE1_1 "string"^^:DataOneOf_DR1 .
+	:DataOneOf_I1_2                             # NOT commented --> constraint violation
+		rdf:type owl:Thing ;                    # NOT commented --> constraint violation
+		:DataOneOf_DPE1_2 "1"^^:DataOneOf_DR1 . # NOT commented --> constraint violation
+	
+	# 2 literals
+	# -----
+	# DataOneOf( "string" "1"^^xsd:integer ) 
+	:DataOneOf_DR2 
+		rdf:type rdfs:Datatype ;
+		owl:oneOf ( "string" "1"^^xsd:integer ) .
+	:DataOneOf_I2_1
+		rdf:type owl:Thing ;
+		:DataOneOf_DPE2_1 "string"^^:DataOneOf_DR2 .
+	:DataOneOf_I2_2
+		rdf:type owl:Thing ;
+		:DataOneOf_DPE2_2 "1"^^:DataOneOf_DR2 .
+	:DataOneOf_I2_3                                # NOT commented --> constraint violation
+		rdf:type owl:Thing ;                       # NOT commented --> constraint violation
+		:DataOneOf_DPE2_2 "true"^^:DataOneOf_DR2 . # NOT commented --> constraint violation
+		
+	# 3 literals
+	# -----
+	# DataOneOf( "string" "1"^^xsd:integer "true"^^xsd:boolean ) 
+	:DataOneOf_DR3 
+		rdf:type rdfs:Datatype ;
+		owl:oneOf ( "string" "1"^^xsd:integer "true"^^xsd:boolean ) .
+	:DataOneOf_I3_1
+		rdf:type owl:Thing ;
+		:DataOneOf_DPE3_1 "string"^^:DataOneOf_DR3 .
+	:DataOneOf_I3_2
+		rdf:type owl:Thing ;
+		:DataOneOf_DPE3_2 "1"^^:DataOneOf_DR3 .
+	:DataOneOf_I3_3
+		rdf:type owl:Thing ;
+		:DataOneOf_DPE3_3 "true"^^:DataOneOf_DR3 .
+	:DataOneOf_I3_4                               # NOT commented --> constraint violation
+		rdf:type owl:Thing ;                      # NOT commented --> constraint violation
+		:DataOneOf_DPE3_4 "1.1"^^:DataOneOf_DR3 . # NOT commented --> constraint violation
+		
+	# 4 literals
+	# -----
+	# DataOneOf( "string" "1"^^xsd:integer "true"^^xsd:boolean "1.1"^^xsd:float ) 
+	:DataOneOf_DR4
+		rdf:type rdfs:Datatype ;
+		owl:oneOf ( "string" "1"^^xsd:integer "true"^^xsd:boolean "1.1"^^xsd:float ) .
+	:DataOneOf_I4_1
+		rdf:type owl:Thing ;
+		:DataOneOf_DPE4_1 "string"^^:DataOneOf_DR4 .
+	:DataOneOf_I4_2
+		rdf:type owl:Thing ;
+		:DataOneOf_DPE4_2 "1"^^:DataOneOf_DR4 .
+	:DataOneOf_I4_3
+		rdf:type owl:Thing ;
+		:DataOneOf_DPE4_3 "true"^^:DataOneOf_DR4 .
+	:DataOneOf_I4_4
+		rdf:type owl:Thing ;
+		:DataOneOf_DPE4_4 "1.1"^^:DataOneOf_DR4 .
+	:DataOneOf_I4_5                               # NOT commented --> constraint violation
+		rdf:type owl:Thing ;                      # NOT commented --> constraint violation
+		:DataOneOf_DPE4_5 "5.7"^^:DataOneOf_DR4 . # NOT commented --> constraint violation
+		
+	# 5 literals
+	# -----
+	# DataOneOf( "string" "1"^^xsd:integer "true"^^xsd:boolean "1.1"^^xsd:float "5.7"^^xsd:double ) 
+	:DataOneOf_DR5
+		rdf:type rdfs:Datatype ;
+		owl:oneOf ( "string" "1"^^xsd:integer "true"^^xsd:boolean "1.1"^^xsd:float "5.7"^^xsd:double ) .
+	:DataOneOf_I5_1
+		rdf:type owl:Thing ;
+		:DataOneOf_DPE5_1 "string"^^:DataOneOf_DR5 .
+	:DataOneOf_I5_2
+		rdf:type owl:Thing ;
+		:DataOneOf_DPE4_2 "1"^^:DataOneOf_DR5 .
+	:DataOneOf_I5_3
+		rdf:type owl:Thing ;
+		:DataOneOf_DPE4_3 "true"^^:DataOneOf_DR5 .
+	:DataOneOf_I5_4
+		rdf:type owl:Thing ;
+		:DataOneOf_DPE4_4 "1.1"^^:DataOneOf_DR5 .
+	:DataOneOf_I5_5
+		rdf:type owl:Thing ;
+		:DataOneOf_DPE4_5 "5.7"^^:DataOneOf_DR5 .
+	:DataOneOf_I5_6                                # NOT commented --> constraint violation
+		rdf:type owl:Thing ;                       # NOT commented --> constraint violation
+		:DataOneOf_DPE5_5 "text"^^:DataOneOf_DR5 . # NOT commented --> constraint violation
+
+# -----

@@ -1,0 +1,56 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# ObjectPropertyChain
+
+
+	# example ( 2 OPE )
+	# -----
+	# SubObjectPropertyOf( ObjectPropertyChain( :ObjectPropertyChain_OPE1 :ObjectPropertyChain_OPE2 ) :ObjectPropertyChain_superOPE1 )
+	:ObjectPropertyChain_superOPE1 owl:propertyChainAxiom ( :ObjectPropertyChain_OPE1 :ObjectPropertyChain_OPE2 ) . 
+	:ObjectPropertyChain_I1_1
+		rdf:type owl:Thing ;
+#		:ObjectPropertyChain_superOPE1 :ObjectPropertyChain_I3_1 ; # commented --> constraint violation
+		:ObjectPropertyChain_OPE1 :ObjectPropertyChain_I2_1 .
+	:ObjectPropertyChain_I2_1
+		rdf:type owl:Thing ;
+		:ObjectPropertyChain_OPE2 :ObjectPropertyChain_I3_1 .
+	:ObjectPropertyChain_I3_1
+		rdf:type owl:Thing .
+		
+	# example ( 2 OPE ) [concrete]
+	# -----
+	:hasAunt owl:propertyChainAxiom ( :hasMother :hasSister ) . 	
+	:Stewie 
+		a owl:Thing ;
+#		:hasAunt :Carol ; # commented --> constraint violation
+		:hasMother :Lois . 	
+	:Lois 
+		a owl:Thing ;
+		:hasSister :Carol .	
+		
+	# ----------
+
+	# example ( 3 OPE )
+	# -----
+	# SubObjectPropertyOf( ObjectPropertyChain( :ObjectPropertyChain_OPE3 :ObjectPropertyChain_OPE4 :ObjectPropertyChain_OPE5 ) :ObjectPropertyChain_superOPE2 )
+	:ObjectPropertyChain_superOPE2 owl:propertyChainAxiom ( :ObjectPropertyChain_OPE3 :ObjectPropertyChain_OPE4 :ObjectPropertyChain_OPE5 ) . 
+	:ObjectPropertyChain_I1_2
+		rdf:type owl:Thing ;
+#		:ObjectPropertyChain_superOPE2 :ObjectPropertyChain_I4_2 ; # commented --> constraint violation
+		:ObjectPropertyChain_OPE3 :ObjectPropertyChain_I2_2 .
+	:ObjectPropertyChain_I2_2
+		rdf:type owl:Thing ;
+		:ObjectPropertyChain_OPE4 :ObjectPropertyChain_I3_2 .
+	:ObjectPropertyChain_I3_2
+		rdf:type owl:Thing ;
+		:ObjectPropertyChain_OPE5 :ObjectPropertyChain_I4_2 .
+	:ObjectPropertyChain_I4_2
+		rdf:type owl:Thing .
+
+# -----

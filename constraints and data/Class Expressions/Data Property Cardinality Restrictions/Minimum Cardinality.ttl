@@ -1,0 +1,40 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# DataMinCardinality
+
+	# example ( owl:minCardinality )
+	# -----	
+	# DataMinCardinality( 2 :hasName ) 
+	# DataMinCardinality ( 2 :hasName rdfs:Literal )
+	:DataMinCardinality_CE1 
+	    rdf:type owl:Restriction ;
+	    owl:minCardinality "2"^^xsd:nonNegativeInteger ;
+	    owl:onProperty :hasName . 
+	:DataMinCardinality_I1
+	    rdf:type owl:Thing ;
+		rdf:type :DataMinCardinality_CE1 ;
+#		:hasName "Thomas Bosch" ; # commented --> constraint violation
+		:hasName "Thomas" .
+		
+	# example ( owl:minQualifiedCardinality )
+	# -----
+	# DataMinCardinality( 2 :hasName xsd:string ) 
+	:DataMinCardinality_CE2 
+	    rdf:type owl:Restriction ;
+	    owl:minCardinality "2"^^xsd:nonNegativeInteger ;
+	    owl:onProperty :hasName ;
+		owl:onClass xsd:string .
+	:DataMinCardinality_I2
+	    rdf:type owl:Thing ;
+		rdf:type :DataMinCardinality_CE2 ;
+#		:hasName "Thomas Bosch"^^xsd:string ; # commented --> constraint violation
+		:hasName "123"^^xsd:nonNegativeInteger ;
+		:hasName "Thomas"^^xsd:string .
+		
+# -----

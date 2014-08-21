@@ -1,0 +1,23 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# SubClassOf
+
+	# concrete
+	# -----	
+	# SubClassOf( :Baby :Child )
+	# SubClassOf( :Child :Person ) 	
+	# ClassAssertion( :Baby :Stewie ) 
+	:Baby rdfs:subClassOf :Child . 
+	:Child rdfs:subClassOf :Person . 
+	:Stewie a :Baby . 
+	# --> :Baby rdfs:subClassOf :Person .
+	# --> :Stewie a :Child .
+	# --> :Stewie a :Person
+		
+# -----

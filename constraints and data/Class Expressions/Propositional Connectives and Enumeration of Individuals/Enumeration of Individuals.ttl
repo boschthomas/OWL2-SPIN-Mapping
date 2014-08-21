@@ -1,0 +1,82 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# ObjectOneOf
+
+	
+	# 1 Individual
+	# -----
+	# EquivalentClasses( :ObjectOneOf_C1 ObjectOneOf( :ObjectOneOf_I1_1 ) )
+	:ObjectOneOf_C1 owl:equivalentClass :ObjectOneOf_EC1 .
+	:ObjectOneOf_EC1 
+		rdf:type owl:Class ;
+	    owl:oneOf ( :ObjectOneOf_I1_1 ) . 
+	:ObjectOneOf_I1_1
+		rdf:type owl:Thing ;
+		rdf:type :ObjectOneOf_C1 .
+	:ObjectOneOf_I1_2              # NOT commented --> constraint violation
+		rdf:type owl:Thing ;       # NOT commented --> constraint violation
+		rdf:type :ObjectOneOf_C1 . # NOT commented --> constraint violation
+		
+	# 2 Individuals
+	# -----
+	# EquivalentClasses( :ObjectOneOf_C2 ObjectOneOf( :ObjectOneOf_I2_1 :ObjectOneOf_I2_2 ) )
+	:ObjectOneOf_C2 owl:equivalentClass :ObjectOneOf_EC2 .
+	:ObjectOneOf_EC2 
+		rdf:type owl:Class ;
+	    owl:oneOf ( :ObjectOneOf_I2_1 :ObjectOneOf_I2_2 ) . 
+	:ObjectOneOf_I2_1
+		rdf:type owl:Thing ;
+		rdf:type :ObjectOneOf_C2 .
+	:ObjectOneOf_I2_3              # NOT commented --> constraint violation
+		rdf:type owl:Thing ;       # NOT commented --> constraint violation
+		rdf:type :ObjectOneOf_C2 . # NOT commented --> constraint violation
+		
+	# 3 Individuals
+	# -----
+	# EquivalentClasses( :ObjectOneOf_C3 ObjectOneOf( :ObjectOneOf_I3_1 :ObjectOneOf_I3_2 :ObjectOneOf_I3_3 ) )
+	:ObjectOneOf_C3 owl:equivalentClass :ObjectOneOf_EC3 .
+	:ObjectOneOf_EC3 
+		rdf:type owl:Class ;
+	    owl:oneOf ( :ObjectOneOf_I3_1 :ObjectOneOf_I3_2 :ObjectOneOf_I3_3 ) . 
+	:ObjectOneOf_I3_1
+		rdf:type owl:Thing ;
+		rdf:type :ObjectOneOf_C3 .
+	:ObjectOneOf_I3_4              # NOT commented --> constraint violation
+		rdf:type owl:Thing ;       # NOT commented --> constraint violation
+		rdf:type :ObjectOneOf_C3 . # NOT commented --> constraint violation
+		
+	# 4 Individuals
+	# -----
+	# EquivalentClasses( :ObjectOneOf_C4 ObjectOneOf( :ObjectOneOf_I4_1 :ObjectOneOf_I4_2 :ObjectOneOf_I4_3 :ObjectOneOf_I4_4 ) )
+	:ObjectOneOf_C4 owl:equivalentClass :ObjectOneOf_EC4 .
+	:ObjectOneOf_EC4 
+		rdf:type owl:Class ;
+	    owl:oneOf ( :ObjectOneOf_I4_1 :ObjectOneOf_I4_2 :ObjectOneOf_I4_3 :ObjectOneOf_I4_4 ) . 
+	:ObjectOneOf_I4_1
+		rdf:type owl:Thing ;
+		rdf:type :ObjectOneOf_C4 .
+	:ObjectOneOf_I4_5              # NOT commented --> constraint violation
+		rdf:type owl:Thing ;       # NOT commented --> constraint violation
+		rdf:type :ObjectOneOf_C4 . # NOT commented --> constraint violation
+		
+	# 5 Individuals
+	# -----
+	# EquivalentClasses( :ObjectOneOf_C5 ObjectOneOf( :ObjectOneOf_I5_1 :ObjectOneOf_I5_2 :ObjectOneOf_I5_3 :ObjectOneOf_I5_4 :ObjectOneOf_I5_5 ) )
+	:ObjectOneOf_C5 owl:equivalentClass :ObjectOneOf_EC5 .
+	:ObjectOneOf_EC5 
+		rdf:type owl:Class ;
+	    owl:oneOf ( :ObjectOneOf_I5_1 :ObjectOneOf_I5_2 :ObjectOneOf_I5_3 :ObjectOneOf_I5_4 :ObjectOneOf_I5_5 ) . 
+	:ObjectOneOf_I5_1
+		rdf:type owl:Thing ;
+		rdf:type :ObjectOneOf_C5 .
+	:ObjectOneOf_I5_6              # NOT commented --> constraint violation
+		rdf:type owl:Thing ;       # NOT commented --> constraint violation
+		rdf:type :ObjectOneOf_C5 . # NOT commented --> constraint violation
+
+# -----

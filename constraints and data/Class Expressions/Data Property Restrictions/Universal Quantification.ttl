@@ -1,0 +1,31 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# DataAllValuesFrom
+
+
+	# example 
+	# -----
+	# DataAllValuesFrom( :DataAllValuesFrom_DPE xsd:integer ) 			
+	:DataAllValuesFrom_C 
+        rdf:type owl:Restriction ;
+        owl:onProperty :DataAllValuesFrom_DPE ;
+        owl:allValuesFrom xsd:integer . 
+    :DataAllValuesFrom_I1
+		rdf:type owl:Thing ;
+        rdf:type :DataAllValuesFrom_C ;
+        :DataAllValuesFrom_DPE :DataAllValuesFrom_I2 ;
+        :DataAllValuesFrom_DPE :DataAllValuesFrom_I3 .
+    :DataAllValuesFrom_I2
+		rdf:type rdfs:Literal ;
+        rdf:type xsd:integer .
+    :DataAllValuesFrom_I3
+#       rdf:type xsd:integer ; # commented --> constraint violation
+		rdf:type rdfs:Literal .
+		
+# -----

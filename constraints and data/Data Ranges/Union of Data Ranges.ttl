@@ -1,0 +1,24 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# DataUnionOf
+
+
+	# 2 DR
+	# -----
+	# DataUnionOf( xsd:string xsd:integer )		
+    :DataUnionOf_DT1
+	    rdf:type rdfs:Datatype ;
+        owl:unionOf ( xsd:string xsd:integer ) .
+	:DataUnionOf_L1
+		rdf:type rdfs:Literal ;
+#		rdf:type xsd:string ; # commented --> constraint violation
+#	    rdf:type xsd:integer ; # commented --> constraint violation
+	    rdf:type :DataUnionOf_DT1 .
+	
+# -----

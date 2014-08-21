@@ -1,0 +1,23 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# DisjointObjectProperties
+
+
+	# example
+	# -----
+	# DisjointObjectProperties( :DisjointObjectProperties_OPE1 :DisjointObjectProperties_OPE2 ) 
+	:DisjointObjectProperties_OPE1 owl:propertyDisjointWith :DisjointObjectProperties_OPE2 . 	
+	:DisjointObjectProperties_I1 
+		rdf:type owl:Thing ;
+		:DisjointObjectProperties_OPE1 :DisjointObjectProperties_I2 ; # not commented --> constraint violation	
+		:DisjointObjectProperties_OPE2 :DisjointObjectProperties_I2 .
+	:DisjointObjectProperties_2
+		rdf:type owl:Thing .
+
+# -----

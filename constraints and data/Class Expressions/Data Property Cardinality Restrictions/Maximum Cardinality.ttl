@@ -1,0 +1,41 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# DataMaxCardinality
+
+	# example ( owl:maxCardinality )
+	# -----	
+	# DataMaxCardinality( 1 :hasName ) 
+	# DataMaxCardinality ( 1 :hasName rdfs:Literal )
+	:DataMaxCardinality_CE1 
+	    rdf:type owl:Restriction ;
+	    owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+	    owl:onProperty :hasName . 
+	:DataMaxCardinality_I1
+	    rdf:type owl:Thing ;
+		rdf:type :DataMaxCardinality_CE1 ;
+		:hasName "Thomas Bosch" ; # NOT commented --> constraint violation
+		:hasName "Thomas" .
+		
+	# example ( owl:maxQualifiedCardinality )
+	# -----
+	# DataMaxCardinality( 2 :hasName xsd:string ) 
+	:DataMaxCardinality_CE2 
+	    rdf:type owl:Restriction ;
+	    owl:maxQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+	    owl:onProperty :hasName ;
+		owl:onClass xsd:string .
+	:DataMaxCardinality_I2
+	    rdf:type owl:Thing ;
+		rdf:type :DataMaxCardinality_CE2 ;
+		:hasName "Thomas Bosch"^^xsd:string ;
+		:hasName "Tommi" ; # NOT commented --> constraint violation
+		:hasName "123"^^xsd:nonNegativeInteger ;
+		:hasName "Thomas"^^xsd:string .
+		
+# -----

@@ -1,0 +1,41 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+@prefix foaf:     <http://xmlns.com/foaf/0.1/#> .
+
+
+# ---------------
+# Disjoint Classes
+
+
+	# 2 CE [concrete]
+	# -----
+	# DisjointClasses ( :Boy :Girl )
+	:Boy owl:disjointWith :Girl . 
+	:Stewie 
+		a foaf:Person, owl:Thing ;
+		a :Boy ; # NOT commented --> constraint violation
+		a :Girl . 	
+	
+	# 3 CE [concrete]
+	# -----
+	# DisjointClasses ( :Male :Female :Hybrid )
+	:Male owl:disjointWith :Female . 
+	:Male owl:disjointWith :Hybrid .
+	:Hybrid owl:disjointWith :Female . 
+	:M_1 
+		a foaf:Person, owl:Thing ;
+		a :Male ; # NOT commented --> constraint violation
+		a :Female .
+	:M_2
+		a foaf:Person, owl:Thing ;
+		a :Male ; # NOT commented --> constraint violation
+		a :Hybrid .
+	:M_3
+		a foaf:Person, owl:Thing ;
+		a :Female ; # NOT commented --> constraint violation
+		a :Hybrid .
+	
+# -----

@@ -1,0 +1,22 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# ObjectComplementOf
+
+ 
+	# -----		
+	# ObjectComplementOf( :CE1 )
+    :ObjectComplementOf_C1 
+	    rdf:type owl:Class ;
+        owl:complementOf :CE1 .
+	:ObjectComplementOf_I1
+		rdf:type owl:Thing ;
+		rdf:type :CE1 ; # NOT commented --> constraint violation
+		rdf:type :ObjectComplementOf_C1 .
+	
+# -----

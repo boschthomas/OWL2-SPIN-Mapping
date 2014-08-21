@@ -1,0 +1,26 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# DataPropertyRange
+
+	# example
+	# -----
+	# DataPropertyRange( :DataPropertyRange_DPE :DR )
+	:DataPropertyRange_DPE rdfs:range :DR .
+	:DataPropertyRange_I1
+		rdf:type owl:Thing ;
+        :DataPropertyRange_DPE :DataPropertyRange_I2 ; 
+        :DataPropertyRange_DPE :DataPropertyRange_I3 . 
+	:DataPropertyRange_I2
+#		rdf:type :DR ; # commented --> constraint violation
+		rdf:type rdfs:Literal .
+	:DataPropertyRange_I3
+#		rdf:type :DR ; # commented --> constraint violation
+		rdf:type rdfs:Literal .
+		
+# -----

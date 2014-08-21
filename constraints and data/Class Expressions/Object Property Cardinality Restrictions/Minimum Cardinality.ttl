@@ -1,0 +1,56 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# ObjectMinCardinality
+
+
+	# example ( owl:minCardinality )
+	# -----		
+	# ObjectMinCardinality ( 3 :hasPet )
+	# ObjectMinCardinality ( 3 :hasPet owl:Thing )
+    :ObjectMinCardinality_CE1 
+        rdf:type owl:Restriction ;
+        owl:minCardinality "3"^^xsd:nonNegativeInteger ;
+        owl:onProperty :hasPet . 
+    :ObjectMinCardinality_I1
+		rdf:type owl:Thing ;
+	    rdf:type :ObjectMinCardinality_CE1 ;
+	    :hasPet :ObjectMinCardinality_I2 ;
+#	    :hasPet :ObjectMinCardinality_I3 ; # commented --> constraint violation
+		:hasPet :ObjectMinCardinality_I4 .
+	:ObjectMinCardinality_I2
+		rdf:type owl:Thing .
+	:ObjectMinCardinality_I3
+		rdf:type owl:Thing .
+	:ObjectMinCardinality_I4
+		rdf:type owl:Thing .
+	
+	# example ( owl:minQualifiedCardinality )
+	# -----
+    # ObjectMinCardinality ( 2 :fatherOf :Man ) 
+    :ObjectMinCardinality_CE2 
+        rdf:type owl:Restriction ;
+        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+        owl:onProperty :fatherOf ;
+        owl:onClass :Man . 
+    :ObjectMinCardinality_I5
+		rdf:type owl:Thing ;
+	    rdf:type :ObjectMinCardinality_CE2 ;
+	    :fatherOf :ObjectMinCardinality_I6 ;
+#		:fatherOf :ObjectMinCardinality_I7 ; # commented --> constraint violation
+		:fatherOf :ObjectMinCardinality_I8 .
+    :ObjectMinCardinality_I6
+		rdf:type owl:Thing ;
+        rdf:type :Man .
+    :ObjectMinCardinality_I7
+		rdf:type owl:Thing ;
+        rdf:type :Man .
+    :ObjectMinCardinality_I8
+		rdf:type owl:Thing .
+	
+# -----

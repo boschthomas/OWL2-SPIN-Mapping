@@ -52,11 +52,14 @@
 	
 owl:Thing 
 	spin:constraint 
-		# set-oriented operations ( on data ranges )
+		# Data Ranges - Set-Oriented Operations
 		# -----
 		# DataOneOf
-		[   a owl2:DataOneOf_1 ] , [   a owl2:DataOneOf_2 ] , [   a owl2:DataOneOf_3 ] , [   a owl2:DataOneOf_4 ] , [   a owl2:DataOneOf_5 ] ,
-	
+		[   a owl2:DataOneOf_1L ] , 
+		[   a owl2:DataOneOf_2L ] , 
+		[   a owl2:DataOneOf_3L ] , 
+		[   a owl2:DataOneOf_4L ] , 
+		[   a owl2:DataOneOf_5L ] ,
 		# set-oriented operations ( on class expressions )
 		# -----
 		# ObjectIntersectionOf ( 2 CE )
@@ -72,7 +75,7 @@ owl:Thing
 		# ObjectOneOf
 		[   a owl2:ObjectOneOf_1 ] , [   a owl2:ObjectOneOf_2 ] , [   a owl2:ObjectOneOf_3 ] , [   a owl2:ObjectOneOf_4 ] , [   a owl2:ObjectOneOf_5 ] ,
 		
-		# object property restrictions
+		# class expressions - object property restrictions
 		# -----
 		# ObjectSomeValuesFrom
 		[   a owl2:ObjectSomeValuesFrom ] ,
@@ -80,6 +83,8 @@ owl:Thing
 		[   a owl2:ObjectAllValuesFrom ] ,
 		# ObjectHasValue
 		[   a owl2:ObjectHasValue ] ,
+		# ObjectHasSelf
+		[   a owl2:ObjectHasSelf ] ,
 		
 		# object property cardinality restrictions
 		# -----
@@ -148,13 +153,124 @@ owl:Thing
 #		[   a owl2:DisjointUnion_2DisjointClassExpressions_2 ] ,
 #		[   a owl2:DisjointUnion_2DisjointClassExpressions_3 ] .
 		
+owl:Thing 
+	spin:rule 
+		# Class Expression Axioms - Subclass Axioms
+		# -----
+		# SubClassOf
+		[   a owl2:SubClassOf ] . 
+		
 rdfs:Literal 
 	spin:constraint 
-		# set-oriented operations
+		# Data Ranges - Set-Oriented Operations
 		# -----
+		# DataIntersectionOf ( 2 DR )
+		[   a owl2:DataIntersectionOf_2DR ] ,
+		# DataUnionOf ( 2 DR )
+		[   a owl2:DataUnionOf_2DR ] ,
 		# DataComplementOf
 		[   a owl2:DataComplementOf ] .
 
+# -----
+
+# ---------------
+# Data Ranges -  Intersection of Data Ranges 
+
+
+owl2:DataIntersectionOf_2DR
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+#   spin:violationSource:
+    spin:labelTemplate "OWL 2 - Data Ranges - Intersection of Data Ranges " ;
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                :cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    spin:violationPath rdf:type ;
+                    rdfs:label ?violationMessage .
+            }
+            WHERE {	    
+	    		?this rdf:type ?DT .
+	    		
+	    		?DT rdf:type rdfs:Datatype .
+       			
+#      			?DT owl:intersectionOf ( ?DR1 ?DR2 ) .
+#      			-----         
+	    		?DT owl:intersectionOf ?DRs .
+	    		?DRs rdf:first ?DR1 .
+	    		?DRs rdf:rest ?rest_1 .
+	    		?rest_1 rdf:first ?DR2 .
+	    		?rest_1 rdf:rest ?rest_2 .
+	    		FILTER ( ?rest_2 = rdf:nil ) .
+
+				FILTER NOT EXISTS { ?this rdf:type ?DR1 . ?this rdf:type ?DR2 . }
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"DataIntersectionOf ( \", 
+                    xsd:string( ?DR1 ), 
+                    \" \", 
+                    xsd:string( ?DR2 ), 
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
+# -----
+    
+# ---------------
+# Data Ranges -  Union of Data Ranges 
+
+
+owl2:DataUnionOf_2DR
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+#   spin:violationSource:
+    spin:labelTemplate "OWL 2 - Data Ranges - Union of Data Ranges " ;
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                :cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    spin:violationPath rdf:type ;
+                    rdfs:label ?violationMessage .
+            }
+            WHERE {	    
+	    		?this rdf:type ?DT .
+	    		
+	    		?DT rdf:type rdfs:Datatype .
+       			
+#      			?DT owl:unionOf ( ?DR1 ?DR2 ) .
+#      			-----         
+	    		?DT owl:unionOf ?DRs .
+	    		?DRs rdf:first ?DR1 .
+	    		?DRs rdf:rest ?rest_1 .
+	    		?rest_1 rdf:first ?DR2 .
+	    		?rest_1 rdf:rest ?rest_2 .
+	    		FILTER ( ?rest_2 = rdf:nil ) .
+
+				FILTER NOT EXISTS { { ?this rdf:type ?DR1 } UNION { ?this rdf:type ?DR2 } }
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"DataUnionOf ( \", 
+                    xsd:string( ?DR1 ), 
+                    \" \", 
+                    xsd:string( ?DR2 ), 
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
 # -----
 
 # ---------------
@@ -1983,11 +2099,9 @@ owl2:DataComplementOf
 # -----	
 # DataOneOf := 'DataOneOf' '(' Literal { Literal } ')' 
 
-# SPIN templates:
-# -----
 
-# 1 literal
-owl2:DataOneOf_1
+# -----
+owl2:DataOneOf_1L
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
 	spin:labelTemplate "DataOneOf" ;
@@ -2115,8 +2229,8 @@ owl2:DataOneOf_1
 					sp:arg2 [ sp:varName "L1" ] ;
 					sp:arg3 " )" ] ] ) ] .
 
-# 2 literals
-owl2:DataOneOf_2
+# -----
+owl2:DataOneOf_2L
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
 	spin:labelTemplate "DataOneOf" ;
@@ -2288,8 +2402,8 @@ owl2:DataOneOf_2
 					sp:arg4 [ sp:varName "L2" ] ;
 					sp:arg5 " )" ] ] ) ].
 
-# 3 literals
-owl2:DataOneOf_3
+# -----
+owl2:DataOneOf_3L
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
 	spin:labelTemplate "DataOneOf" ;
@@ -2502,8 +2616,8 @@ owl2:DataOneOf_3
 					sp:arg6 [ sp:varName "L3" ] ;
 					sp:arg7 " )" ] ] ) ].
 
-# 4 literals
-owl2:DataOneOf_4
+# -----
+owl2:DataOneOf_4L
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
 	spin:labelTemplate "DataOneOf" ;
@@ -2756,8 +2870,8 @@ owl2:DataOneOf_4
 					sp:arg8 [ sp:varName "L4" ] ;
 					sp:arg9 " )" ] ] ) ].
 
-# 5 literals
-owl2:DataOneOf_5
+# -----
+owl2:DataOneOf_5L
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
 	spin:labelTemplate "DataOneOf" ;
@@ -4468,6 +4582,45 @@ owl2:ObjectHasValue
 # -----
 
 # ---------------
+# Class Expressions - Self-Restriction
+
+
+owl2:ObjectHasSelf
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+#   spin:violationSource:
+    spin:labelTemplate "Class Expressions - Self-Restriction" ;
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                :cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    spin:violationPath rdf:type ;
+                    rdfs:label ?violationMessage .
+            }
+            WHERE {	                
+	    		?this rdf:type ?C .
+	    		
+	    		?C rdf:type owl:Restriction .
+	    		?C owl:onProperty ?OPE .
+	    		?C owl:hasSelf "true"^^xsd:boolean .
+
+				FILTER NOT EXISTS { ?this ?OPE ?this . }
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"ObjectHasSelf ( \", 
+                    xsd:string( ?OPE ),
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+
+# ---------------
 # DataSomeValuesFrom
 
 
@@ -4848,110 +5001,47 @@ owl2:DataHasValue
 
 # description
 # -----
-# A disjoint classes axiom DisjointClasses( CE1 ... CEn ) states that all of the class expressions CEi, 1 ≤ i ≤ n, are pairwise disjoint; 
-# that is, no individual can be at the same time an instance of both CEi and CEj for i ≠ j. 
+# A disjoint classes axiom DisjointClasses( CE1 ... CEn ) states that all of the class expressions CEi, 1 <= i <= n, are pairwise disjoint; 
+# that is, no individual can be at the same time an instance of both CEi and CEj for i != j. 
 
 # definition
 # -----	
 # DisjointClasses := 'DisjointClasses' '(' axiomAnnotations ClassExpression ClassExpression { ClassExpression } ')'  
 
-# examples
-# -----
-# DisjointClasses( a:Boy a:Girl ) 
-# a:Boy owl:disjointWith a:Girl . 
-# a:Stewie 
-#     rdf:type a:Boy ; 
-#     rdf:type a:Girl . 
 
-# DisjointClasses ( a:Male a:Female a:Hybrid )
-# a:Male owl:disjointWith a:Female . 
-# a:Male owl:disjointWith a:Hybrid .
-# a:Hybrid owl:disjointWith a:Female .
-# a:M_1 
-#	  rdf:type a:Male ;
-#	  rdf:type a:Female .
-# a:M_2
-#	  rdf:type a:Male ;
-#	  rdf:type a:Hybrid .
-# a:M_3
-#	  rdf:type a:Female ;
-#	  rdf:type a:Hybrid .
-
-# SPIN template
 # -----
 owl2:DisjointClasses
-	a spin:Template; 
-	rdfs:subClassOf spin:Templates ;
-	spin:labelTemplate "DisjointClasses" ;
-	rdfs:label "DisjointClasses" ;
-	rdfs:comment "DisjointClasses" ;
-	spin:body [
-		a sp:Construct ;
-#		CONSTRUCT {
-#           _:violation 
-#		        a spin:ConstraintViolation ;
-#		        rdfs:label ?label
-#               spin:violationRoot ?this ;
-#               spin:violationPath ?violationPath ;
-#               spin:violationSource ?violationSource }
-		sp:templates ( 
-			[   sp:subject _:violation ;
-				sp:predicate rdf:type ;
-				sp:object spin:ConstraintViolation ]
-			[   sp:subject _:violation ; 
-				sp:predicate rdfs:label ;
-				sp:object [ sp:varName "label" ] ] 
-			[	sp:subject _:violation ;
-				sp:predicate spin:violationRoot ;
-				sp:object spin:_this ]		 
-			[   sp:subject _:violation ;
-				sp:predicate spin:violationPath ;
-				sp:object [ sp:varName "CE1" ] ] 
-			[   sp:subject _:violation ;
-				sp:predicate spin:violationSource ;
-				sp:object owl2:DisjointClasses ] ) ;
-#		WHERE {
-#           ?this rdf:type ?CE_1 .
-#           ?this rdf:type ?CE_2 .
-#		    ?CE1 owl:disjointWith ?CE2 .
-#           FILTER ( ?CE_1 = ?CE1 ) .
-#           FILTER ( ?CE_2 = ?CE2 ) .
-#           FILTER ( ?CE_1 != ?CE_2 ) .  
-#		    LET ( ( ... ) AS ?label ) . }
-		sp:where ( 
-			[   sp:subject [ sp:varName "this" ] ;
-			    sp:predicate rdf:type ;
-				sp:object [ sp:varName "CE_1" ] ]
-			[   sp:subject [ sp:varName "this" ] ;
-			    sp:predicate rdf:type ;
-				sp:object [ sp:varName "CE_2" ] ]	
-			[   sp:subject [ sp:varName "CE1" ] ;
-			    sp:predicate owl:disjointWith ;
-				sp:object [ sp:varName "CE2" ] ]
-			[   a sp:Filter;
-				sp:expression [ 
-					a sp:eq;
-				    sp:arg1 [ sp:varName "CE_1" ] ;
-					sp:arg2 [ sp:varName "CE1" ] ] ]
-			[   a sp:Filter;
-				sp:expression [ 
-					a sp:eq;
-				    sp:arg1 [ sp:varName "CE_2" ] ;
-					sp:arg2 [ sp:varName "CE2" ] ] ]
-			[   a sp:Filter;
-				sp:expression [ 
-					a sp:ne;
-				    sp:arg1 [ sp:varName "CE_1" ] ;
-					sp:arg2 [ sp:varName "CE_2" ] ] ]		
-			[   a sp:Let;
-				sp:variable [ sp:varName "label" ];
-				sp:expression [ 
-					a fn:concat; 
-					sp:arg1 "DisjointClasses ( " ;
-					sp:arg2 [ sp:varName "CE1" ] ;
-					sp:arg3 " " ;
-					sp:arg4 [ sp:varName "CE2" ] ;
-					sp:arg5 " )" ] ] ) ] .
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+#   spin:violationSource:
+    spin:labelTemplate "OWL 2 - Axioms - Class Expressions Axioms - Disjoint Classes" ;
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                _:cv a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    spin:violationPath rdf:type ;
+                    rdfs:label ?violationMessage .
+            }
+            WHERE {
+                ?this rdf:type ?CE1 .
+                ?this rdf:type ?CE2 .
+		        ?CE1 owl:disjointWith ?CE2 .                
+                FILTER ( ?CE1 != ?CE2 ) .
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"DisjointClasses ( \", 
+                    xsd:string( ?CE1 ), 
+                    \" \", 
+                    xsd:string( ?CE2 ), 
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
 					
 # -----
 
@@ -6627,4 +6717,25 @@ owl2:DatatypeDefinition_Pattern
 					sp:arg4 [ sp:varName "pattern" ] ;
 					sp:arg5 "'" ] ] ) ] .
 					
+# -----
+
+# ---------------
+# Axioms - Class Expression Axioms - Subclass Axioms
+
+
+owl2:SubClassOf 
+	a sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                :CE1 rdfs:subClassOf :CE3 .              
+                ?this rdf:type :CE2 .
+                ?this rdf:type :CE3 .          
+            }
+            WHERE {
+                :CE1 rdfs:subClassOf :CE2 .
+                :CE2 rdfs:subClassOf :CE3 .               
+                ?this rdf:type :CE1 .            
+        	}
+        """ .
+    
 # -----

@@ -1,0 +1,25 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# InverseFunctionalObjectProperty
+
+
+	# example
+	# -----
+	# InverseFunctionalObjectProperty ( :InverseFunctionalObjectProperty_OPE ) 
+	:InverseFunctionalObjectProperty_OPE rdf:type owl:InverseFunctionalProperty . 	
+	:InverseFunctionalObjectProperty_I1
+		rdf:type owl:Thing ;
+		:InverseFunctionalObjectProperty_OPE :InverseFunctionalObjectProperty_I . 
+	:InverseFunctionalObjectProperty_I2
+		:InverseFunctionalObjectProperty_OPE :InverseFunctionalObjectProperty_I ; # not commented --> constraint violation
+		rdf:type owl:Thing .
+	:InverseFunctionalObjectProperty_I
+		rdf:type owl:Thing .
+
+# -----

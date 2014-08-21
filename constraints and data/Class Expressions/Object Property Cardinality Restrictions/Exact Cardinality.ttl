@@ -1,0 +1,50 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# ObjectExactCardinality
+
+
+	# example ( owl:cardinality )
+	# -----		
+	# ObjectExactCardinality( 1 :hasPet )
+	# ObjectExactCardinality ( 1 :hasPet owl:Thing )
+	:ObjectExactCardinality_CE2 
+       rdf:type owl:Restriction ;
+       owl:cardinality "1"^^xsd:nonNegativeInteger ;
+       owl:onProperty :hasPet . 
+    :ObjectExactCardinality_I1
+		rdf:type owl:Thing ;
+	    rdf:type :ObjectExactCardinality_CE2 ;
+        :hasPet :ObjectExactCardinality_I2 ; # NOT commented --> constraint violation
+	    :hasPet :ObjectExactCardinality_I3 .
+	:ObjectExactCardinality_I2
+		rdf:type owl:Thing .
+	:ObjectExactCardinality_I3
+		rdf:type owl:Thing .
+	
+	# example ( owl:qualifiedCardinality )
+	# -----
+    # ObjectExactCardinality ( 1 :hasPet :Dog ) 
+    :ObjectExactCardinality_CE1 
+        rdf:type owl:Restriction ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty :hasPet ;
+        owl:onClass :Dog . 
+    :ObjectExactCardinality_I4
+		rdf:type owl:Thing ;
+	    rdf:type :ObjectExactCardinality_CE1 ;
+        :hasPet :ObjectExactCardinality_I5 ; # NOT commented --> constraint violation
+	    :hasPet :ObjectExactCardinality_I6 .
+    :ObjectExactCardinality_I5
+		rdf:type owl:Thing ;
+        rdf:type :Dog .
+    :ObjectExactCardinality_I6
+		rdf:type owl:Thing ;
+        rdf:type :Dog .
+	
+# -----
