@@ -2,6 +2,7 @@
 @prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix owl2spin: <http://constraints.org/owl2#> .
 @prefix :         <http://www.example.org/OWL2InstanceData#> .
 
 
@@ -14,23 +15,23 @@
 	# ObjectPropertyDomain( :ObjectPropertyDomain_OPE :CE )
     :ObjectPropertyDomain_OPE rdfs:domain :ObjectPropertyDomain_CE .
     :ObjectPropertyDomain_I1
-        a owl:Thing ;
-#		a :ObjectPropertyDomain_CE ; # commented --> constraint violation
+        a owl:Thing, owl2spin:ToInfer ;
         :ObjectPropertyDomain_OPE :ObjectPropertyDomain_I2 ; 
         :ObjectPropertyDomain_OPE :ObjectPropertyDomain_I3 . 
     :ObjectPropertyDomain_I2
-        a owl:Thing .
+        a owl:Thing, owl2spin:ToInfer .
     :ObjectPropertyDomain_I3
-    a owl:Thing .
-		
+        a owl:Thing, owl2spin:ToInfer .
+	# --> :ObjectPropertyDomain_I1 a :ObjectPropertyDomain_CE .
+	
 	# concrete
 	# -----
     :hasDog rdfs:domain :Person .
     :Peter 
-        a owl:Thing ;
-#       a :Person # commented --> constraint violation
+        a owl:Thing, owl2spin:ToInfer ;
         :hasDog :Brian .
     :Brian
-        a owl:Thing .
+        a owl:Thing, owl2spin:ToInfer .
+    # --> :Peter a :Person .
 		
 # -----

@@ -6,21 +6,23 @@
 
 
 # ---------------
-# DataPropertyRange
+# Axioms - Data Property Axioms - Data Property Range
 
-	# example
-	# -----
-	# DataPropertyRange( :DataPropertyRange_DPE :DR )
-	:DataPropertyRange_DPE rdfs:range :DR .
-	:DataPropertyRange_I1
-		rdf:type owl:Thing ;
-        :DataPropertyRange_DPE :DataPropertyRange_I2 ; 
-        :DataPropertyRange_DPE :DataPropertyRange_I3 . 
-	:DataPropertyRange_I2
-#		rdf:type :DR ; # commented --> constraint violation
-		rdf:type rdfs:Literal .
-	:DataPropertyRange_I3
-#		rdf:type :DR ; # commented --> constraint violation
-		rdf:type rdfs:Literal .
-		
+    # generic
+    # -----
+    # DataPropertyRange( :DataPropertyRange_DPE :DR )
+    :DataPropertyRange_DPE rdfs:range :DataPropertyRange_DR .
+    :DataPropertyRange_I1
+        a owl:Thing ;
+        :DataPropertyRange_DPE ""^^xsd:string ; # NOT commented --> constraint violation
+        :DataPropertyRange_DPE ""^^:DataPropertyRange_DR . 
+    
+    # concrete
+    # -----    
+    :hasName rdfs:range xsd:string . 
+    :Peter 
+        a owl:Thing ;
+        :hasName "42"^^xsd:integer ; # NOT commented --> constraint violation
+        :hasName "Peter Griffin" .  
+        
 # -----

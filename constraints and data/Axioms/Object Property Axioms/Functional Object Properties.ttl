@@ -6,20 +6,32 @@
 
 
 # ---------------
-# FunctionalObjectProperty
+# Axioms - Object Property Axioms - Functional Object Property
 
 
-	# example
+	# generic
 	# -----
 	# FunctionalObjectProperty( :FunctionalObjectProperty_OPE ) 
 	:FunctionalObjectProperty_OPE rdf:type owl:FunctionalProperty .
 	:FunctionalObjectProperty_I1 
-		rdf:type owl:Thing ;
-		:FunctionalObjectProperty_OPE :FunctionalObjectProperty_2 ; # not commented --> constraint violation
-		:FunctionalObjectProperty_OPE :FunctionalObjectProperty_3 . 
+		a owl:Thing ;
+		:FunctionalObjectProperty_OPE :FunctionalObjectProperty_I2 ; # NOT commented --> constraint violation
+		:FunctionalObjectProperty_OPE :FunctionalObjectProperty_I3 . 
 	:FunctionalObjectProperty_I2 
-		rdf:type owl:Thing .
+		a owl:Thing .
 	:FunctionalObjectProperty_I3 
-		rdf:type owl:Thing .
+		a owl:Thing .
+		
+	# concrete
+	# -----
+	:hasFather a owl:FunctionalProperty . 
+	:Stewie 
+	    a owl:Thing ;
+	    :hasFather :Peter ; # NOT commented --> constraint violation
+	    :hasFather :Peter_Griffin .
+	:Peter
+		a owl:Thing .
+	:Peter_Griffin
+		a owl:Thing .
 		
 # -----

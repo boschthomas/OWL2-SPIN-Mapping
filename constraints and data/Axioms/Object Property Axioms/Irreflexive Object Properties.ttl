@@ -1,0 +1,27 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# Axioms - Object Property Axioms - Irreflexive Object Property
+
+
+    # generic
+    # -----
+    # IrreflexiveObjectProperty ( :IrreflexiveObjectProperty_OPE ) 
+    :IrreflexiveObjectProperty_OPE a owl:IrreflexiveProperty . 	
+    :IrreflexiveObjectProperty_I1
+        :IrreflexiveObjectProperty_OPE :IrreflexiveObjectProperty_I1 ; # NOT commented --> constraint violation
+        a owl:Thing .
+		
+    # concrete
+    # -----
+    :marriedTo a owl:IrreflexiveProperty . 
+    :Peter 
+        :marriedTo :Peter ; # NOT commented --> constraint violation
+        a owl:Thing, :Person . 
+
+# -----

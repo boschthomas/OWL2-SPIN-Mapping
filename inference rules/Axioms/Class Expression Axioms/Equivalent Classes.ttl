@@ -1,0 +1,45 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix owl2spin: <http://constraints.org/owl2#> .
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# EquivalentClasses
+
+	# 2 CE
+	# -----	
+#	EquivalentClasses( :Boy ObjectIntersectionOf( :Child :Man ) )
+#	ClassAssertion( :Child :Chris )
+#	ClassAssertion( :Man :Chris )
+#	ClassAssertion( :Boy :Stewie )
+	:Boy owl:equivalentClass  :EquivalentClasses_CE1.
+	:EquivalentClasses_CE1 a owl:Class .
+	:EquivalentClasses_CE1 owl:intersectionOf ( :Child :Man ) .
+	:Chris a :Child, owl2spin:ToInfer .
+	:Chris a :Man, owl2spin:ToInfer .
+	:Stewie a :Boy, owl2spin:ToInfer .
+#	--> :Chris a :Boy .
+#   --> :Stewie a :EquivalentClasses_CE1 .
+
+	# 3 CE
+	# -----	
+#   EquivalentClasses( :MongrelOwner ObjectSomeValuesFrom( :hasPet :Mongrel ) ) 
+#   EquivalentClasses( :DogOwner ObjectSomeValuesFrom( :hasPet :Dog ) ) 
+#   SubClassOf( :Mongrel :Dog ) 
+#   ClassAssertion( :MongrelOwner :Peter ) 
+	:MongrelOwner owl:equivalentClass :EquivalentClasses_CE2 .
+	:EquivalentClasses_CE2 a owl:Restriction .
+	:EquivalentClasses_CE2 owl:onProperty :hasPet .
+	:EquivalentClasses_CE2 owl:someValuesFrom :Mongrel . 	
+	:DogOwner owl:equivalentClass :EquivalentClasses_CE3 .
+	:EquivalentClasses_CE3 a owl:Restriction .
+	:EquivalentClasses_CE3 owl:onProperty :hasPet .
+	:EquivalentClasses_CE3 owl:someValuesFrom :Dog . 	
+	:Mongrel rdfs:subClassOf :Dog . 	
+	:Peter a :MongrelOwner, owl2spin:ToInfer .   
+#   --> :Peter a :EquivalentClasses_CE2 .
+		
+# -----

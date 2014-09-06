@@ -2,32 +2,33 @@
 @prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix owl2spin: <http://constraints.org/owl2#> .
 @prefix :         <http://www.example.org/OWL2InstanceData#> .
 
 
 # ---------------
 # Axioms - Data Property Axioms - Data Property Domain
 
-	# generic
-	# -----
-	# DataPropertyDomain( :DataPropertyDomain_DPE :DataPropertyDomain_CE )
-	:DataPropertyDomain_DPE rdfs:domain :DataPropertyDomain_CE  .
-	:DataPropertyDomain_I1
-		a owl:Thing ;
-#		a :DataPropertyDomain_CE ; # commented --> constraint violation
+    # generic
+    # -----
+    # DataPropertyDomain( :DataPropertyDomain_DPE :DataPropertyDomain_CE )
+    :DataPropertyDomain_DPE rdfs:domain :DataPropertyDomain_CE  .
+    :DataPropertyDomain_I1
+        a owl:Thing, owl2spin:ToInfer ;
         :DataPropertyDomain_DPE :DataPropertyDomain_I2 ; 
         :DataPropertyDomain_DPE :DataPropertyDomain_I3 . 
-	:DataPropertyDomain_I2
-		a rdfs:Literal .
-	:DataPropertyDomain_I3
-		a rdfs:Literal .
-		
+    :DataPropertyDomain_I2
+        a rdfs:Literal .
+    :DataPropertyDomain_I3
+        a rdfs:Literal .
+    # --> :DataPropertyDomain_I1 a :DataPropertyDomain_CE .
+        
     # concrete
     # -----
     :hasName rdfs:domain :Person . 
     :Peter 
-        a owl:Thing ;
-#       a :Person ; # commented --> constraint violation
+        a owl:Thing, owl2spin:ToInfer ;
         :hasName "Peter Griffin" . 
-		
+    # --> :Peter a :Person .
+        
 # -----

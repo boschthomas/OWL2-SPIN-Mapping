@@ -113,33 +113,43 @@ owl:Thing
 		# owl2:DataExactCardinality
 		[   a owl2:DataExactCardinality ] ,
 		
-		# object property axioms
+		# Axioms - Object Property Axioms
 		# -----
-		# SubObjectPropertyOf
-		[   a owl2:SubObjectPropertyOf ] ,
-		# ObjectPropertyChain ( 2 OPE )
-		[   a owl2:ObjectPropertyChain_2OPE ] ,
-		# ObjectPropertyChain ( 3 OPE )
-		[   a owl2:ObjectPropertyChain_3OPE ] ,
-		# EquivalentObjectProperties
-		# DisjointObjectProperties
+		# Axioms - Object Property Axioms - Sub-Object Properties
+#		[   a owl2:SubObjectPropertyOf ] ,
+		# Axioms - Object Property Axioms - Object Property Chains 
+#		[   a owl2:ObjectPropertyChain_2OPE ] ,
+#		[   a owl2:ObjectPropertyChain_3OPE ] ,
+		# Axioms - Object Property Axioms - Disjoint Object Properties
 		[   a owl2:DisjointObjectProperties ] ,
-		# InverseObjectProperties
-		[   a owl2:InverseObjectProperties ] ,
-		# ObjectPropertyDomain
+		# Axioms - Object Property Axioms - Inverse Object Properties
+#		[   a owl2:InverseObjectProperties ] ,
+		# Axioms - Object Property Axioms - Object Property Domain
 		[   a owl2:ObjectPropertyDomain ] ,
-		# ObjectPropertyRange
+		# Axioms - Object Property Axioms - Object Property Range
 		[   a owl2:ObjectPropertyRange ] ,
-		# FunctionalObjectProperty
+		# Axioms - Object Property Axioms - Functional Object Property
 		[   a owl2:FunctionalObjectProperty ] ,
-		# InverseFunctionalObjectProperty
+		# Axioms - Object Property Axioms - Inverse-Functional Object Property
 		[   a owl2:InverseFunctionalObjectProperty ] ,
+		# Axioms - Object Property Axioms - Reflexive Object Properties
+#       [   a owl2:ReflexiveObjectProperties ] ,
+		# Axioms - Object Property Axioms - Irreflexive Object Properties
+        [   a owl2:IrreflexiveObjectProperties ] ,
+        # Axioms - Object Property Axioms - Symmetric Object Properties
+        [   a owl2:SymmetricObjectProperties ] ,
+        # Axioms - Object Property Axioms - Asymmetric Object Properties
+        [   a owl2:AsymmetricObjectProperties ] ,
+        # Axioms - Object Property Axioms - Transitive Object Properties
+        [   a owl2:TransitiveObjectProperties ] ,
 		
-		# data property axioms
+		# Axioms - Data Property Axioms
 		# -----
-		# DataPropertyDomain
+		# Axioms - Data Property Axioms - Disjoint Data Properties
+		[   a owl2:DisjointDataProperties ] ,		
+		# Axioms - Data Property Axioms - Data Property Domain
 		[   a owl2:DataPropertyDomain ] ,
-		# DataPropertyRange
+		# Axioms - Data Property Axioms - Data Property Range
 		[   a owl2:DataPropertyRange ] ,
 		
 		# datatype definitions
@@ -147,18 +157,11 @@ owl:Thing
 		
 		
 		# Disjoint Classes
-		[   a owl2:DisjointClasses ] .
+		[   a owl2:DisjointClasses ] ,
 		# Disjoint Union of Class Expressions
-#		[   a owl2:DisjointUnion_2DisjointClassExpressions_1 ] .
-#		[   a owl2:DisjointUnion_2DisjointClassExpressions_2 ] ,
-#		[   a owl2:DisjointUnion_2DisjointClassExpressions_3 ] .
-		
-owl:Thing 
-	spin:rule 
-		# Class Expression Axioms - Subclass Axioms
-		# -----
-		# SubClassOf
-		[   a owl2:SubClassOf ] . 
+		[   a owl2:DisjointUnion_2CE_1 ] ,
+		[   a owl2:DisjointUnion_2CE_2 ] ,
+		[   a owl2:DisjointUnion_2CE_3 ] .
 		
 rdfs:Literal 
 	spin:constraint 
@@ -4972,41 +4975,7 @@ owl2:DataHasValue
 # -----
 
 # ---------------
-# Equivalent Classes ( class expression axioms )
-
-
-# description
-# -----
-# An equivalent classes axiom EquivalentClasses( CE1 ... CEn ) states that all of the class expressions CEi, 1 ≤ i ≤ n, are semantically equivalent to each other. 
-# This axiom allows one to use each CEi as a synonym for each CEj — that is, in any expression in the ontology containing such an axiom, 
-# CEi can be replaced with CEj without affecting the meaning of the ontology.
-
-# definition
-# -----	
-# EquivalentClasses := 'EquivalentClasses' '(' axiomAnnotations ClassExpression ClassExpression { ClassExpression } ')' 
-
-# examples
-# -----
-
-
-# SPIN template
-# -----
-
-
-# -----
-
-# ---------------
-# Disjoint Classes ( class expression axioms )
-
-
-# description
-# -----
-# A disjoint classes axiom DisjointClasses( CE1 ... CEn ) states that all of the class expressions CEi, 1 <= i <= n, are pairwise disjoint; 
-# that is, no individual can be at the same time an instance of both CEi and CEj for i != j. 
-
-# definition
-# -----	
-# DisjointClasses := 'DisjointClasses' '(' axiomAnnotations ClassExpression ClassExpression { ClassExpression } ')'  
+# Axioms - Class Expression Axioms - Disjoint Classes
 
 
 # -----
@@ -5046,457 +5015,170 @@ owl2:DisjointClasses
 # -----
 
 # ---------------
-# Disjoint Union ( of Class Expressions ) ( class expression axioms )
+# Axioms - Class Expression Axioms - Disjoint Union of Class Expressions
 
 
-# description
-# -----
-# A disjoint union axiom DisjointUnion( C CE1 ... CEn ) states that a class C is a disjoint union of the class expressions CEi, 1 ≤ i ≤ n, 
-# all of which are pairwise disjoint. Such axioms are sometimes referred to as covering axioms, 
-# as they state that the extensions of all CEi exactly cover the extension of C. 
-# Thus, each instance of C is an instance of exactly one CEi, and each instance of CEi is an instance of C. 
+owl2:DisjointUnion_2CE_1
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    
+#   spin:violationSource:
+#   -----
+    spin:labelTemplate "OWL 2 - Axioms - Class Expression Axioms - Disjoint Union of Class Expressions" ;
+    
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                :cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    spin:violationPath rdf:type ;
+                    rdfs:label ?violationMessage .
+            }
+            WHERE {	 
+            	?this rdf:type ?C .
+               
+#	    		?C owl:disjointUnionOf ( ?CE1 ?CE2 ) . 
+#       		-----
+	    		?C owl:disjointUnionOf ?DCE .
+	    		?DCE rdf:first ?CE1 .
+	    		?DCE rdf:rest ?r1 .
+	    		?r1 rdf:first ?CE2 .
+	    		?r1 rdf:rest ?r2 .
+	    		FILTER ( ?r2 = rdf:nil ) .
 
-# definition
-# -----	
-# DisjointUnion := 'DisjointUnion' '(' axiomAnnotations Class disjointClassExpressions ')'
-# disjointClassExpressions := ClassExpression ClassExpression { ClassExpression } 
+#	    		each instance of C is an instance of exactly one CEi
+#       		-----
+	    		?this rdf:type ?CE1 .
+				?this rdf:type ?CE2 .
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"DisjointUnion ( \", 
+                    xsd:string( ?C ), 
+                    \" \", 
+                    xsd:string( ?CE1 ),
+                    \" \", 
+                    xsd:string( ?CE2 ),  
+                    \" )\", 
+                    \" - each instance of \",
+                    xsd:string( ?C ),  
+                    \" must also be an instance of exactly one of \",
+                    xsd:string( ?CE1 ),
+                    \" and \", 
+                    xsd:string( ?CE2 ) ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
+owl2:DisjointUnion_2CE_2
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    
+#   spin:violationSource:
+#   -----
+    spin:labelTemplate "OWL 2 - Axioms - Class Expression Axioms - Disjoint Union of Class Expressions" ;
+    
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                :cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    spin:violationPath rdf:type ;
+                    rdfs:label ?violationMessage .
+            }
+            WHERE {	 
+            	?this rdf:type ?CE1 .
+               
+#	    		?C owl:disjointUnionOf ( ?CE1 ?CE2 ) . 
+#       		-----
+	    		?C owl:disjointUnionOf ?DCE .
+	    		?DCE rdf:first ?CE1 .
+	    		?DCE rdf:rest ?r1 .
+	    		?r1 rdf:first ?CE2 .
+	    		?r1 rdf:rest ?r2 .
+	    		FILTER ( ?r2 = rdf:nil ) .
 
-# example ( 2 disjoint class expressions )
-# -----
-# DisjointUnion( a:Child a:Boy a:Girl ) 
-# a:Child owl:disjointUnionOf ( a:Boy a:Girl ) .
+#       		each instance of CE1 is an instance of C
+#       		-----
+       			FILTER NOT EXISTS { ?this rdf:type ?C }
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"DisjointUnion ( \", 
+                    xsd:string( ?C ), 
+                    \" \", 
+                    xsd:string( ?CE1 ),
+                    \" \", 
+                    xsd:string( ?CE2 ),  
+                    \" )\",
+                    \" - each instance of \",
+                    xsd:string( ?CE1 ),  
+                    \" must also be an instance of \",
+                    xsd:string( ?C ) ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
 
-# DisjointUnion( a:DisjointUnion_C a:DisjointUnion_CE1 a:DisjointUnion_CE2 ) 
-# a:DisjointUnion_C1 owl:disjointUnionOf ( a:DisjointUnion_CE1 a:DisjointUnion_CE2 ) . 
-# a:DisjointUnion_I1 
-#	rdf:type a:DisjointUnion_C1 ;
-#	rdf:type a:DisjointUnion_CE1 ;
-#	rdf:type a:DisjointUnion_CE2 .
-# a:DisjointUnion_I2 
-#	rdf:type owl:Thing ;
-#	rdf:type a:DisjointUnion_C1 ;
-#	rdf:type a:DisjointUnion_CE1 .
-# a:DisjointUnion_I3 
-#	rdf:type owl:Thing ;
-#	rdf:type a:DisjointUnion_C1 ;
-#	rdf:type a:DisjointUnion_CE2 .
+owl2:DisjointUnion_2CE_3
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    
+#   spin:violationSource:
+#   -----
+    spin:labelTemplate "OWL 2 - Axioms - Class Expression Axioms - Disjoint Union of Class Expressions" ;
+    
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                :cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    spin:violationPath rdf:type ;
+                    rdfs:label ?violationMessage .
+            }
+            WHERE {	 
+            	?this rdf:type ?CE2 .
+               
+#	    		?C owl:disjointUnionOf ( ?CE1 ?CE2 ) . 
+#       		-----
+	    		?C owl:disjointUnionOf ?DCE .
+	    		?DCE rdf:first ?CE1 .
+	    		?DCE rdf:rest ?r1 .
+	    		?r1 rdf:first ?CE2 .
+	    		?r1 rdf:rest ?r2 .
+	    		FILTER ( ?r2 = rdf:nil ) .
 
-# example ( 3 disjoint class expressions )
-# -----
-
-
-# SPIN templates
-# -----
-
-# 2 disjoint class expressions
-#	CONSTRUCT {
-#	    _:violation 
-#			a spin:ConstraintViolation ;
-#			rdfs:label ?label
-#		    spin:violationRoot ?this ;
-#		    spin:violationPath ?violationPath ;
-#		    spin:violationSource ?violationSource }
-#	WHERE {
-#	    ?C owl:disjointUnionOf ( ?CE1 CE2 ) . 
-#       -----
-#	    ?C owl:disjointUnionOf ?disjointClassExpressions .
-#	    ?disjointClassExpressions rdf:first ?CE1 .
-#	    ?disjointClassExpressions rdf:rest ?rest_1 .
-#	    ?rest_1 rdf:first ?CE2 .
-#	    ?rest_1 rdf:rest ?rest_2 .
-#	    FILTER ( ?rest_2 = rdf:nil ) .
-#
-#	    ?this rdf:type ?C .
-#
-#	    each instance of C is an instance of exactly one CEi
-#       -----
-#	    ?this rdf:type ?CE1 .
-#		?this rdf:type ?CE2 .
-#
-#		LET ( ( ... ) AS ?label ) . }
-owl2:DisjointUnion_2DisjointClassExpressions_1 
-	a spin:Template; 
-	rdfs:subClassOf spin:Templates ;
-	spin:labelTemplate "Disjoint Union of Class Expressions" ;
-	rdfs:label "Disjoint Union of Class Expressions" ;
-	rdfs:comment "Disjoint Union of Class Expressions" ;
-	spin:body [
-		a sp:Construct ;
-		sp:templates ( 
-			[   sp:subject _:violation ;
-				sp:predicate rdf:type ;
-				sp:object spin:ConstraintViolation ]
-			[   sp:subject _:violation ; 
-				sp:predicate rdfs:label ;
-				sp:object [ sp:varName "label" ] ] 
-			[	sp:subject _:violation ;
-				sp:predicate spin:violationRoot ;
-				sp:object spin:_this ]		 
-			[   sp:subject _:violation ;
-				sp:predicate spin:violationPath ;
-				sp:object "" ] 
-			[   sp:subject _:violation ;
-				sp:predicate spin:violationSource ;
-				sp:object "" ] ) ;
-		sp:where (
-#	    	?C owl:disjointUnionOf ( ?CE1 CE2 ) . 
-#       	-----
-#	    	?C owl:disjointUnionOf ?disjointClassExpressions .
-#	    	?disjointClassExpressions rdf:first ?CE1 .
-#	    	?disjointClassExpressions rdf:rest ?rest_1 .
-#	    	?rest_1 rdf:first ?CE2 .
-#	    	?rest_1 rdf:rest ?rest_2 .
-#	    	FILTER ( ?rest_2 = rdf:nil ) .				
-			[   sp:subject [ sp:varName "C" ] ;
-			    sp:predicate owl:disjointUnionOf ;
-				sp:object [ sp:varName "?disjointClassExpressions" ] ]
-			[   sp:subject [ sp:varName "disjointClassExpressions" ] ;
-			    sp:predicate rdf:first ;
-				sp:object [ sp:varName "CE1" ] ]
-			[   sp:subject [ sp:varName "disjointClassExpressions" ] ;
-			    sp:predicate rdf:rest ;
-				sp:object [ sp:varName "rest_1" ] ]
-			[   sp:subject [ sp:varName "rest_1" ] ;
-			    sp:predicate rdf:first ;
-				sp:object [ sp:varName "CE2" ] ]
-			[   sp:subject [ sp:varName "rest_1" ] ;
-			    sp:predicate rdf:rest ;
-				sp:object [ sp:varName "rest_2" ] ]
-			[   a sp:Filter;
-				sp:expression [ 
-					a sp:eq;
-				    sp:arg1 [ sp:varName "rest_2" ];
-					sp:arg2 rdf:nil ] ]
-					
-#           ?this rdf:type ?C .
-			[   sp:subject [ sp:varName "this" ] ;
-			    sp:predicate rdf:type ;
-				sp:object [ sp:varName "C" ] ]
-					
-#	    	each instance of C is an instance of exactly one CEi
-#       	-----
-#	    	?this rdf:type ?CE1 .
-#			?this rdf:type ?CE2 .
-#			[   sp:subject [ sp:varName "this" ] ;
-#			    sp:predicate rdf:type ;
-#				sp:object [ sp:varName "CE1" ] ]
-#			[   sp:subject [ sp:varName "this" ] ;
-#			    sp:predicate rdf:type ;
-#				sp:object [ sp:varName "CE2" ] ]
-			[   a sp:Filter ;
-                sp:expression [
-			        a sp:exists ;
-                    sp:elements (
-						[   sp:subject [ sp:varName "this" ] ;
-			                sp:predicate rdf:type ;
-				            sp:object [ sp:varName "CE1" ] ]
-						[   sp:subject [ sp:varName "object" ] ;
-                            sp:predicate rdf:type ;
-                            sp:object [ sp:varName "CE2" ] ] ) ] ]
-				
-#		    LET ( ( ... ) AS ?label ) .					
-			[   a sp:Let;
-				sp:variable [ sp:varName "label" ];
-				sp:expression [ 
-					a fn:concat; 
-					sp:arg1 [ sp:varName "C" ] ;
-					sp:arg2 " owl:disjointUnionOf ( " ;
-					sp:arg3 [ sp:varName "CE1" ] ;
-					sp:arg4 " " ;
-					sp:arg5 [ sp:varName "CE2" ] ;
-					sp:arg6 " )" ] ] ) ] .
-				
-#	CONSTRUCT {
-#	    _:violation 
-#           a spin:ConstraintViolation ;
-#	        rdfs:label ?label
-#		    spin:violationRoot ?this ;
-#		    spin:violationPath ?violationPath ;
-#		    spin:violationSource ?violationSource }
-#	WHERE {
-#	    ?C owl:disjointUnionOf ( ?CE1 CE2 ) . 
-#       -----
-#	    ?C owl:disjointUnionOf ?disjointClassExpressions .
-#	    ?disjointClassExpressions rdf:first ?CE1 .
-#	    ?disjointClassExpressions rdf:rest ?rest_1 .
-#	    ?rest_1 rdf:first ?CE2 .
-#	    ?rest_1 rdf:rest ?rest_2 .
-#	    FILTER ( ?rest_2 = rdf:nil ) .
-#
-#       ?this rdf:type ?CE1
-#
-#       each instance of CE1 is an instance of C
-#       -----
-#       FILTER NOT EXISTS { ?this rdf:type ?C }
-#
-#		LET ( ( ... ) AS ?label ) . }			
-owl2:DisjointUnion_2DisjointClassExpressions_2
-	a spin:Template; 
-	rdfs:subClassOf spin:Templates ;
-	spin:labelTemplate "Disjoint Union of Class Expressions" ;
-	rdfs:label "Disjoint Union of Class Expressions" ;
-	rdfs:comment "Disjoint Union of Class Expressions" ;
-	spin:body [
-		a sp:Construct ;
-		sp:templates ( 
-			[   sp:subject _:violation ;
-				sp:predicate rdf:type ;
-				sp:object spin:ConstraintViolation ]
-			[   sp:subject _:violation ; 
-				sp:predicate rdfs:label ;
-				sp:object [ sp:varName "label" ] ] 
-			[	sp:subject _:violation ;
-				sp:predicate spin:violationRoot ;
-				sp:object spin:_this ]		 
-			[   sp:subject _:violation ;
-				sp:predicate spin:violationPath ;
-				sp:object "" ] 
-			[   sp:subject _:violation ;
-				sp:predicate spin:violationSource ;
-				sp:object "" ] ) ;
-		sp:where (
-#	    	?C owl:disjointUnionOf ( ?CE1 CE2 ) . 
-#       	-----
-#	    	?C owl:disjointUnionOf ?disjointClassExpressions .
-#	    	?disjointClassExpressions rdf:first ?CE1 .
-#	    	?disjointClassExpressions rdf:rest ?rest_1 .
-#	    	?rest_1 rdf:first ?CE2 .
-#	    	?rest_1 rdf:rest ?rest_2 .
-#	    	FILTER ( ?rest_2 = rdf:nil ) .			
-			[   sp:subject [ sp:varName "C" ] ;
-			    sp:predicate owl:disjointUnionOf ;
-				sp:object [ sp:varName "?disjointClassExpressions" ] ]
-			[   sp:subject [ sp:varName "disjointClassExpressions" ] ;
-			    sp:predicate rdf:first ;
-				sp:object [ sp:varName "CE1" ] ]
-			[   sp:subject [ sp:varName "disjointClassExpressions" ] ;
-			    sp:predicate rdf:rest ;
-				sp:object [ sp:varName "rest_1" ] ]
-			[   sp:subject [ sp:varName "rest_1" ] ;
-			    sp:predicate rdf:first ;
-				sp:object [ sp:varName "CE2" ] ]
-			[   sp:subject [ sp:varName "rest_1" ] ;
-			    sp:predicate rdf:rest ;
-				sp:object [ sp:varName "rest_2" ] ]
-			[   a sp:Filter;
-				sp:expression [ 
-					a sp:eq;
-				    sp:arg1 [ sp:varName "rest_2" ];
-					sp:arg2 rdf:nil ] ]
-
-#           ?this rdf:type ?CE1
-            [   sp:subject spin:_this ;
-				sp:predicate rdf:type ;
-				sp:object [ sp:varName "CE1" ] ]
-
-#           each instance of CE1 is an instance of C
-#           -----
-#           FILTER NOT EXISTS { ?this rdf:type ?C }
-			[   a sp:Filter ;
-                sp:expression [
-			        a sp:notExists ;
-                    sp:elements (
-						[   sp:subject [ sp:varName "this" ] ;
-			                sp:predicate rdf:type ;
-				            sp:object [ sp:varName "C" ] ] ) ] ]
-				
-#           workaround ( ObjectIntersectionOf )
-#       	-----
-#			[   sp:subject [ sp:varName "C_" ] ;
-#			    sp:predicate rdf:type ;
-#				sp:object owl:Class ]
-#			[   sp:subject [ sp:varName "C_" ] ;
-#			    sp:predicate owl:intersectionOf ;
-#				sp:object [ sp:varName "CEs_" ] ]
-#			[   sp:subject [ sp:varName "CEs_" ] ;
-#			    sp:predicate rdf:first ;
-#				sp:object [ sp:varName "CE_1" ] ]
-#			[   sp:subject [ sp:varName "CEs_" ] ;
-#			    sp:predicate rdf:rest ;
-#				sp:object [ sp:varName "rest_1_" ] ]
-#			[   sp:subject [ sp:varName "rest_1_" ] ;
-#			    sp:predicate rdf:first ;
-#				sp:object [ sp:varName "CE_2" ] ]
-#			[   sp:subject [ sp:varName "rest_1_" ] ;
-#			    sp:predicate rdf:rest ;
-#				sp:object [ sp:varName "rest_2_" ] ]
-#			[   a sp:Filter;
-#				sp:expression [ 
-#					a sp:eq;
-#				    sp:arg1 [ sp:varName "rest_2_" ];
-#					sp:arg2 rdf:nil ] ]	
-#			[   a sp:Filter ;
-#                sp:expression [
-#			        a sp:notExists ;
-#                    sp:elements (
-#						[   sp:subject [ sp:varName "this" ] ;
-#			                sp:predicate rdf:type ;
-#				            sp:object [ sp:varName "CE_1" ] ] ) ] ]
-#			[   a sp:Filter ;
-#                sp:expression [
-#			        a sp:notExists ;
-#                    sp:elements (
-#						[   sp:subject [ sp:varName "this" ] ;
-#			                sp:predicate rdf:type ;
-#				            sp:object [ sp:varName "CE_2" ] ] ) ] ]
-				
-#		    LET ( ( ... ) AS ?label ) .					
-			[   a sp:Let;
-				sp:variable [ sp:varName "label" ];
-				sp:expression [ 
-					a fn:concat; 
-					sp:arg1 [ sp:varName "C" ] ;
-					sp:arg2 " owl:disjointUnionOf ( 2 ) ( " ;
-					sp:arg3 [ sp:varName "CE1" ] ;
-					sp:arg4 " " ;
-					sp:arg5 [ sp:varName "CE2" ] ;
-					sp:arg6 " )" ] ] ) ] .
-
-#	CONSTRUCT {
-#	    _:violation 
-#           a spin:ConstraintViolation ;
-#	        rdfs:label ?label
-#		    spin:violationRoot ?this ;
-#		    spin:violationPath ?violationPath ;
-#		    spin:violationSource ?violationSource }
-#	WHERE {
-#	    ?C owl:disjointUnionOf ( ?CE1 CE2 ) . 
-#       -----
-#	    ?C owl:disjointUnionOf ?disjointClassExpressions .
-#	    ?disjointClassExpressions rdf:first ?CE1 .
-#	    ?disjointClassExpressions rdf:rest ?rest_1 .
-#	    ?rest_1 rdf:first ?CE2 .
-#	    ?rest_1 rdf:rest ?rest_2 .
-#	    FILTER ( ?rest_2 = rdf:nil ) .
-#
-#       ?this rdf:type ?CE2
-#
-#       each instance of CE2 is an instance of C
-#       -----
-#       FILTER NOT EXISTS { ?this rdf:type ?C }
-#
-#		LET ( ( ... ) AS ?label ) . }		
-owl2:DisjointUnion_2DisjointClassExpressions_3
-	a spin:Template; 
-	rdfs:subClassOf spin:Templates ;
-	spin:labelTemplate "Disjoint Union of Class Expressions" ;
-	rdfs:label "Disjoint Union of Class Expressions" ;
-	rdfs:comment "Disjoint Union of Class Expressions" ;
-	spin:body [
-		a sp:Construct ;
-		sp:templates ( 
-			[   sp:subject _:violation ;
-				sp:predicate rdf:type ;
-				sp:object spin:ConstraintViolation ]
-			[   sp:subject _:violation ; 
-				sp:predicate rdfs:label ;
-				sp:object [ sp:varName "label" ] ] 
-			[	sp:subject _:violation ;
-				sp:predicate spin:violationRoot ;
-				sp:object spin:_this ]		 
-			[   sp:subject _:violation ;
-				sp:predicate spin:violationPath ;
-				sp:object "" ] 
-			[   sp:subject _:violation ;
-				sp:predicate spin:violationSource ;
-				sp:object "" ] ) ;
-		sp:where (
-#	    	?C owl:disjointUnionOf ( ?CE1 CE2 ) . 
-#       	-----
-#	    	?C owl:disjointUnionOf ?disjointClassExpressions .
-#	    	?disjointClassExpressions rdf:first ?CE1 .
-#	    	?disjointClassExpressions rdf:rest ?rest_1 .
-#	    	?rest_1 rdf:first ?CE2 .
-#	    	?rest_1 rdf:rest ?rest_2 .
-#	    	FILTER ( ?rest_2 = rdf:nil ) .				
-			[   sp:subject [ sp:varName "C" ] ;
-			    sp:predicate owl:disjointUnionOf ;
-				sp:object [ sp:varName "?disjointClassExpressions" ] ]
-			[   sp:subject [ sp:varName "disjointClassExpressions" ] ;
-			    sp:predicate rdf:first ;
-				sp:object [ sp:varName "CE1" ] ]
-			[   sp:subject [ sp:varName "disjointClassExpressions" ] ;
-			    sp:predicate rdf:rest ;
-				sp:object [ sp:varName "rest_1" ] ]
-			[   sp:subject [ sp:varName "rest_1" ] ;
-			    sp:predicate rdf:first ;
-				sp:object [ sp:varName "CE2" ] ]
-			[   sp:subject [ sp:varName "rest_1" ] ;
-			    sp:predicate rdf:rest ;
-				sp:object [ sp:varName "rest_2" ] ]
-			[   a sp:Filter;
-				sp:expression [ 
-					a sp:eq;
-				    sp:arg1 [ sp:varName "rest_2" ];
-					sp:arg2 rdf:nil ] ]
-			
-#           ?this rdf:type ?CE2
-            [   sp:subject spin:_this ;
-				sp:predicate rdf:type ;
-				sp:object [ sp:varName "CE2" ] ]
-
-#       	each instance of CE2 is an instance of C
-#       	-----
-#       	FILTER NOT EXISTS { ?this rdf:type ?C }
-			[   a sp:Filter ;
-                sp:expression [
-			        a sp:notExists ;
-                    sp:elements (
-						[   sp:subject [ sp:varName "this" ] ;
-			                sp:predicate rdf:type ;
-				            sp:object [ sp:varName "C" ] ] ) ] ]
-							
-#           workaround ( ObjectIntersectionOf )
-#       	-----
-#			[   sp:subject [ sp:varName "C_" ] ;
-#			    sp:predicate rdf:type ;
-#				sp:object owl:Class ]
-#			[   sp:subject [ sp:varName "C_" ] ;
-#			    sp:predicate owl:intersectionOf ;
-#				sp:object [ sp:varName "CEs_" ] ]
-#			[   sp:subject [ sp:varName "CEs_" ] ;
-#			    sp:predicate rdf:first ;
-#				sp:object [ sp:varName "CE_1" ] ]
-#			[   sp:subject [ sp:varName "CEs_" ] ;
-#			    sp:predicate rdf:rest ;
-#				sp:object [ sp:varName "rest_1_" ] ]
-#			[   sp:subject [ sp:varName "rest_1_" ] ;
-#			    sp:predicate rdf:first ;
-#				sp:object [ sp:varName "CE_2" ] ]
-#			[   sp:subject [ sp:varName "rest_1_" ] ;
-#			    sp:predicate rdf:rest ;
-#				sp:object [ sp:varName "rest_2_" ] ]
-#			[   a sp:Filter;
-#				sp:expression [ 
-#					a sp:eq;
-#				    sp:arg1 [ sp:varName "rest_2_" ];
-#					sp:arg2 rdf:nil ] ]	
-#			[   a sp:Filter ;
-#                sp:expression [
-#			        a sp:notExists ;
-#                    sp:elements (
-#						[   sp:subject [ sp:varName "this" ] ;
-#			                sp:predicate rdf:type ;
-#				            sp:object [ sp:varName "CE_1" ] ] ) ] ]	
-#			[   a sp:Filter ;
-#                sp:expression [
-#			        a sp:notExists ;
-#                    sp:elements (
-#						[   sp:subject [ sp:varName "this" ] ;
-#			                sp:predicate rdf:type ;
-#				            sp:object [ sp:varName "CE_2" ] ] ) ] ]
-					
-#		    LET ( ( ... ) AS ?label ) .					
-			[   a sp:Let;
-				sp:variable [ sp:varName "label" ];
-				sp:expression [ 
-					a fn:concat; 
-					sp:arg1 [ sp:varName "C" ] ;
-					sp:arg2 " owl:disjointUnionOf (3) ( " ;
-					sp:arg3 [ sp:varName "CE1" ] ;
-					sp:arg4 " " ;
-					sp:arg5 [ sp:varName "CE2" ] ;
-					sp:arg6 " )" ] ] ) ] .
+#       		each instance of CE2 is an instance of C
+#       		-----
+       			FILTER NOT EXISTS { ?this rdf:type ?C }
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"DisjointUnion ( \", 
+                    xsd:string( ?C ), 
+                    \" \", 
+                    xsd:string( ?CE1 ),
+                    \" \", 
+                    xsd:string( ?CE2 ),  
+                    \" )\",
+                    \" - each instance of \",
+                    xsd:string( ?CE2 ),  
+                    \" must also be an instance of \",
+                    xsd:string( ?C ) ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
 					
 # -----
 
@@ -5855,51 +5537,73 @@ owl:Thing
 # -----
 
 # ---------------
-# DisjointObjectProperties
+# Axioms - Object Property Axioms - Disjoint Object Properties
 
 
-# description
-# -----
-# A disjoint object properties axiom DisjointObjectProperties( OPE1 ... OPEn ) states that all of the object property expressions OPEi, 1 ≤ i ≤ n, 
-# are pairwise disjoint; that is, no individual x can be connected to an individual y by both OPEi and OPEj for i ≠ j. 
-
-# definition
-# -----	
-# DisjointObjectProperties := 'DisjointObjectProperties' '(' axiomAnnotations ObjectPropertyExpression ObjectPropertyExpression { ObjectPropertyExpression } ')' 
-
-# SPIN templates:
-# -----
 owl2:DisjointObjectProperties
-	a spin:Template; 
-	rdfs:subClassOf spin:Templates ;
-	spin:labelTemplate "DisjointObjectProperties" ;
-	rdfs:label "DisjointObjectProperties" ;
-	rdfs:comment "DisjointObjectProperties" ;
-	spin:body [
-		a sp:Construct ;
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Object Property Axioms - Disjoint Object Properties" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                _:cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?OPE1 ;
+                    spin:violationPath ?OPE2 .
+            }
+            WHERE {	  
+			    ?OPE1 owl:propertyDisjointWith ?OPE2 . 
+			    ?this ?OPE1 ?y .
+			    ?this ?OPE2 ?y .
+			    ?y rdf:type owl:Thing . # ?OPE1 and ?OPE2 are OPEs
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"DisjointObjectProperties ( \", 
+                    xsd:string( ?OPE1 ), 
+                    \" \", 
+                    xsd:string( ?OPE2 ), 
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+
+owl2:DisjointObjectProperties_old
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Object Property Axioms - Disjoint Object Properties" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
 #		CONSTRUCT {
-#           _:violation 
+#           _:cv
 #		        a spin:ConstraintViolation ;
-#		        rdfs:label ?label
 #               spin:violationRoot ?this ;
-#               spin:violationPath ?violationPath ;
-#               spin:violationSource ?violationSource }
+#		        rdfs:label ?violationMessage ;
+#               spin:violationPath ?OPE1 ;
+#               spin:violationPath ?OPE2 ; 
+#       }
 		sp:templates ( 
-			[   sp:subject _:violation ;
+			[   sp:subject _:cv ;
 				sp:predicate rdf:type ;
 				sp:object spin:ConstraintViolation ]
-			[   sp:subject _:violation ; 
-				sp:predicate rdfs:label ;
-				sp:object [ sp:varName "label" ] ] 
-			[	sp:subject _:violation ;
+			[	sp:subject _:cv ;
 				sp:predicate spin:violationRoot ;
-				sp:object spin:_this ]		 
-			[   sp:subject _:violation ;
+				sp:object spin:_this ]	
+			[   sp:subject _:cv ; 
+				sp:predicate rdfs:label ;
+				sp:object [ sp:varName "violationMessage" ] ] 
+			[   sp:subject _:cv ;
 				sp:predicate spin:violationPath ;
-				sp:object [ sp:varName "superOPE" ] ] 
-			[   sp:subject _:violation ;
-				sp:predicate spin:violationSource ;
-				sp:object owl2:ObjectPropertyChain_TwoObjectPropertyExpressions ] ) ;
+				sp:object [ sp:varName "OPE1" ] ]	 
+			[   sp:subject _:cv ;
+				sp:predicate spin:violationPath ;
+				sp:object [ sp:varName "OPE2" ] ] ) ;
 		sp:where ( 
 #		WHERE {
 #		    ?OPE1 owl:propertyDisjointWith ?OPE2 . 
@@ -5908,37 +5612,28 @@ owl2:DisjointObjectProperties
 			    sp:predicate owl:propertyDisjointWith ;
 				sp:object [ sp:varName "OPE2" ] ]
 				
-#           { ?this ?OPE1 ?y . FILTER EXISTS { ?this ?OPE2 ?y } } 
-#           UNION
-#           { ?this ?OPE2 ?y . FILTER NOT EXISTS { ?this ?OPE1 ?y } } 
+#			?this ?OPE1 ?y .
 #           -----
-			[   a sp:Union ;
-                sp:elements ( 
-					(   [   sp:subject [ sp:varName "this" ] ;
-                            sp:predicate [ sp:varName "OPE1" ] ;
-                            sp:object [ sp:varName "y" ] ] 
-						[   a sp:Filter ;
-                            sp:expression [
- 							    a sp:exists ;
-                                sp:elements ( 
-									[   sp:subject [ sp:varName "this" ] ;
-                                        sp:predicate [ sp:varName "OPE2" ] ;
-                                        sp:object [ sp:varName "y" ] ] ) ] ] ) 
-					(   [   sp:subject [ sp:varName "this" ] ;
-                            sp:predicate [ sp:varName "OPE2" ] ;
-                            sp:object [ sp:varName "y" ] ] 
-						[   a sp:Filter ;
-                            sp:expression [
- 							    a sp:exists ;
-                                sp:elements ( 
-									[   sp:subject [ sp:varName "this" ] ;
-                                        sp:predicate [ sp:varName "OPE1" ] ;
-                                        sp:object [ sp:varName "y" ] ] ) ] ] ) ) ] 
+			[   sp:subject [ sp:varName "this" ] ;
+                sp:predicate [ sp:varName "OPE1" ] ;
+                sp:object [ sp:varName "y" ] ]
+                
+#			?this ?OPE2 ?y .
+#           -----
+			[   sp:subject [ sp:varName "this" ] ;
+                sp:predicate [ sp:varName "OPE2" ] ;
+                sp:object [ sp:varName "y" ] ]
+                
+#			OPE
+#           -----
+			[   sp:subject [ sp:varName "y" ] ;
+                sp:predicate rdf:type ;
+                sp:object owl:Thing ]             
 							
-#    		BIND ( ... ) AS ?label ) . }
+#           violation message
 #           -----			
 			[   a sp:Bind;
-				sp:variable [ sp:varName "label" ];
+				sp:variable [ sp:varName "violationMessage" ];
 				sp:expression [ 
 					a fn:concat; 
 					sp:arg1 "DisjointObjectProperties ( " ;
@@ -6046,20 +5741,42 @@ owl2:InverseObjectProperties
 # -----
 
 # ---------------
-# Object Property Domain ( object property axioms )
+# Axioms - Object Property Axioms - Object Property Domain
 
 
-# description
-# -----
-# An object property domain axiom ObjectPropertyDomain( OPE CE ) states that the domain of the object property expression OPE is the class expression CE — 
-# that is, if an individual x is connected by OPE with some other individual, then x is an instance of CE. 
+owl2:ObjectPropertyDomain
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Object Property Axioms - Object Property Domain" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                _:cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?OPE .
+            }
+            WHERE {	  
+			    ?OPE rdfs:domain ?CE . 
+                ?this ?OPE ?y .
+				?y rdf:type owl:Thing . # ?OPE is OPE
+				FILTER NOT EXISTS { ?this rdf:type ?CE } .
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"ObjectPropertyDomain ( \", 
+                    xsd:string( ?OPE ), 
+                    \" \", 
+                    xsd:string( ?CE ), 
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
 
-# definition
-# -----	
-# ObjectPropertyDomain := 'ObjectPropertyDomain' '(' axiomAnnotations ObjectPropertyExpression ClassExpression ')' 
-
-# SPIN templates:
-# -----
 #	CONSTRUCT {
 #	    _:violation 
 #		    a spin:ConstraintViolation ;
@@ -6073,7 +5790,7 @@ owl2:InverseObjectProperties
 #	    FILTER EXISTS { ?y rdf:type owl:Thing }
 #       FILTER NOT EXISTS ( ?this rdf:type ?CE ) .
 #		LET ( ( ... ) AS ?label ) . }
-owl2:ObjectPropertyDomain
+owl2:ObjectPropertyDomain_old
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
 	spin:labelTemplate "Object Property Domain" ;
@@ -6131,20 +5848,43 @@ owl2:ObjectPropertyDomain
 # -----
 
 # ---------------
-# Object Property Range ( object property axioms ) 
+# Axioms - Object Property Axioms - Object Property Range
 
 
-# description
-# -----
-# An object property range axiom ObjectPropertyRange( OPE CE ) states that the range of the object property expression OPE is the class expression CE — 
-# that is, if some individual is connected by OPE with an individual x, then x is an instance of CE. 
+owl2:ObjectPropertyRange
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Object Property Axioms - Object Property Range" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                _:cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?OPE .
+            }
+            WHERE {	  
+			    ?OPE rdfs:range ?CE . 
+                ?x ?OPE ?this .
+				?this rdf:type owl:Thing . # ?OPE is OPE
+				FILTER NOT EXISTS { ?this rdf:type ?CE } .
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"ObjectPropertyRange ( \", 
+                    xsd:string( ?OPE ), 
+                    \" \", 
+                    xsd:string( ?CE ), 
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
 
-# definition
-# -----	
-# ObjectPropertyRange := 'ObjectPropertyRange' '(' axiomAnnotations ObjectPropertyExpression ClassExpression ')' 
 
-# SPIN templates:
-# -----
 #	CONSTRUCT {
 #	    _:violation 
 #		    a spin:ConstraintViolation ;
@@ -6158,7 +5898,7 @@ owl2:ObjectPropertyDomain
 #	    FILTER EXISTS { ?y rdf:type owl:Thing }
 #       FILTER NOT EXISTS ( ?y rdf:type ?CE ) .
 #		LET ( ( ... ) AS ?label ) . }
-owl2:ObjectPropertyRange
+owl2:ObjectPropertyRange_old
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
 	spin:labelTemplate "Object Property Range" ;
@@ -6216,21 +5956,41 @@ owl2:ObjectPropertyRange
 # -----
 
 # ---------------
-# Functional Object Properties 
+# Axioms - Object Property Axioms - Functional Object Property
 
 
-# description
-# -----
-# An object property functionality axiom FunctionalObjectProperty( OPE ) states that the object property expression OPE is functional — 
-# that is, for each individual x, there can be at most one distinct individual y such that x is connected by OPE to y. 
-
-# definition
-# -----	
-# FunctionalObjectProperty := 'FunctionalObjectProperty' '(' axiomAnnotations ObjectPropertyExpression ')' 
-
-# SPIN templates:
-# -----
 owl2:FunctionalObjectProperty
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Object Property Axioms - Functional Object Property" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                _:cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?OPE .
+            }
+            WHERE {	  
+			    ?OPE rdf:type owl:FunctionalProperty .
+			    ?this ?OPE ?x . ?x rdf:type owl:Thing .
+			    ?this ?OPE ?y . ?y rdf:type owl:Thing . 
+			    FILTER ( ?x != ?y ) .
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"FunctionalProperty ( \", 
+                    xsd:string( ?OPE ), 
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+
+owl2:FunctionalObjectProperty_old
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
 	spin:labelTemplate "FunctionalObjectProperty" ;
@@ -6303,21 +6063,41 @@ owl2:FunctionalObjectProperty
 # -----
 
 # ---------------
-# Inverse-Functional Object Properties
+# Axioms - Object Property Axioms - Inverse-Functional Object Properties
 
 
-# description
-# -----
-# An object property inverse functionality axiom InverseFunctionalObjectProperty( OPE ) states that the object property expression OPE is inverse-functional — 
-# that is, for each individual x, there can be at most one individual y such that y is connected by OPE with x. 
-
-# definition
-# -----	
-# InverseFunctionalObjectProperty := 'InverseFunctionalObjectProperty' '(' axiomAnnotations ObjectPropertyExpression ')' 
-
-# SPIN templates:
-# -----
 owl2:InverseFunctionalObjectProperty
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Object Property Axioms - Inverse Functional Object Property" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                _:cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?OPE .
+            }
+            WHERE {	  
+			    ?OPE rdf:type owl:InverseFunctionalProperty . 
+			    ?x ?OPE ?this . ?this rdf:type owl:Thing .
+			    ?y ?OPE ?this . ?this rdf:type owl:Thing . 
+			    FILTER ( ?x != ?y ) .
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"InverseFunctionalProperty ( \", 
+                    xsd:string( ?OPE ), 
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
+owl2:InverseFunctionalObjectProperty_old
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
 	spin:labelTemplate "InverseFunctionalObjectProperty" ;
@@ -6390,20 +6170,262 @@ owl2:InverseFunctionalObjectProperty
 # -----
 
 # ---------------
-# Data Property Domain
+# Axioms - Object Property Axioms - Reflexive Object Properties
 
 
-# description
+# no constraint checking needed
+
+owl2:ReflexiveObjectProperties
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Object Property Axioms - Reflexive Object Properties" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                _:cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?OPE .
+            }
+            WHERE {	  
+			    
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"ReflexiveObjectProperty ( \", 
+                    xsd:string( ?OPE ), 
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
 # -----
-# A data property domain axiom DataPropertyDomain( DPE CE ) states that the domain of the data property expression DPE is the class expression CE — 
-# that is, if an individual x is connected by DPE with some literal, then x is an instance of CE.
 
-# definition
-# -----	
-# DataPropertyDomain := 'DataPropertyDomain' '(' axiomAnnotations DataPropertyExpression ClassExpression ')' 
+# ---------------
+# Axioms - Object Property Axioms - Irreflexive Object Properties
 
-# SPIN templates:
+
+owl2:IrreflexiveObjectProperties
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Object Property Axioms - Irreflexive Object Properties" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                _:cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?OPE .
+            }
+            WHERE {	  
+                ?OPE rdf:type owl:IrreflexiveProperty . 
+			    ?this ?OPE ?this . ?this rdf:type owl:Thing .
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"IrreflexiveObjectProperty ( \", 
+                    xsd:string( ?OPE ), 
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
 # -----
+
+# ---------------
+# Axioms - Object Property Axioms - Symmetric Object Properties
+
+
+owl2:SymmetricObjectProperties
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Object Property Axioms - Symmetric Object Properties" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                _:cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?OPE .
+            }
+            WHERE {	  
+                ?OPE rdf:type owl:SymmetricProperty . 
+			    ?this ?OPE ?y . 
+			    ?this rdf:type owl:Thing .
+			    FILTER NOT EXISTS { ?y ?OPE ?this }
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"SymmetricObjectProperty ( \", 
+                    xsd:string( ?OPE ), 
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
+# -----
+
+# ---------------
+# Axioms - Object Property Axioms - Asymmetric Object Properties
+
+
+owl2:AsymmetricObjectProperties
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Object Property Axioms - Asymmetric Object Properties" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                _:cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?OPE .
+            }
+            WHERE {	  
+                ?OPE rdf:type owl:AsymmetricProperty . 
+			    ?this ?OPE ?y . 
+			    ?this rdf:type owl:Thing .
+			    FILTER EXISTS { ?y ?OPE ?this }
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"AsymmetricObjectProperty ( \", 
+                    xsd:string( ?OPE ), 
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
+# -----
+
+# ---------------
+# Axioms - Object Property Axioms - Transitive Object Properties
+
+
+owl2:TransitiveObjectProperties
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Object Property Axioms - Transitive Object Properties" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                _:cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?OPE .
+            }
+            WHERE {	  
+                ?OPE rdf:type owl:TransitiveProperty . 
+			    ?this ?OPE ?y . ?y rdf:type owl:Thing .
+			    ?y ?OPE ?z . ?z rdf:type owl:Thing .
+			    FILTER NOT EXISTS { ?this ?OPE ?z }
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"TransitiveObjectProperty ( \", 
+                    xsd:string( ?OPE ), 
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
+# -----
+
+# ---------------
+# Axioms - Data Property Axioms - Disjoint Data Properties
+
+
+owl2:DisjointDataProperties
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Data Property Axioms - Disjoint Data Properties" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                _:cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?PDE1 ;
+                    spin:violationPath ?DPE2 .
+            }
+            WHERE {	  
+			    ?DPE1 owl:propertyDisjointWith ?DPE2 . 
+			    ?this ?DPE1 ?y .
+			    ?this ?DPE2 ?y .
+			    FILTER NOT EXISTS { ?y rdf:type owl:Thing } # ?DPE1 and ?DPE2 are DPEs
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"DisjointDataProperties ( \", 
+                    xsd:string( ?DPE1 ), 
+                    \" \", 
+                    xsd:string( ?DPE2 ), 
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
+# ---------------
+# Axioms - Data Property Axioms - Data Property Domain
+
+
+owl2:DataPropertyDomain
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Data Property Axioms - Data Property Domain" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                _:cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?DPE .
+            }
+            WHERE {	  
+			    ?DPE rdfs:domain ?CE . 
+                ?this ?DPE ?y .
+				FILTER NOT EXISTS { ?y rdf:type owl:Thing } # ?DPE is DPE
+				FILTER NOT EXISTS { ?this rdf:type ?CE } .
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"DataPropertyDomain ( \", 
+                    xsd:string( ?DPE ), 
+                    \" \", 
+                    xsd:string( ?CE ), 
+                    \" )\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+
 #	CONSTRUCT {
 #	    _:violation 
 #		    a spin:ConstraintViolation ;
@@ -6417,7 +6439,7 @@ owl2:InverseFunctionalObjectProperty
 #       FILTER NOT EXISTS ( ?y rdf:type owl:Thing . ) .
 #       FILTER NOT EXISTS ( ?this rdf:type ?DR ) .
 #		LET ( ( ... ) AS ?label ) . }
-owl2:DataPropertyDomain
+owl2:DataPropertyDomain_old
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
 	spin:labelTemplate "Data Property Domain" ;
@@ -6472,23 +6494,67 @@ owl2:DataPropertyDomain
 					sp:arg4 [ sp:varName "DR" ] ;
 					sp:arg5 " )" ] ] ) ] .
 
-# -----
+# -----    
 
 # ---------------
-# Data Property Range
+# Axioms - Data Property Axioms - Data Property Range
 
 
-# description
-# -----
-# A data property range axiom DataPropertyRange( DPE DR ) states that the range of the data property expression DPE is the data range DR — 
-# that is, if some individual is connected by DPE with a literal x, then x is in DR.
-
-# definition
-# -----	
-# DataPropertyRange := 'DataPropertyRange' '(' axiomAnnotations DataPropertyExpression DataRange ')' 
-
-# SPIN templates:
-# -----
+owl2:DataPropertyRange
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Data Property Axioms - Data Property Range" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                _:cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?DPE .
+            }
+            WHERE {	  
+                ?DPE rdfs:range ?DR . 
+               	
+               	?this ?DPE ?l .
+				FILTER NOT EXISTS { ?l rdf:type owl:Thing } # ?DPE is DPE
+					
+				BIND ( DATATYPE( ?l ) AS ?datatype ) .
+				FILTER ( ?datatype != ?DR ) .
+                    
+#               testing
+#               -----
+                BIND ( CONCAT( 
+                    \"literal: \", 
+                    xsd:string( ?l ), 
+                    \" | DATATYPE( literal ): \", 
+                    xsd:string( ?datatype ), 
+                    \" | DR: \", 
+                    xsd:string( ?DR ), 
+                    \" )\" ) 
+                    AS ?testing ) . 
+				            
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"DataPropertyRange ( \", 
+                    xsd:string( ?l ), 
+                    \" \", 
+                    xsd:string( ?DR ), 
+                    \" ) | \",
+                    \"The datatype of the literal '\", 
+                    xsd:string( ?l ), 
+                    \"' is '\", 
+                    xsd:string( ?datatype ), 
+                    \"' but must be '\", 
+                    xsd:string( ?DR ), 
+                    \"'\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
 #	CONSTRUCT {
 #	    _:violation 
 #		    a spin:ConstraintViolation ;
@@ -6502,7 +6568,7 @@ owl2:DataPropertyDomain
 #       FILTER NOT EXISTS ( ?y rdf:type owl:Thing . ) .
 #       FILTER NOT EXISTS ( ?y rdf:type ?DR ) .
 #		LET ( ( ... ) AS ?label ) . }
-owl2:DataPropertyRange
+owl2:DataPropertyRange_old
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
 	spin:labelTemplate "Data Property Range" ;
@@ -6717,25 +6783,4 @@ owl2:DatatypeDefinition_Pattern
 					sp:arg4 [ sp:varName "pattern" ] ;
 					sp:arg5 "'" ] ] ) ] .
 					
-# -----
-
-# ---------------
-# Axioms - Class Expression Axioms - Subclass Axioms
-
-
-owl2:SubClassOf 
-	a sp:Construct ;
-        sp:text """
-            CONSTRUCT {
-                :CE1 rdfs:subClassOf :CE3 .              
-                ?this rdf:type :CE2 .
-                ?this rdf:type :CE3 .          
-            }
-            WHERE {
-                :CE1 rdfs:subClassOf :CE2 .
-                :CE2 rdfs:subClassOf :CE3 .               
-                ?this rdf:type :CE1 .            
-        	}
-        """ .
-    
 # -----

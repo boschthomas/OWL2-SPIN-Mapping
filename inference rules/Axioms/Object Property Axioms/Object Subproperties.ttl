@@ -2,6 +2,7 @@
 @prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix owl2spin: <http://constraints.org/owl2#> .
 @prefix :         <http://www.example.org/OWL2InstanceData#> .
 
 
@@ -13,10 +14,10 @@
 	# SubObjectPropertyOf( :SubObjectPropertyOf_subOPE :SubObjectPropertyOf_superOPE ) 
 	:SubObjectPropertyOf_subOPE rdfs:subPropertyOf :SubObjectPropertyOf_superOPE . 
 	:SubObjectPropertyOf_I1
-		rdf:type owl:Thing ;
-#		:SubObjectPropertyOf_superOPE :SubObjectPropertyOf_I2 ; # commented --> constraint violation
+		rdf:type owl:Thing, owl2spin:ToInfer ;
 		:SubObjectPropertyOf_subOPE :SubObjectPropertyOf_I2 .
 	:SubObjectPropertyOf_I2
 		rdf:type owl:Thing .
+	# --> :SubObjectPropertyOf_I1 :SubObjectPropertyOf_superOPE :SubObjectPropertyOf_I2 .
 
 # -----

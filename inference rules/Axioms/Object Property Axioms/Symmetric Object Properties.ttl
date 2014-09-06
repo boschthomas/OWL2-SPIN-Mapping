@@ -1,0 +1,34 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix owl2spin: <http://constraints.org/owl2#> .
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# Axioms - Object Property Axioms - Symmetric Object Property
+
+
+    # generic
+    # -----
+    # SymmetricObjectProperty ( :SymmetricObjectProperty_OPE ) 
+    :SymmetricObjectProperty_OPE a owl:SymmetricProperty . 	
+    :SymmetricObjectProperty_I1
+        :SymmetricObjectProperty_OPE :SymmetricObjectProperty_I2 ;
+        a owl:Thing, owl2spin:ToInfer .
+    :SymmetricObjectProperty_I2
+        a owl:Thing, owl2spin:ToInfer .
+    # --> :SymmetricObjectProperty_I2 :SymmetricObjectProperty_OPE :SymmetricObjectProperty_I1 .
+		
+    # concrete
+    # -----
+    :friend a owl:SymmetricProperty . 
+    :Peter 
+        :friend :Brian ; 
+        a owl:Thing, owl2spin:ToInfer .
+    :Brian
+        a owl:Thing, owl2spin:ToInfer . 
+    # --> :Brian :friend :Peter . 
+
+# -----

@@ -6,18 +6,31 @@
 
 
 # ---------------
-# DisjointObjectProperties
+# Axioms - Object Property Axioms - Disjoint Object Properties
 
 
-	# example
+	# generic
 	# -----
 	# DisjointObjectProperties( :DisjointObjectProperties_OPE1 :DisjointObjectProperties_OPE2 ) 
 	:DisjointObjectProperties_OPE1 owl:propertyDisjointWith :DisjointObjectProperties_OPE2 . 	
 	:DisjointObjectProperties_I1 
-		rdf:type owl:Thing ;
-		:DisjointObjectProperties_OPE1 :DisjointObjectProperties_I2 ; # not commented --> constraint violation	
+		a owl:Thing ;
+		:DisjointObjectProperties_OPE1 :DisjointObjectProperties_I2 ; # NOT commented --> constraint violation	
 		:DisjointObjectProperties_OPE2 :DisjointObjectProperties_I2 .
-	:DisjointObjectProperties_2
-		rdf:type owl:Thing .
+	:DisjointObjectProperties_I2
+		a owl:Thing .
+		
+	# concrete
+	# -----
+	:hasFather owl:propertyDisjointWith :hasMother .
+	:Stewie 
+        a owl:Thing ;
+	    :hasFather :Peter ;
+	    :hasMother :Peter ; # NOT commented --> constraint violation	 
+	    :hasMother :Lois . 
+	:Peter
+		a owl:Thing .
+	:Lois
+		a owl:Thing .
 
 # -----

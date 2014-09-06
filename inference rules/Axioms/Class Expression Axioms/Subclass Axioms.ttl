@@ -2,6 +2,7 @@
 @prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix owl2spin: <http://constraints.org/owl2#> .
 @prefix :         <http://www.example.org/OWL2InstanceData#> .
 
 
@@ -15,9 +16,8 @@
 	# ClassAssertion( :Baby :Stewie ) 
 	:Baby rdfs:subClassOf :Child . 
 	:Child rdfs:subClassOf :Person . 
-	:Stewie a :Baby . 
-	# --> :Baby rdfs:subClassOf :Person .
+	:Stewie a :Baby , owl2spin:ToInfer. 
 	# --> :Stewie a :Child .
-	# --> :Stewie a :Person
+	# --> :Stewie a :Person .
 		
 # -----

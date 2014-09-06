@@ -1,0 +1,39 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# Axioms - Object Property Axioms - Transitive Object Property
+
+
+    # generic
+    # -----
+    # TransitiveObjectProperty ( :TransitiveObjectProperty_OPE ) 
+    :TransitiveObjectProperty_OPE a owl:TransitiveProperty . 	
+    :TransitiveObjectProperty_I1
+        :TransitiveObjectProperty_OPE :TransitiveObjectProperty_I2 ;
+#       :TransitiveObjectProperty_OPE :TransitiveObjectProperty_I3 ; # commented --> constraint violation
+        a owl:Thing .
+    :TransitiveObjectProperty_I2
+        :TransitiveObjectProperty_OPE :TransitiveObjectProperty_I3 ;
+        a owl:Thing .
+    :TransitiveObjectProperty_I3
+        a owl:Thing .
+		
+    # concrete
+    # -----
+    :ancestorOf a owl:TransitiveProperty . 
+    :Carter
+        :ancestorOf :Lois ; 
+#       :ancestorOf :Meg ; # commented --> constraint violation
+        a owl:Thing .
+    :Lois
+        :ancestorOf :Meg ;
+        a owl:Thing . 
+    :Meg
+        a owl:Thing .
+
+# -----

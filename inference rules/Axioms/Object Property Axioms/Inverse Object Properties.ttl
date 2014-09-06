@@ -1,0 +1,44 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix owl2spin: <http://constraints.org/owl2#> .
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# Axioms - Object Property Axioms - Inverse Object Properties
+
+
+	# generic
+	# -----
+	# InverseObjectProperties( :InverseObjectProperties_OPE1 :InverseObjectProperties_OPE2 ) 
+	:InverseObjectProperties_OPE1 owl:inverseOf :InverseObjectProperties_OPE2 .
+	:InverseObjectProperties_I1
+		a owl:Thing, owl2spin:ToInfer ;
+        :InverseObjectProperties_OPE1 :InverseObjectProperties_I2 .
+	:InverseObjectProperties_I2
+		a owl:Thing, owl2spin:ToInfer .
+	:InverseObjectProperties_I3
+		a owl:Thing, owl2spin:ToInfer ;
+        :InverseObjectProperties_OPE2 :InverseObjectProperties_I4 .
+	:InverseObjectProperties_I4
+		a owl:Thing, owl2spin:ToInfer .
+	# --> :InverseObjectProperties_I2 :InverseObjectProperties_OPE2 :InverseObjectProperties_I1 . 
+	# --> :InverseObjectProperties_I4 :InverseObjectProperties_OPE1 :InverseObjectProperties_I3 .
+	
+	# concrete
+	# -----
+	:hasFather owl:inverseOf :fatherOf .
+	:Stewie 
+	    a owl:Thing, owl2spin:ToInfer ;
+	    :hasFather :Peter .
+	:Peter 
+	    a owl:Thing, owl2spin:ToInfer ;
+	    :fatherOf :Chris . 
+	:Chris
+		a owl:Thing, owl2spin:ToInfer .
+	# --> :Peter :fatherOf :Stewie . 
+	# --> :Chris :hasFather :Peter . 
+		
+# -----

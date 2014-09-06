@@ -1,0 +1,43 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix owl2spin: <http://constraints.org/owl2#> .
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# Axioms - Data Property Axioms - Equivalent Data Properties
+
+
+	# generic
+	# -----
+	# EquivalentDataProperties( :EquivalentDataProperties_DPE1 :EquivalentDataProperties_DPE2 ) 
+	:EquivalentDataProperties_DPE1 owl:equivalentProperty :EquivalentDataProperties_DPE2 .
+	:EquivalentDataProperties_I1 
+		a owl:Thing, owl2spin:ToInfer ;
+		:EquivalentDataProperties_DPE1 :EquivalentDataProperties_I2 .
+	:EquivalentDataProperties_I3 
+		a owl:Thing, owl2spin:ToInfer ;
+		:EquivalentDataProperties_DPE2 :EquivalentDataProperties_I4 .
+	:EquivalentDataProperties_I2
+	    a rdfs:Label .
+	:EquivalentDataProperties_I4
+	    a rdfs:Label .
+			
+#	 --> :EquivalentDataProperties_I1 
+#		      :EquivalentDataProperties_DPE2 :EquivalentDataProperties_I2 .
+#	 --> :EquivalentDataProperties_I3 
+#		      :EquivalentDataProperties_DPE1 :EquivalentDataProperties_I4 .
+
+     # concrete
+     # ----
+     :hasName owl:equivalentProperty :seLlama .
+     :Meg 
+         a owl:Thing, owl2spin:ToInfer ;
+         :hasName "Meg Griffin" ;
+         :seLlama "Megan Griffin" .
+#	 --> :Meg :seLlama "Meg Griffin" .  
+#	 --> :Meg :hasName "Megan Griffin" .
+
+# -----

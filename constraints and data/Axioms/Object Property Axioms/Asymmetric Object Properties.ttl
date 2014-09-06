@@ -1,0 +1,33 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# Axioms - Object Property Axioms - Asymmetric Object Property
+
+
+    # generic
+    # -----
+    # AsymmetricObjectProperty ( :AsymmetricObjectProperty_OPE ) 
+    :AsymmetricObjectProperty_OPE a owl:AsymmetricProperty . 	
+    :AsymmetricObjectProperty_I1
+        :AsymmetricObjectProperty_OPE :AsymmetricObjectProperty_I2 ; # NOT commented --> constraint violation
+        a owl:Thing .
+    :AsymmetricObjectProperty_I2
+        :AsymmetricObjectProperty_OPE :AsymmetricObjectProperty_I1 ; # NOT commented --> constraint violation
+        a owl:Thing .
+		
+    # concrete
+    # -----
+    :parentOf a owl:AsymmetricProperty . 
+    :Peter 
+        :parentOf :Stewie ; # NOT commented --> constraint violation
+        a owl:Thing .
+    :Stewie
+        :parentOf :Peter ; # NOT commented --> constraint violation
+        a owl:Thing . 
+
+# -----

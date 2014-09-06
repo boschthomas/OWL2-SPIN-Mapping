@@ -6,7 +6,7 @@
 
 
 # ---------------
-# Disjoint Union
+# Axioms - Class Expression Axioms - Disjoint Union of Class Expressions
 
 
 	# 2 CE
@@ -14,18 +14,17 @@
 	# DisjointUnion( :DisjointUnion_C :CE1 :CE2 ) 
 	:DisjointUnion_C1 owl:disjointUnionOf ( :CE1 :CE2 ) . 
 	:DisjointUnion_I1 
-		rdf:type owl:Thing ;
-		rdf:type :DisjointUnion_C1 ;
-		rdf:type :CE1 ;
-		rdf:type :CE2 .
+		a :DisjointUnion_C1, owl:Thing ;
+		a :CE1 ; # NOT commented --> constraint violation
+		a :CE2 .
 	:DisjointUnion_I2 
-		rdf:type owl:Thing ;
-	#	rdf:type :DisjointUnion_C1 ;
-		rdf:type :CE1 .
+		a owl:Thing ;
+#		a :DisjointUnion_C1 ; # commented --> constraint violation
+		a :CE1 .
 	:DisjointUnion_I3 
-		rdf:type owl:Thing ;
-	#	rdf:type :DisjointUnion_C1 ;
-		rdf:type :CE2 .
+		a owl:Thing ;
+#		a :DisjointUnion_C1 ; # commented --> constraint violation
+		a :CE2 .
 	
 	# 3 CE 
 	# -----

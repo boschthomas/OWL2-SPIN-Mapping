@@ -2,6 +2,7 @@
 @prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix owl2spin: <http://constraints.org/owl2#> .
 @prefix :         <http://www.example.org/OWL2InstanceData#> .
 
 
@@ -13,24 +14,24 @@
 	# ObjectPropertyRange( :ObjectPropertyRange_OPE :ObjectPropertyRange_CE )
     :ObjectPropertyRange_OPE rdfs:range :ObjectPropertyRange_CE .
     :ObjectPropertyRange_I1
-        a owl:Thing ;
+        a owl:Thing, owl2spin:ToInfer ;
         :ObjectPropertyRange_OPE :ObjectPropertyRange_I2 ; 
         :ObjectPropertyRange_OPE :ObjectPropertyRange_I3 . 
     :ObjectPropertyRange_I2
-#       a :ObjectPropertyRange_CE ; # commented --> constraint violation
-        a owl:Thing .
+        a owl:Thing, owl2spin:ToInfer .
     :ObjectPropertyRange_I3
-#       a :ObjectPropertyRange_CE ; # commented --> constraint violation
-        a owl:Thing .
-        
+        a owl:Thing, owl2spin:ToInfer .
+    # --> :ObjectPropertyRange_I2 a :ObjectPropertyRange_CE .
+    # --> :ObjectPropertyRange_I3 a :ObjectPropertyRange_CE .
+    
     # concrete
     # -----
     :hasDog rdfs:range :Dog .
     :Peter 
-        a owl:Thing ;
+        a owl:Thing, owl2spin:ToInfer ;
         :hasDog :Brian .
     :Brian 
-#       a :Dog ; # commented --> constraint violation
-        a owl:Thing . 
+        a owl:Thing, owl2spin:ToInfer . 
+    # --> :Brian a :Dog . 
 		
 # -----

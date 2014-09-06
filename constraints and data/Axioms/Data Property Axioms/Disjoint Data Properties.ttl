@@ -1,0 +1,32 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# Axioms - Data Property Axioms - Disjoint Data Properties
+
+
+	# generic
+	# -----
+	# DisjointDataProperties( :DisjointDataProperties_DPE1 :DisjointDataProperties_DPE2 ) 
+	:DisjointDataProperties_DPE1 owl:propertyDisjointWith :DisjointDataProperties_DPE2 . 	
+	:DisjointDataProperties_I1 
+		a owl:Thing ;
+		:DisjointDataProperties_DPE1 :DisjointDataProperties_I2 ; # NOT commented --> constraint violation	
+		:DisjointDataProperties_DPE2 :DisjointDataProperties_I2 .
+	:DisjointDataProperties_I2
+		a rdfs:Literal .
+		
+	# concrete
+	# -----
+	:hasName owl:propertyDisjointWith :hasAddress .
+	:Peter 
+	    a owl:Thing ;
+	    :hasName "Peter Griffin" ;
+	    :hasAddress "Peter Griffin" ; # NOT commented --> constraint violation
+	    :hasAddress "Quahog, Rhode Island" . 
+
+# -----

@@ -6,20 +6,32 @@
 
 
 # ---------------
-# InverseFunctionalObjectProperty
+# Axioms - Object Property Axioms - Inverse Functional Object Property
 
 
-	# example
+	# generic
 	# -----
 	# InverseFunctionalObjectProperty ( :InverseFunctionalObjectProperty_OPE ) 
-	:InverseFunctionalObjectProperty_OPE rdf:type owl:InverseFunctionalProperty . 	
+	:InverseFunctionalObjectProperty_OPE a owl:InverseFunctionalProperty . 	
 	:InverseFunctionalObjectProperty_I1
-		rdf:type owl:Thing ;
+		a owl:Thing ;
 		:InverseFunctionalObjectProperty_OPE :InverseFunctionalObjectProperty_I . 
 	:InverseFunctionalObjectProperty_I2
-		:InverseFunctionalObjectProperty_OPE :InverseFunctionalObjectProperty_I ; # not commented --> constraint violation
-		rdf:type owl:Thing .
+		:InverseFunctionalObjectProperty_OPE :InverseFunctionalObjectProperty_I ; # NOT commented --> constraint violation
+		a owl:Thing .
 	:InverseFunctionalObjectProperty_I
-		rdf:type owl:Thing .
+		a owl:Thing .
+		
+	# concrete
+	# -----
+	:fatherOf a owl:InverseFunctionalProperty . 
+	:Peter 
+	    a owl:Thing ;
+	    :fatherOf :Stewie . 
+	:Peter_Griffin 
+	    :fatherOf :Stewie ; # NOT commented --> constraint violation
+	    a owl:Thing . 
+	:Stewie
+	    a owl:Thing .
 
 # -----
