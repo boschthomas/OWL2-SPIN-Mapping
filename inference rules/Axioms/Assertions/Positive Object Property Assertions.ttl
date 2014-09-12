@@ -1,0 +1,33 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix owl2spin: <http://constraints.org/owl2#> .
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# Axioms - Assertions -  Positive Object Property Assertions 
+
+    
+    # concrete 
+    # -----
+    # ObjectPropertyAssertion( :hasDog :Peter :Brian )
+    :Peter 
+        a owl:Thing , owl2spin:ToInfer ; 
+        :hasDog :Brian .
+    :Brian
+        a owl:Thing . 	
+    
+    # SubClassOf( ObjectSomeValuesFrom( :hasDog owl:Thing ) :DogOwner ) 
+    _:x 
+        a owl:Restriction ;
+        owl:onProperty :hasDog ;
+        owl:someValuesFrom owl:Thing ;
+        rdfs:subClassOf :DogOwner . 
+    
+    # -->
+    # ClassAssertion( :DogOwner :Peter ) 
+    # :Peter a :DogOwner .
+        
+# -----

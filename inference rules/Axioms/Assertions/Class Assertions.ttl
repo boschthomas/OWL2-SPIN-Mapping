@@ -7,29 +7,19 @@
 
 
 # ---------------
-# Axioms - Class Expression Axioms - Subclass Axioms
+# Axioms - Assertions - Class Assertions 
 
-    # concrete
-    # -----    
-    # SubClassOf( :Baby :Child )
-    # SubClassOf( :Child :Person )     
-    # ClassAssertion( :Baby :Stewie ) 
-    :Baby rdfs:subClassOf :Child . 
-    :Child rdfs:subClassOf :Person . 
-    :Stewie 
-        a :Baby ;
-        a owl2spin:ToInfer . 
-    # --> 
-    # :Stewie 
-    #     a :Child .
-    #     a :Person .
     
     # concrete 
     # -----
+    # ClassAssertion( :Dog :Brian ) 
+    # SubClassOf( :Dog :Mammal )
     :Brian  
         a :Dog ;
         a owl:Thing , owl2spin:ToInfer .     
     :Dog rdfs:subClassOf :Mammal .
-    # --> :Brian a :Mammal . 
+    # --> 
+    # ClassAssertion( :Mammal :Brian ) 
+    # :Brian a :Mammal . 
         
 # -----

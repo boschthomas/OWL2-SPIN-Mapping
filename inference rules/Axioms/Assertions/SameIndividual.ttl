@@ -1,0 +1,39 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix owl2spin: <http://constraints.org/owl2#> .
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# Axioms -  Assertions - Individual Equality 
+
+    # generic
+    # -----
+    # SameIndividual( Individual Individual { Individual } )
+    :SameIndividual_I1 owl:sameAs :SameIndividual_I2 .
+    :SameIndividual_I1
+        a owl:Thing, owl2spin:ToInfer ;
+        :SameIndividual_OPE1 :SameIndividual_I3 ; 
+        :SameIndividual_DPE1 "literal" . 
+    :SameIndividual_I3
+        a owl:Thing, owl2spin:ToInfer .
+    # -->
+    # :SameIndividual_I2
+    #     a owl:Thing, owl2spin:ToInfer ;
+    #     :SameIndividual_OPE1 :SameIndividual_I3 ; 
+    #     :SameIndividual_DPE1 "literal" .
+        
+    # concrete
+    # ----
+    :Megan owl:sameAs :Meg . 	
+    :Meg 
+        a owl:Thing, owl2spin:ToInfer ;
+        :hasBrother :Stewie .
+    # -->
+    # :Megan 
+    #     a owl:Thing, owl2spin:ToInfer ;
+    #     :hasBrother :Stewie .   
+        
+# -----

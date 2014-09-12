@@ -6,28 +6,28 @@
 
 
 # ---------------
-# DatatypeDefinition
+# Axioms - Datatype Definition
 
 
-	# example
-	# -----
-	# Declaration( Datatype( :SSN ) ) 
-	# DatatypeDefinition( 
-	#     :SSN
-	#	  DatatypeRestriction( xsd:string xsd:pattern "[0-9]{3}-[0-9]{2}-[0-9]{4}" ) ) 	
-	# DataPropertyRange( :hasSSN :SSN ) 
-	:SSN 
-		a rdfs:Datatype ;
-		owl:equivalentClass [
-			a rdfs:Datatype ;
-			owl:onDatatype xsd:string ;
-			owl:withRestrictions ( 
-				[ xsd:pattern "[0-9]{3}-[0-9]{2}-[0-9]{4}" ] ) ] .
-	:DatatypeDefinition_I1
-		a owl:Thing ;
-		:hasSSN "123-45-6789"^^:SSN .
-	:DatatypeDefinition_I2
-		a owl:Thing ;
-		:hasSSN "123456789"^^:SSN .
+    # pattern
+    # -----
+    # Declaration( Datatype( :SSN ) ) 
+    # DatatypeDefinition( 
+    #     :SSN
+    #      DatatypeRestriction( xsd:string xsd:pattern "[0-9]{3}-[0-9]{2}-[0-9]{4}" ) )     
+    # DataPropertyRange( :hasSSN :SSN ) 
+    :SSN 
+        a rdfs:Datatype ;
+        owl:equivalentClass [
+            a rdfs:Datatype ;
+            owl:onDatatype xsd:string ;
+            owl:withRestrictions ( 
+                [ xsd:pattern "[0-9]{3}-[0-9]{2}-[0-9]{4}" ] ) ] .
+    :DatatypeDefinition_I1
+        a owl:Thing ;
+        :hasSSN "123-45-6789"^^:SSN .
+    :DatatypeDefinition_I2
+        :hasSSN "123456789"^^:SSN ; # NOT commented --> constraint violation
+        a owl:Thing .
 
 # -----

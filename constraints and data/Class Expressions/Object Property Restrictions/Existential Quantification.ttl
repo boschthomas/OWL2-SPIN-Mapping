@@ -6,7 +6,7 @@
 
 
 # ---------------
-# ObjectSomeValuesFrom
+# Class Expressions - Object Property Restrictions - Existential Quantification
 
 
 	# generic

@@ -1,0 +1,27 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix owl2spin: <http://constraints.org/owl2#> .
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# Axioms - Assertions -  Negative Data Property Assertions 
+
+    
+    # concrete 
+    # -----
+    # NegativeDataPropertyAssertion ( axiomAnnotations DataPropertyExpression sourceIndividual targetValue )
+    # NegativeDataPropertyAssertion( :hasAge :Meg "5"^^xsd:integer )
+    _:x 
+        a owl:NegativePropertyAssertion ;
+        owl:sourceIndividual :Meg ;
+        owl:assertionProperty :hasAge ;
+        owl:targetValue "5"^^xsd:integer .
+    # DataPropertyAssertion( :hasAge :Meg "5"^^xsd:integer )
+    :Meg 
+        :hasAge "5"^^xsd:integer ; # NOT commented --> constraint violation
+        a owl:Thing .
+        
+# -----

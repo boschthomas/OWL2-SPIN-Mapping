@@ -43,7 +43,7 @@ owl2spin:ToInfer
                 	?this rdf:type ?CE1 .    	         
         		} """ ; ] .
         		
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -61,7 +61,7 @@ owl2spin:ToInfer
 # Axioms - Object Property Axioms  - Object Subproperties 
 
         		
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -81,7 +81,7 @@ owl2spin:ToInfer
  
  # 2 OPE
  # -----       		
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -102,7 +102,7 @@ owl2spin:ToInfer
         		
  # 3 OPE
  # -----       		
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -130,7 +130,7 @@ owl2spin:ToInfer
 # Axioms - Object Property Axioms  - Equivalent Object Properties
 
       		
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -144,7 +144,7 @@ owl2spin:ToInfer
         		    ?a rdf:type owl:Thing . # ?OPE1 is OPE         
         		} """ ; ] .
         		
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -164,7 +164,7 @@ owl2spin:ToInfer
 # Axioms - Object Property Axioms - Inverse Object Properties
 
 
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -177,7 +177,7 @@ owl2spin:ToInfer
                     ?y rdf:type owl:Thing . # ?OPE1 is OPE   
         		} """ ; ] .	
         		
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -196,7 +196,7 @@ owl2spin:ToInfer
 # Axioms - Object Property Axioms - Object Property Domain
 
 
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -216,7 +216,7 @@ owl2spin:ToInfer
 # Axioms - Object Property Axioms - Object Property Range
 
 
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -236,7 +236,7 @@ owl2spin:ToInfer
 # Axioms - Object Property Axioms - Symmetric Object Property
 
 
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -256,7 +256,7 @@ owl2spin:ToInfer
 # Axioms - Object Property Axioms - Transitive Object Property
 
 
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -276,7 +276,7 @@ owl2spin:ToInfer
 # Axioms - Data Property Axioms  - Data Subproperties 
 
         		
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -295,7 +295,7 @@ owl2spin:ToInfer
 # Axioms - Data Property Axioms  - Equivalent Data Properties
 
       		
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -309,7 +309,7 @@ owl2spin:ToInfer
         		    FILTER NOT EXISTS { ?a rdf:type owl:Thing } # ?DPE1 is DPE         
         		} """ ; ] .
         		
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -329,7 +329,7 @@ owl2spin:ToInfer
 # Axioms - Data Property Axioms - Data Property Domain
 
 
- owl2spin:ToInfer 
+owl2spin:ToInfer 
 	spin:rule [
 		a sp:Construct ;
         	sp:text """
@@ -341,6 +341,71 @@ owl2spin:ToInfer
                	 	?this ?DPE ?y .
 					FILTER NOT EXISTS { ?y rdf:type owl:Thing } # ?DPE is DPE
 					FILTER NOT EXISTS { ?this rdf:type ?CE }   
+        		} """ ; ] .	
+	
+# -----
+
+# ---------------
+# Axioms -  Individual Equality 
+
+
+owl2spin:ToInfer 
+	spin:rule [
+		a sp:Construct ;
+        	sp:text """
+            	CONSTRUCT {            
+                    ?a ?PE ?b .
+            	}
+            	WHERE {
+                    { ?this owl:sameAs ?a } UNION { ?a owl:sameAs ?this }
+                    ?this ?PE ?b .  
+                    FILTER ( ?PE != owl:sameAs ) .
+        		} """ ; ] .	
+        		
+owl2spin:ToInfer 
+	spin:rule [
+		a sp:Construct ;
+        	sp:text """
+            	CONSTRUCT {            
+                    ?b ?PE ?a .
+            	}
+            	WHERE {
+                    { ?this owl:sameAs ?a } UNION { ?a owl:sameAs ?this }
+                    ?b ?PE ?this .
+                    FILTER ( ?PE != owl:sameAs ) .  
+        		} """ ; ] .	
+	
+# -----
+
+# ---------------
+# Axioms -  Individual Inequality 
+
+
+# This axiom can be used to axiomatize the unique name assumption.
+# As the unique name assumption is presumed, this axiom does not have to be implemented.
+	
+# -----
+
+# ---------------
+# Class Expressions - Object Property Restrictions - Existential Quantification
+
+
+owl2spin:ToInfer 
+	spin:rule [
+		a sp:Construct ;
+        	sp:text """
+            	CONSTRUCT {            
+                    ?this rdf:type ?super_CE .
+            	}
+            	WHERE {
+                    ?this ?OPE ?x .
+                    ?x rdf:type ?CE .
+                    
+                    ?c 
+                        rdf:type owl:Restriction ;
+                        owl:onProperty ?OPE ;
+                        owl:someValuesFrom ?CE ;
+                        rdfs:subClassOf ?super_CE . 
         		} """ ; ] .	
 	
 # -----

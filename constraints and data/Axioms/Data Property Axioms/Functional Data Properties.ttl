@@ -1,0 +1,46 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# Axioms - Data Property Axioms - Functional Data Property
+
+
+    # generic
+    # -----
+    # FunctionalDataProperty( :FunctionalDataProperty_DPE ) 
+    :FunctionalDataProperty_DPE a owl:FunctionalProperty .
+    :FunctionalDataProperty_I1 
+        a owl:Thing ;
+        :FunctionalDataProperty_DPE :FunctionalDataProperty_L1 ; # NOT commented --> constraint violation
+        :FunctionalDataProperty_DPE :FunctionalDataProperty_L2 . 
+    :FunctionalDataProperty_L1 
+        a rdfs:Literal .
+    :FunctionalDataProperty_L2 
+        a rdfs:Literal .
+        
+    # concrete
+    # -----
+    :hasAge a owl:FunctionalProperty . 
+    :Meg 
+        a owl:Thing ;
+        :hasAge "17"^^xsd:integer ; # NOT commented --> constraint violation
+        :hasAge "15"^^xsd:integer . 
+        
+    :hasAge a owl:FunctionalProperty .     
+    :Tom 
+        a owl:Thing ;
+        :hasAge "17"^^xsd:integer ;     
+        :hasAge "17.0"^^xsd:decimal ; 
+        :hasAge "+17"^^xsd:int . 
+    
+    :numberOfChildren a owl:FunctionalProperty .     
+    :Stewie
+        a owl:Thing ;
+        :numberOfChildren "+0"^^xsd:float ; # NOT commented --> constraint violation    
+        :numberOfChildren "-0"^^xsd:float .
+        
+# -----

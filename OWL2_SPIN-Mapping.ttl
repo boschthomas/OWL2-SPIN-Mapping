@@ -5,6 +5,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 
+# sp
+# -----
 @prefix sp: <http://spinrdf.org/sp#> .
 # syntactically represent SPARQL queries and update commands as RDF triples
 
@@ -52,132 +54,151 @@
 	
 owl:Thing 
 	spin:constraint 
+	
 		# Data Ranges - Set-Oriented Operations
 		# -----
-		# DataOneOf
+		# Enumeration of Literals 
 		[   a owl2:DataOneOf_1L ] , 
 		[   a owl2:DataOneOf_2L ] , 
 		[   a owl2:DataOneOf_3L ] , 
 		[   a owl2:DataOneOf_4L ] , 
 		[   a owl2:DataOneOf_5L ] ,
-		# set-oriented operations ( on class expressions )
-		# -----
-		# ObjectIntersectionOf ( 2 CE )
-		[   a owl2:ObjectIntersectionOf_2CE ] ,
-		# ObjectIntersectionOf ( 3 CE )
-		[   a owl2:ObjectIntersectionOf_3CE ] ,
-		# ObjectUnionOf ( 2 CE )
-		[   a owl2:ObjectUnionOf_2CE ] ,
-		# ObjectUnionOf ( 3 CE )
-		[   a owl2:ObjectUnionOf_3CE ] ,
-		# ObjectComplementOf
-		[   a owl2:ObjectComplementOf ] ,
-		# ObjectOneOf
-		[   a owl2:ObjectOneOf_1 ] , [   a owl2:ObjectOneOf_2 ] , [   a owl2:ObjectOneOf_3 ] , [   a owl2:ObjectOneOf_4 ] , [   a owl2:ObjectOneOf_5 ] ,
 		
-		# class expressions - object property restrictions
+		# Class Expressions - Set-Oriented Operations
 		# -----
-		# ObjectSomeValuesFrom
+		# Intersection of Class Expressions 
+		[   a owl2:ObjectIntersectionOf_2CE ] ,
+		[   a owl2:ObjectIntersectionOf_3CE ] ,
+		# Union of Class Expressions 
+		[   a owl2:ObjectUnionOf_2CE ] ,
+		[   a owl2:ObjectUnionOf_3CE ] ,
+		# Complement of Class Expressions 
+		[   a owl2:ObjectComplementOf ] ,
+		# Enumeration of Individuals
+		[   a owl2:ObjectOneOf_1 ] , 
+		[   a owl2:ObjectOneOf_2 ] , 
+		[   a owl2:ObjectOneOf_3 ] , 
+		[   a owl2:ObjectOneOf_4 ] , 
+		[   a owl2:ObjectOneOf_5 ] ,
+		
+		# Class Expressions - Object Property Restrictions
+		# -----
+		# Existential Quantification 
 		[   a owl2:ObjectSomeValuesFrom ] ,
-		# ObjectAllValuesFrom
+		# Universal Quantification 
 		[   a owl2:ObjectAllValuesFrom ] ,
-		# ObjectHasValue
+		# Individual Value Restriction 
 		[   a owl2:ObjectHasValue ] ,
-		# ObjectHasSelf
+		# Self-Restriction 
 		[   a owl2:ObjectHasSelf ] ,
 		
-		# object property cardinality restrictions
+		# Class Expressions - Object Property Cardinality Restrictions 
 		# -----
-		# ObjectMinCardinality
+		# Minimum Cardinality 
 		[   a owl2:ObjectMinCardinality ] ,
-		# ObjectMaxCardinality
+		# Maximum Cardinality
 		[   a owl2:ObjectMaxCardinality ] ,
-		# ObjectExactCardinality
+		# Exact Cardinality
 		[   a owl2:ObjectExactCardinality ] ,
 		
-		# data property restrictions
+		# Class Expressions - Data Property Restrictions 
 		# -----
-		# DataSomeValuesFrom
+		# Existential Quantification 
 		[   a owl2:DataSomeValuesFrom ] ,
-		# DataAllValuesFrom
+		# Universal Quantification 
 		[   a owl2:DataAllValuesFrom ] ,
-		# DataHasValue
+		# Literal Value Restriction 
 		[   a owl2:DataHasValue ] ,
 		
-		# data property cardinality restrictions
+		# Class Expressions - Data Property Cardinality Restrictions 
 		# -----
-		# owl2:DataMinCardinality
+		# Minimum Cardinality 
 		[   a owl2:DataMinCardinality ] ,
-		# owl2:DataMaxCardinality
+		# Maximum Cardinality
 		[   a owl2:DataMaxCardinality ] ,
-		# owl2:DataExactCardinality
+		# Exact Cardinality 
 		[   a owl2:DataExactCardinality ] ,
 		
-		# Axioms - Object Property Axioms
+		# Axioms - Class Expression Axioms
 		# -----
-		# Axioms - Object Property Axioms - Sub-Object Properties
-#		[   a owl2:SubObjectPropertyOf ] ,
-		# Axioms - Object Property Axioms - Object Property Chains 
-#		[   a owl2:ObjectPropertyChain_2OPE ] ,
-#		[   a owl2:ObjectPropertyChain_3OPE ] ,
-		# Axioms - Object Property Axioms - Disjoint Object Properties
-		[   a owl2:DisjointObjectProperties ] ,
-		# Axioms - Object Property Axioms - Inverse Object Properties
-#		[   a owl2:InverseObjectProperties ] ,
-		# Axioms - Object Property Axioms - Object Property Domain
-		[   a owl2:ObjectPropertyDomain ] ,
-		# Axioms - Object Property Axioms - Object Property Range
-		[   a owl2:ObjectPropertyRange ] ,
-		# Axioms - Object Property Axioms - Functional Object Property
-		[   a owl2:FunctionalObjectProperty ] ,
-		# Axioms - Object Property Axioms - Inverse-Functional Object Property
-		[   a owl2:InverseFunctionalObjectProperty ] ,
-		# Axioms - Object Property Axioms - Reflexive Object Properties
-#       [   a owl2:ReflexiveObjectProperties ] ,
-		# Axioms - Object Property Axioms - Irreflexive Object Properties
-        [   a owl2:IrreflexiveObjectProperties ] ,
-        # Axioms - Object Property Axioms - Symmetric Object Properties
-        [   a owl2:SymmetricObjectProperties ] ,
-        # Axioms - Object Property Axioms - Asymmetric Object Properties
-        [   a owl2:AsymmetricObjectProperties ] ,
-        # Axioms - Object Property Axioms - Transitive Object Properties
-        [   a owl2:TransitiveObjectProperties ] ,
-		
-		# Axioms - Data Property Axioms
-		# -----
-		# Axioms - Data Property Axioms - Disjoint Data Properties
-		[   a owl2:DisjointDataProperties ] ,		
-		# Axioms - Data Property Axioms - Data Property Domain
-		[   a owl2:DataPropertyDomain ] ,
-		# Axioms - Data Property Axioms - Data Property Range
-		[   a owl2:DataPropertyRange ] ,
-		
-		# datatype definitions
-		[   a owl2:DatatypeDefinition_Pattern ] ,
-		
-		
 		# Disjoint Classes
 		[   a owl2:DisjointClasses ] ,
 		# Disjoint Union of Class Expressions
 		[   a owl2:DisjointUnion_2CE_1 ] ,
 		[   a owl2:DisjointUnion_2CE_2 ] ,
-		[   a owl2:DisjointUnion_2CE_3 ] .
+		[   a owl2:DisjointUnion_2CE_3 ] ,
+		
+		# Axioms - Object Property Axioms
+		# -----
+		# Object Subproperties 
+#		[   a owl2:SubObjectPropertyOf ] ,
+		# Object Property Chains 
+#		[   a owl2:ObjectPropertyChain_2OPE ] ,
+#		[   a owl2:ObjectPropertyChain_3OPE ] ,
+		# Disjoint Object Properties
+		[   a owl2:DisjointObjectProperties ] ,
+		# Inverse Object Properties
+#		[   a owl2:InverseObjectProperties ] ,
+		# Object Property Domain
+		[   a owl2:ObjectPropertyDomain ] ,
+		# Object Property Range
+		[   a owl2:ObjectPropertyRange ] ,
+		# Functional Object Property
+		[   a owl2:FunctionalObjectProperty ] ,
+		# Inverse-Functional Object Property
+		[   a owl2:InverseFunctionalObjectProperty ] ,
+		# Reflexive Object Properties
+#       [   a owl2:ReflexiveObjectProperties ] ,
+		# Irreflexive Object Properties
+        [   a owl2:IrreflexiveObjectProperties ] ,
+        # Symmetric Object Properties
+        [   a owl2:SymmetricObjectProperties ] ,
+        # Asymmetric Object Properties
+        [   a owl2:AsymmetricObjectProperties ] ,
+        # Transitive Object Properties
+        [   a owl2:TransitiveObjectProperties ] ,
+		
+		# Axioms - Data Property Axioms
+		# -----
+		# Disjoint Data Properties
+		[   a owl2:DisjointDataProperties ] ,		
+		# Data Property Domain
+		[   a owl2:DataPropertyDomain ] ,
+		# Data Property Range
+		[   a owl2:DataPropertyRange ] ,
+		# Functional Data Properties
+		[   a owl2:FunctionalDataProperties ] ,
+		
+		# Axioms - Datatype Definitions 
+		[   a owl2:DatatypeDefinition_Pattern ] ,
+		
+		# Axioms - Keys
+		# -----
+		[   a owl2:HasKey ] ,
+
+		# Axioms - Assertions
+		# -----
+		# Negative Object Property Assertions 
+		[   a owl2:NegativeObjectPropertyAssertion ] ,
+		# Negative Data Property Assertions 
+		[   a owl2:NegativeDataPropertyAssertion ] .
 		
 rdfs:Literal 
 	spin:constraint 
+	
 		# Data Ranges - Set-Oriented Operations
 		# -----
-		# DataIntersectionOf ( 2 DR )
+		# Intersection of Data Ranges
 		[   a owl2:DataIntersectionOf_2DR ] ,
-		# DataUnionOf ( 2 DR )
+		# Union of Data Ranges 
 		[   a owl2:DataUnionOf_2DR ] ,
-		# DataComplementOf
+		# Complement of Data Ranges
 		[   a owl2:DataComplementOf ] .
 
 # -----
 
 # ---------------
-# Data Ranges -  Intersection of Data Ranges 
+# Data Ranges - Set-Oriented Operations - Intersection of Data Ranges 
 
 
 owl2:DataIntersectionOf_2DR
@@ -227,7 +248,7 @@ owl2:DataIntersectionOf_2DR
 # -----
     
 # ---------------
-# Data Ranges -  Union of Data Ranges 
+# Data Ranges - Set-Oriented Operations -  Union of Data Ranges 
 
 
 owl2:DataUnionOf_2DR
@@ -277,18 +298,10 @@ owl2:DataUnionOf_2DR
 # -----
 
 # ---------------
-# ObjectIntersectionOf (  intersection of class expressions  )
+# Class Expressions - Set-Oriented Operations - Intersection of Class Expressions
 
 
-# description
-# -----
-# An intersection class expression ObjectIntersectionOf( CE1 ... CEn ) contains all individuals that are instances of all class expressions CEi for 1 ≤ i ≤ n. 
-
-# definition: 
-# -----	
-# ObjectIntersectionOf := 'ObjectIntersectionOf' '(' ClassExpression ClassExpression { ClassExpression } ')' 	
-
-# SPIN template:
+# 2 CE
 # -----
 #   CONSTRUCT {
 #	    _:violation 
@@ -416,7 +429,9 @@ owl2:ObjectIntersectionOf_2CE
 					sp:arg3 " " ;
 					sp:arg4 [ sp:varName "CE2" ] ;
 					sp:arg5 " )" ] ] ) ].
-					
+
+# 3 CE
+# -----					
 #   CONSTRUCT {
 #	    _:violation 
 #		    a spin:ConstraintViolation ;
@@ -562,18 +577,10 @@ owl2:ObjectIntersectionOf_3CE
 # -----
 
 # ---------------
-# ObjectUnionOf (  union of class expressions  )
+# Class Expressions - Set-Oriented Operations - Union of Class Expressions
 
 
-# description
-# -----
-# A union class expression ObjectUnionOf( CE1 ... CEn ) contains all individuals that are instances of at least one class expression CEi for 1 ≤ i ≤ n. 
-
-# definition: 
-# -----	
-# ObjectUnionOf := 'ObjectUnionOf' '(' ClassExpression ClassExpression { ClassExpression } ')' 
-
-# SPIN template:
+# 2 CE
 # -----
 #   CONSTRUCT {
 #	    _:violation 
@@ -705,7 +712,9 @@ owl2:ObjectUnionOf_2CE
 					sp:arg3 " " ;
 					sp:arg4 [ sp:varName "CE2" ] ;
 					sp:arg5 " )" ] ] ) ].
-					
+			
+# 3 CE
+# -----		
 #   CONSTRUCT {
 #	    _:violation 
 #		    a spin:ConstraintViolation ;
@@ -856,19 +865,9 @@ owl2:ObjectUnionOf_3CE
 # -----
 
 # ---------------
-# ObjectComplementOf ( complement of class expressions  )
+# Class Expressions - Set-Oriented Operations - Complement of Class Expressions
 
 
-# description
-# -----
-# A complement class expression ObjectComplementOf( CE ) contains all individuals that are not instances of the class expression CE. 
-
-# definition: 
-# -----	
-# ObjectComplementOf := 'ObjectComplementOf' '(' ClassExpression ')'		
-
-# SPIN template:
-# -----
 #   CONSTRUCT {
 #	    _:violation 
 #		    a spin:ConstraintViolation ;
@@ -967,21 +966,11 @@ owl2:ObjectComplementOf
 # -----	
 
 # ---------------
-# ObjectOneOf ( enumeration of individuals )
+# Class Expressions - Set-Oriented Operations - Enumeration of Individuals
 
-
-# description
-# -----
-# An enumeration of individuals ObjectOneOf( a1 ... an ) contains exactly the individuals ai with 1 ≤ i ≤ n. 
-
-# definition
-# -----	
-# ObjectOneOf := 'ObjectOneOf' '(' Individual { Individual }')' 
-
-# SPIN templates:
-# -----
 
 # 1 Individual
+# -----
 owl2:ObjectOneOf_1
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
@@ -1090,6 +1079,7 @@ owl2:ObjectOneOf_1
 					sp:arg3 " )" ] ] ) ].
 
 # 2 Individuals
+# -----
 owl2:ObjectOneOf_2
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
@@ -1245,6 +1235,7 @@ owl2:ObjectOneOf_2
 					sp:arg5 " )" ] ] ) ].
 
 # 3 Individuals
+# -----
 owl2:ObjectOneOf_3
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
@@ -1447,6 +1438,7 @@ owl2:ObjectOneOf_3
 					sp:arg7 " )" ] ] ) ].
 					
 # 4 Individuals
+# -----
 owl2:ObjectOneOf_4
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
@@ -1690,7 +1682,8 @@ owl2:ObjectOneOf_4
 					sp:arg8 [ sp:varName "I4" ] ;
 					sp:arg9 " )" ] ] ) ].
 					
-					# 4 Individuals
+# 5 Individuals
+# -----
 owl2:ObjectOneOf_5
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
@@ -1980,19 +1973,9 @@ owl2:ObjectOneOf_5
 # -----
 
 # ---------------
-# DataComplementOf ( complement of data ranges  )
+# Data Ranges - Set-Oriented Operations - Complement of Data Ranges
 
 
-# description
-# -----
-# A complement data range DataComplementOf( DR ) contains all tuples of literals that are not contained in the data range DR. 
-
-# definition: 
-# -----	
-# ObjectComplementOf := 'ObjectComplementOf' '(' ClassExpression ')'		
-
-# SPIN template:
-# -----
 #   CONSTRUCT {
 #	    _:violation 
 #		    a spin:ConstraintViolation ;
@@ -2091,18 +2074,10 @@ owl2:DataComplementOf
 # -----	
 
 # ---------------
-# DataOneOf ( enumeration of literals )
+# Data Ranges - Set-Oriented Operations -  Enumeration of Literals 
 
 
-# description
-# -----
-# An enumeration of literals DataOneOf( lt1 ... ltn ) contains exactly the explicitly specified literals lti with 1 ≤ i ≤ n. The resulting data range has arity one. 
-
-# definition
-# -----	
-# DataOneOf := 'DataOneOf' '(' Literal { Literal } ')' 
-
-
+# 1 literal
 # -----
 owl2:DataOneOf_1L
 	a spin:Template; 
@@ -2232,6 +2207,7 @@ owl2:DataOneOf_1L
 					sp:arg2 [ sp:varName "L1" ] ;
 					sp:arg3 " )" ] ] ) ] .
 
+# 2 literals
 # -----
 owl2:DataOneOf_2L
 	a spin:Template; 
@@ -2405,6 +2381,7 @@ owl2:DataOneOf_2L
 					sp:arg4 [ sp:varName "L2" ] ;
 					sp:arg5 " )" ] ] ) ].
 
+# 3 literals
 # -----
 owl2:DataOneOf_3L
 	a spin:Template; 
@@ -2619,6 +2596,7 @@ owl2:DataOneOf_3L
 					sp:arg6 [ sp:varName "L3" ] ;
 					sp:arg7 " )" ] ] ) ].
 
+# 4 literals
 # -----
 owl2:DataOneOf_4L
 	a spin:Template; 
@@ -2873,6 +2851,7 @@ owl2:DataOneOf_4L
 					sp:arg8 [ sp:varName "L4" ] ;
 					sp:arg9 " )" ] ] ) ].
 
+# 5 literals
 # -----
 owl2:DataOneOf_5L
 	a spin:Template; 
@@ -3169,7 +3148,7 @@ owl2:DataOneOf_5L
 # -----
 
 # ---------------
-# ObjectMinCardinality ( Object Property Cardinality Restriction )
+# Class Expressions - Object Property Cardinality Restrictions - Minimum Cardinality
 
 
 # description
@@ -3183,8 +3162,7 @@ owl2:DataOneOf_5L
 # -----	
 # ObjectMinCardinality := 'ObjectMinCardinality' '(' nonNegativeInteger ObjectPropertyExpression [ ClassExpression ] ')'			
 
-# SPIN template:
-# -----
+
 #   CONSTRUCT {
 #	    _:violation 
 #		    a spin:ConstraintViolation ;
@@ -3342,7 +3320,7 @@ owl2:ObjectMinCardinality
 # -----	
 
 # ---------------
-# ObjectMaxCardinality
+# Class Expressions - Object Property Cardinality Restrictions - Maximum Cardinality
 
 
 # description
@@ -3355,8 +3333,7 @@ owl2:ObjectMinCardinality
 # -----
 # ObjectMaxCardinality := 'ObjectMaxCardinality' '(' nonNegativeInteger ObjectPropertyExpression [ ClassExpression ] ')'
 
-# SPIN template:
-# -----
+
 #   CONSTRUCT {
 #	    _:violation 
 #		    a spin:ConstraintViolation ;
@@ -3514,7 +3491,7 @@ owl2:ObjectMaxCardinality
 # -----
 		
 # ---------------
-# ObjectExactCardinality (object property cardinality restriction )
+# Class Expressions - Object Property Cardinality Restrictions - Exact Cardinality
 		
 
 # description
@@ -3527,8 +3504,7 @@ owl2:ObjectMaxCardinality
 # -----
 # ObjectExactCardinality := 'ObjectExactCardinality' '(' nonNegativeInteger ObjectPropertyExpression [ ClassExpression ] ')' 
 	
-# SPIN template:
-# -----
+
 #   CONSTRUCT {
 #	    _:violation 
 #		    a spin:ConstraintViolation ;
@@ -3686,7 +3662,7 @@ owl2:ObjectExactCardinality
 # -----
 
 # ---------------
-# DataMinCardinality
+# Class Expressions - Data Property Cardinality Restrictions - Minimum Cardinality
 
 
 # description
@@ -3699,8 +3675,7 @@ owl2:ObjectExactCardinality
 # -----
 # DataMinCardinality := 'DataMinCardinality' '(' nonNegativeInteger DataPropertyExpression [ DataRange ] ')' 
 
-# SPIN template:
-# -----
+
 #   CONSTRUCT {
 #	    _:violation 
 #		    a spin:ConstraintViolation ;
@@ -3858,7 +3833,7 @@ owl2:DataMinCardinality
 # -----	
 
 # ---------------
-# DataMaxCardinality
+# Class Expressions - Data Property Cardinality Restrictions - Maximum Cardinality
 
 
 
@@ -3872,8 +3847,7 @@ owl2:DataMinCardinality
 # -----
 # DataMaxCardinality := 'DataMaxCardinality' '(' nonNegativeInteger DataPropertyExpression [ DataRange ] ')' 
 
-# SPIN template:
-# -----
+
 #   CONSTRUCT {
 #	    _:violation 
 #		    a spin:ConstraintViolation ;
@@ -4031,7 +4005,7 @@ owl2:DataMaxCardinality
 # -----	
 
 # ---------------
-# DataExactCardinality
+# Class Expressions - Data Property Cardinality Restrictions - Exact Cardinality
 
 
 # description
@@ -4044,8 +4018,7 @@ owl2:DataMaxCardinality
 # -----
 # DataExactCardinality := 'DataExactCardinality' '(' nonNegativeInteger DataPropertyExpression [ DataRange ] ')' 
 	
-# SPIN template:
-# -----
+
 #   CONSTRUCT {
 #	    _:violation 
 #		    a spin:ConstraintViolation ;
@@ -4203,7 +4176,7 @@ owl2:DataExactCardinality
 # -----			
 
 # ---------------
-# ObjectSomeValuesFrom ( object property restrictions - existential quantification )
+# Class Expressions - Object Property Restrictions - Existential Quantification
 
 
 # description
@@ -4215,8 +4188,7 @@ owl2:DataExactCardinality
 # -----
 # ObjectSomeValuesFrom := 'ObjectSomeValuesFrom' '(' ObjectPropertyExpression ClassExpression ')' 
 
-# SPIN template:
-# -----
+
 owl2:ObjectSomeValuesFrom
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
@@ -4319,7 +4291,7 @@ owl2:ObjectSomeValuesFrom
 # -----
 
 # ---------------
-# ObjectAllValuesFrom ( object property restriction - universal quantification )
+# Class Expressions - Object Property Restrictions - Universal Quantification
 
 
 # description
@@ -4331,8 +4303,7 @@ owl2:ObjectSomeValuesFrom
 # -----
 # ObjectAllValuesFrom := 'ObjectAllValuesFrom' '(' ObjectPropertyExpression ClassExpression ')' 	
 
-# SPIN template:
-# -----
+
 # CONSTRUCT {
 #   _:violation 
 #     a spin:ConstraintViolation ;
@@ -4473,7 +4444,7 @@ owl2:ObjectAllValuesFrom
 # -----	
 
 # ---------------
-# ObjectHasValue ( object property restrictions - individual value restriction )
+# Class Expressions - Object Property Restrictions - Individual Value Restriction
 
 
 # description
@@ -4485,8 +4456,7 @@ owl2:ObjectAllValuesFrom
 # -----
 # ObjectHasValue := 'ObjectHasValue' '(' ObjectPropertyExpression Individual ')' 
 
-# SPIN template:
-# -----
+
 owl2:ObjectHasValue
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
@@ -4585,7 +4555,7 @@ owl2:ObjectHasValue
 # -----
 
 # ---------------
-# Class Expressions - Self-Restriction
+# Class Expressions - Object Property Restrictions - Self-Restriction
 
 
 owl2:ObjectHasSelf
@@ -4624,7 +4594,7 @@ owl2:ObjectHasSelf
     ] .
 
 # ---------------
-# DataSomeValuesFrom
+# Class Expressions - Data Property Restrictions - Existential Quantification
 
 
 # description
@@ -4637,8 +4607,7 @@ owl2:ObjectHasSelf
 # -----
 # DataSomeValuesFrom := 'DataSomeValuesFrom' '(' DataPropertyExpression { DataPropertyExpression } DataRange ')
 
-# SPIN template:
-# -----
+
 owl2:DataSomeValuesFrom
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
@@ -4738,7 +4707,7 @@ owl2:DataSomeValuesFrom
 # -----
 
 # ---------------
-# DataAllValuesFrom ( data property restriction - universal quantification )
+# Class Expressions - Data Property Restrictions - Universal Quantification
 
 
 # description
@@ -4750,8 +4719,7 @@ owl2:DataSomeValuesFrom
 # -----
 # DataAllValuesFrom := 'DataAllValuesFrom' '(' DataPropertyExpression { DataPropertyExpression } DataRange ')' 
 
-# SPIN template:
-# -----
+
 owl2:DataAllValuesFrom
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
@@ -4864,7 +4832,7 @@ owl2:DataAllValuesFrom
 # -----	
 
 # ---------------
-# DataHasValue
+# Class Expressions - Data Property Restrictions - Literal Value Restriction
 
 
 # description
@@ -4875,8 +4843,7 @@ owl2:DataAllValuesFrom
 # -----
 # DataHasValue := 'DataHasValue' '(' DataPropertyExpression Literal ')' 
 
-# SPIN template:
-# -----
+
 owl2:DataHasValue
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
@@ -5183,7 +5150,7 @@ owl2:DisjointUnion_2CE_3
 # -----
 
 # ---------------
-# SubObjectPropertyOf ( object property axioms )
+# Axioms - Object Property Axioms - Object Subproperties
 
 
 # description
@@ -5195,7 +5162,7 @@ owl2:DisjointUnion_2CE_3
 # -----
 # SubObjectPropertyOf := 'SubObjectPropertyOf' '(' axiomAnnotations subObjectPropertyExpression superObjectPropertyExpression ')'	
 
-# SPIN template:
+
 # -----
 owl2:SubObjectPropertyOf
 	a spin:Template; 
@@ -5263,7 +5230,7 @@ owl2:SubObjectPropertyOf
 # -----
 
 # ---------------
-# ObjectPropertyChain ( object property axioms )
+# Axioms - Object Property Axioms - Object Property Chains
 
 
 # description
@@ -5275,7 +5242,7 @@ owl2:SubObjectPropertyOf
 # -----	
 # SubObjectPropertyOf ( axiomAnnotations ObjectPropertyChain ( ObjectPropertyExpression ObjectPropertyExpression { ObjectPropertyExpression } ) superObjectPropertyExpression )
 
-# SPIN template:
+# 2 OPE
 # -----
 owl2:ObjectPropertyChain_2OPE
 	a spin:Template; 
@@ -5371,7 +5338,9 @@ owl2:ObjectPropertyChain_2OPE
 					sp:arg5 " ) " ;
 					sp:arg6 [ sp:varName "superOPE" ] ;
 					sp:arg7 " )" ] ] ) ] .
-					
+		
+# 3 OPE
+# -----			
 owl2:ObjectPropertyChain_3OPE
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
@@ -5474,7 +5443,7 @@ owl2:ObjectPropertyChain_3OPE
 # -----
 
 # ---------------
-# EquivalentObjectProperties
+# Axioms - Object Property Axioms - Equivalent Object Properties
 
 
 # description
@@ -5486,6 +5455,7 @@ owl2:ObjectPropertyChain_3OPE
 # definition
 # -----	
 # EquivalentObjectProperties := 'EquivalentObjectProperties' '(' axiomAnnotations ObjectPropertyExpression ObjectPropertyExpression { ObjectPropertyExpression } ')' 
+
 
 owl:Thing
     spin:rule [
@@ -5645,7 +5615,7 @@ owl2:DisjointObjectProperties_old
 # -----
 
 # ---------------
-# InverseObjectProperties
+# Axioms - Object Property Axioms - Inverse Object Properties
 
 
 # description
@@ -5658,7 +5628,7 @@ owl2:DisjointObjectProperties_old
 # -----	
 # InverseObjectProperties := 'InverseObjectProperties' '(' axiomAnnotations ObjectPropertyExpression ObjectPropertyExpression ')' 
 
-# SPIN templates
+
 # -----
 owl2:InverseObjectProperties
 	a spin:Template; 
@@ -5982,7 +5952,7 @@ owl2:FunctionalObjectProperty
 #               violation message
 #               -----
                 BIND ( CONCAT( 
-                    \"FunctionalProperty ( \", 
+                    \"FunctionalObjectProperty ( \", 
                     xsd:string( ?OPE ), 
                     \" )\" ) 
                     AS ?violationMessage ) . 
@@ -6174,6 +6144,7 @@ owl2:InverseFunctionalObjectProperty_old
 
 
 # no constraint checking needed
+
 
 owl2:ReflexiveObjectProperties
 	a spin:ConstructTemplate ;
@@ -6626,27 +6597,233 @@ owl2:DataPropertyRange_old
 # -----
 
 # ---------------
-# DatatypeDefinition
+# Axioms - Data Property Axioms - Functional Data Properties
 
 
-# description
-# -----
-# A datatype definition DatatypeDefinition( DT DR ) defines a new datatype DT as being semantically equivalent to the data range DR; 
-# the latter MUST be a unary data range. This axiom allows one to use the defined datatype DT as a synonym for DR — 
-# that is, in any expression in the ontology containing such an axiom, DT can be replaced with DR without affecting the meaning of the ontology.
+owl2:FunctionalDataProperties
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Data Property Axioms - Functional Data Properties" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            CONSTRUCT {
+                _:cv 
+                	a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?DPE .
+            }
+            WHERE {	  
+			    ?DPE rdf:type owl:FunctionalProperty .
+			    ?this ?DPE ?x .
+			    ?this ?DPE ?y . 
+			    FILTER NOT EXISTS { ?x rdf:type owl:Thing } . # ?DPE is DPE
+			    FILTER ( ?x != ?y ) .
+                
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"FunctionalDataProperty ( \", 
+                    xsd:string( ?DPE ), 
+                    \" ) | \", 
+                    \" For the individual '\", 
+                    xsd:string( ?this ), 
+                    \"', there can be at most one distinct literal y such that the individual is connected by '\", 
+                    xsd:string( ?DPE ), 
+                    \"' with y, but is related to the literals '\", 
+                    xsd:string( ?x ), 
+                    \"' and '\", 
+                    xsd:string( ?y ),
+                    \"'\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
+# ----
 
-# definition
-# -----	
-# DatatypeDefinition := 'DatatypeDefinition' '(' axiomAnnotations Datatype DataRange ')' 
+# ---------------
+# Axioms - Keys
 
-# SPIN templates:
+
+owl2:HasKey
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Keys" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+        	CONSTRUCT {            
+                _:cv 
+            	    a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?PE1 .
+        	}
+        	WHERE {
+                ?CE owl:hasKey ?PEs .  
+				?PEs rdf:first ?PE1 .
+				?PEs rdf:rest ?r1 .
+    		    FILTER ( ?r1 = rdf:nil ) .
+    		    
+    		    ?this rdf:type ?CE .
+    		    ?this ?PE1 ?v .
+    		    ?x ?PE1 ?v . 
+    		    ?x rdf:type ?CE .
+    		    FILTER ( ?this != ?x ) .
+        		    
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"HasKey( \", 
+                    xsd:string( ?CE ), 
+                    \" ( \", 
+                    xsd:string( ?PE1 ), 
+                    \" ) ) | The individuals '\", 
+                    xsd:string( ?this ), 
+                    \"' and '\", 
+                    xsd:string( ?x ), 
+                    \"' of the class expression '\", 
+                    xsd:string( ?CE ), 
+                    \"' coincide the value '\", 
+                    xsd:string( ?v ), 
+                    \"' of the property expression '\", 
+                    xsd:string( ?PE1 ), 
+                    \"', but no 2 distinct individuals can coincide the value of this property expression.\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
+# ----
+
+# ---------------
+# Axioms - Assertions - Negative Object Property Assertions 
+
+
+owl2:NegativeObjectPropertyAssertion
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Assertions - Negative Object Property Assertions" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+        	CONSTRUCT {            
+                _:cv 
+            	    a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?OPE .
+        	}
+        	WHERE {
+#               NegativeObjectPropertyAssertion ( axiomAnnotations ObjectPropertyExpression sourceIndividual targetIndividual )
+#				-----
+			    ?negativeObjectPropertyAssertion 
+			        a owl:NegativePropertyAssertion ;
+			        owl:sourceIndividual ?sourceIndividual ;
+			        owl:assertionProperty ?OPE ;
+			        owl:targetIndividual ?targetIndividual .
+				        
+#				ObjectPropertyAssertion( ObjectPropertyExpression sourceIndividual targetIndividual ) 
+#               ----
+                ?sourceIndividual ?OPE ?targetIndividual . 
+                ?targetIndividual rdf:type owl:Thing . # ?OPE is OPE
+                
+                FILTER ( ?this = ?sourceIndividual ) .
+        		    
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"NegativeObjectPropertyAssertion ( \", 
+                    xsd:string( ?OPE ), 
+                    \" \", 
+                    xsd:string( ?sourceIndividual ), 
+                    \" \", 
+                    xsd:string( ?targetIndividual ), 
+                    \" ) | The individual '\", 
+                    xsd:string( ?sourceIndividual ), 
+                    \"' must not have to be connected by the object property expression '\", 
+                    xsd:string( ?OPE ), 
+                    \"' to the individual '\", 
+                    xsd:string( ?targetIndividual ),
+                    \"'.\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
+# ----
+
+# ---------------
+# Axioms - Assertions - Negative Data Property Assertions 
+
+
+owl2:NegativeDataPropertyAssertion
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Axioms - Assertions - Negative Data Property Assertions" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+        	CONSTRUCT {            
+                ?this 
+            	    a spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?DPE .
+        	}
+        	WHERE {
+#               NegativeDataPropertyAssertion ( axiomAnnotations DataPropertyExpression sourceIndividual targetValue )
+#				-----
+			    ?negativeDataPropertyAssertion 
+			        a owl:NegativePropertyAssertion ;
+			        owl:sourceIndividual ?sourceIndividual ;
+			        owl:assertionProperty ?OPE ;
+			        owl:targetValue ?targetValue .
+				        
+#				DataPropertyAssertion( DataPropertyExpression sourceIndividual targetValue ) 
+#               ----
+                ?sourceIndividual ?DPE ?targetValue . 
+                FILTER NOT EXISTS { ?targetValue rdf:type owl:Thing } # ?DPE is DPE
+                
+                FILTER ( ?this = ?sourceIndividual ) .
+        		    
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"NegativeDataPropertyAssertion ( \", 
+                    xsd:string( ?DPE ), 
+                    \" \", 
+                    xsd:string( ?sourceIndividual ), 
+                    \" \", 
+                    xsd:string( ?targetValue ), 
+                    \" ) | The individual '\", 
+                    xsd:string( ?sourceIndividual ), 
+                    \"' must not have to be connected by the data property expression '\", 
+                    xsd:string( ?DPE ), 
+                    \"' to the literal '\", 
+                    xsd:string( ?targetValue ),
+                    \"'.\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
+# ----
+
+# ---------------
+# Axioms - Datatype Definition
+
+
+# Pattern
 # -----
 owl2:DatatypeDefinition_Pattern
 	a spin:Template; 
 	rdfs:subClassOf spin:Templates ;
-	spin:labelTemplate "DatatypeDefinition" ;
-	rdfs:label "DatatypeDefinition" ;
-	rdfs:comment "DatatypeDefinition" ;
+	spin:labelTemplate "Axioms - Datatype Definition" ;
+	rdfs:label "Axioms - Datatype Definition" ;
+	rdfs:comment "Axioms - Datatype Definition" ;
 	spin:body [
 		a sp:Construct ;
 #	    CONSTRUCT {
@@ -6654,7 +6831,7 @@ owl2:DatatypeDefinition_Pattern
 #			    a spin:ConstraintViolation ;
 #				rdfs:label ?label
 #			    spin:violationRoot ?this ;
-#			    spin:violationPath ?property ;
+#			    spin:violationPath ?DPE ;
 #				spin:violationSource ?violationSource }
 		sp:templates ( 
 			[   sp:subject _:violation ;
@@ -6668,7 +6845,7 @@ owl2:DatatypeDefinition_Pattern
 				sp:object spin:_this ]		 
 			[   sp:subject _:violation ;
 				sp:predicate spin:violationPath ;
-				sp:object [ rdf:type rdf:Property ] ] 
+				sp:object [ sp:varName "DPE" ] ] 
 			[   sp:subject _:violation ;
 				sp:predicate spin:violationSource ;
 				sp:object "" ] ) ;

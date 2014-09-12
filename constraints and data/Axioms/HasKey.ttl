@@ -1,0 +1,66 @@
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix :         <http://www.example.org/OWL2InstanceData#> .
+
+
+# ---------------
+# Axioms - Keys
+
+    # 1 OPE (generic)
+    # -----
+    # HasKey( CE ( OPE1 ... OPEm ) ( DPE1 ... DPEn ) )
+    # HasKey( CE ( OPE ) () ) 
+    :Keys_CE1 owl:hasKey ( :Keys_DPE1 ) .
+    :Keys_I1
+        :Keys_DPE1 "a" ;
+        a owl:Thing, :Keys_CE1 .
+    :Keys_I2
+        :Keys_DPE1 "a" ; # NOT commented --> constraint violation
+        a owl:Thing, :Keys_CE1 .
+    
+    # 1 OPE (concrete)
+    # -----
+    # XXXXX
+    # XXXXX
+    # XXXXX
+        
+    # 1 DPE (generic)
+    # -----
+    # HasKey( CE ( OPE1 ... OPEm ) ( DPE1 ... DPEn ) )
+    # HasKey( CE () ( DPE ) ) 
+    :Keys_CE2 owl:hasKey ( :Keys_OPE1 ) .
+    :Keys_I3
+        :Keys_OPE1 :Keys_I5 ;
+        a owl:Thing, :Keys_CE2 .
+    :Keys_I4
+        :Keys_OPE1 :Keys_I5 ; # NOT commented --> constraint violation
+        a owl:Thing, :Keys_CE2 .
+    :Keys_I5
+        a owl:Thing, :Keys_CE2 .
+    
+    # 1 DPE (concrete)
+    # -----    
+    owl:Thing owl:hasKey ( :hasSSN ) . # Each object is uniquely identified by its social security number.
+    :Thomas 
+        a owl:Thing ;
+        :hasSSN "123-45-6789" . 	
+    :Tom 
+        :hasSSN "123-45-6789" ; # NOT commented --> constraint violation
+        a owl:Thing .  
+        
+    # 1 DPE (concrete)
+    # -----
+    :GriffinFamilyMember owl:hasKey ( :hasName ) . # Each member of the Griffin family is uniquely identified by its name.
+    :Peter 
+        a :GriffinFamilyMember, owl:Thing ;
+        :hasName "Peter" . 	
+    :Peter_Griffin 
+        :hasName "Peter" ; # NOT commented --> constraint violation 
+        a :GriffinFamilyMember, owl:Thing .		
+    :StPeter 
+        a owl:Thing ;
+        :hasName "Peter" . 	
+        
+# -----
