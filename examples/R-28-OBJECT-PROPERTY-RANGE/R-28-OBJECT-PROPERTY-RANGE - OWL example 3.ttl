@@ -1,0 +1,26 @@
+# namespace declarations
+# -----
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> . 
+@prefix oer:      <http://www.example.org/oer#> .
+@prefix ex:      <http://www.example.org/ex#> .
+
+# constraints
+# -----
+oer:addressCountry a owl:ObjectProperty .	
+oer:addressCountry rdfs:range oer:Country .
+
+# invalid data
+# -----
+ex:myAddress rdf:type oer:PostalAddress .
+ex:myAddress oer:addressCountry ex:amsterdam .
+#there is no type!
+
+# triples needed for validation:
+# - automatically infered in future versions
+# - as every OWL individual is a owl:Thing
+# -----
+ex:myAddress rdf:type owl:Thing .
+ex:amsterdam rdf:type owl:Thing .
