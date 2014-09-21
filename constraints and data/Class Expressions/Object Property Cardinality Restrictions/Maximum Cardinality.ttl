@@ -9,45 +9,40 @@
 # ObjectMaxCardinality
 
 
-	# example ( owl:maxCardinality )
-	# -----		
-	# ObjectMaxCardinality( 2 :hasPet )
-	# ObjectMaxCardinality ( 2 :hasPet owl:Thing )
-	:ObjectMaxCardinality_CE1 
-	    rdf:type owl:Restriction ;
-	    owl:maxCardinality "2"^^xsd:nonNegativeInteger ;
-	    owl:onProperty :hasPet . 
-	:ObjectMaxCardinality_I1
-		rdf:type owl:Thing ;
-		rdf:type :ObjectMaxCardinality_CE1 ;
-		:hasPet :ObjectMaxCardinality_I2 ;
-		:hasPet :ObjectMaxCardinality_I3 ; # NOT commented --> constraint violation
-		:hasPet :ObjectMaxCardinality_I4 .
-	:ObjectMaxCardinality_I2
-		rdf:type owl:Thing .
-	:ObjectMaxCardinality_I3
-		rdf:type owl:Thing .
-	:ObjectMaxCardinality_I4
-		rdf:type owl:Thing .
-	
-	# example ( owl:maxQualifiedCardinality )
-	# -----
+    # example ( cardinality )
+    # -----        
+    # ObjectMaxCardinality( 2 :hasPet )
+    :ObjectMaxCardinality_CE1 
+        a owl:Restriction ;
+        owl:maxCardinality "2"^^xsd:nonNegativeInteger ;
+        owl:onProperty :hasPet . 
+    :ObjectMaxCardinality_I1
+        a :ObjectMaxCardinality_CE1 , owl:Thing ;
+        :hasPet :ObjectMaxCardinality_I2 ;
+        :hasPet :ObjectMaxCardinality_I3 ; # NOT commented --> constraint violation
+        :hasPet :ObjectMaxCardinality_I4 .
+    :ObjectMaxCardinality_I2
+        a owl:Thing .
+    :ObjectMaxCardinality_I3
+        a owl:Thing .
+    :ObjectMaxCardinality_I4
+        a owl:Thing .
+    
+    # example ( qualified cardinality )
+    # -----
     # ObjectMaxCardinality ( 1 :fatherOf :Man ) 
-	:ObjectMaxCardinality_CE2 rdfs:subClassOf [
-	    rdf:type owl:Restriction ;
-	    owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-	    owl:onProperty :fatherOf ;
-	    owl:onClass :Man ] . 
-	:ObjectMaxCardinality_I5
-		rdf:type owl:Thing ;
-		rdf:type :ObjectMaxCardinality_CE2 ;
-		:fatherOf :ObjectMaxCardinality_I6 ; # NOT commented --> constraint violation
-		:fatherOf :ObjectMaxCardinality_I7 .
-	:ObjectMaxCardinality_I6
-		rdf:type owl:Thing ;
-	    rdf:type :Man .
-	:ObjectMaxCardinality_I7
-		rdf:type owl:Thing ;
-	    rdf:type :Man .
-	
+    :ObjectMaxCardinality_CE2
+        a owl:Restriction ;
+        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty :fatherOf ;
+        owl:onClass :Man . 
+    :ObjectMaxCardinality_I5
+        a :ObjectMaxCardinality_CE2 , owl:Thing ;
+        :fatherOf :ObjectMaxCardinality_I6 ; # NOT commented --> constraint violation
+        :fatherOf :ObjectMaxCardinality_I7 .
+    :ObjectMaxCardinality_I6
+        a :Man , owl:Thing .
+    :ObjectMaxCardinality_I7
+        a :Man , owl:Thing .
+    
 # -----

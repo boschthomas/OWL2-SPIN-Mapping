@@ -8,34 +8,33 @@
 # ---------------
 # DataMaxCardinality
 
-	# example ( owl:maxCardinality )
-	# -----	
-	# DataMaxCardinality( 1 :hasName ) 
-	# DataMaxCardinality ( 1 :hasName rdfs:Literal )
-	:DataMaxCardinality_CE1 
-	    rdf:type owl:Restriction ;
-	    owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-	    owl:onProperty :hasName . 
-	:DataMaxCardinality_I1
-	    rdf:type owl:Thing ;
-		rdf:type :DataMaxCardinality_CE1 ;
-		:hasName "Thomas Bosch" ; # NOT commented --> constraint violation
-		:hasName "Thomas" .
-		
-	# example ( owl:maxQualifiedCardinality )
-	# -----
-	# DataMaxCardinality( 2 :hasName xsd:string ) 
-	:DataMaxCardinality_CE2 
-	    rdf:type owl:Restriction ;
-	    owl:maxQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-	    owl:onProperty :hasName ;
-		owl:onClass xsd:string .
-	:DataMaxCardinality_I2
-	    rdf:type owl:Thing ;
-		rdf:type :DataMaxCardinality_CE2 ;
-		:hasName "Thomas Bosch"^^xsd:string ;
-		:hasName "Tommi" ; # NOT commented --> constraint violation
-		:hasName "123"^^xsd:nonNegativeInteger ;
-		:hasName "Thomas"^^xsd:string .
-		
+    # example ( owl:maxCardinality )
+    # -----    
+    # DataMaxCardinality( 1 :hasName ) 
+    :DataMaxCardinality_CE1 
+        rdf:type owl:Restriction ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty :hasName . 
+    :DataMaxCardinality_I1
+        rdf:type owl:Thing ;
+        rdf:type :DataMaxCardinality_CE1 ;
+        :hasName "Thomas Bosch" ; # NOT commented --> constraint violation
+        :hasName "Thomas" .
+        
+    # example ( owl:maxQualifiedCardinality )
+    # -----
+    # DataMaxCardinality( 2 :hasName xsd:string ) 
+    :DataMaxCardinality_CE2 
+        rdf:type owl:Restriction ;
+        owl:maxQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+        owl:onProperty :hasName ;
+        owl:onClass xsd:string .
+    :DataMaxCardinality_I2
+        rdf:type owl:Thing ;
+        rdf:type :DataMaxCardinality_CE2 ;
+        :hasName "Thomas Bosch"^^xsd:string ;
+        :hasName "Tommi" ; # NOT commented --> constraint violation
+        :hasName "123"^^xsd:nonNegativeInteger ;
+        :hasName "Thomas"^^xsd:string .
+        
 # -----

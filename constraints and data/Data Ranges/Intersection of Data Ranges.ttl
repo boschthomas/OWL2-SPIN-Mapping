@@ -9,16 +9,16 @@
 # DataIntersectionOf
 
 
-	# 2 DR
-	# -----		
-	# DataIntersectionOf( xsd:nonNegativeInteger xsd:nonPositiveInteger ) 
+    # 2 DR
+    # -----          
+    # DataIntersectionOf( xsd:nonNegativeInteger xsd:nonPositiveInteger ) 
     :DataIntersectionOf_DT1
-	    rdf:type rdfs:Datatype ;
+        rdf:type rdfs:Datatype ;
         owl:intersectionOf ( xsd:nonNegativeInteger xsd:nonPositiveInteger ) .
-	:DataIntersectionOf_L1
-		rdf:type rdfs:Literal ;
-		rdf:type :DataIntersectionOf_DT1 ;
-#		rdf:type xsd:nonNegativeInteger ; # commented --> constraint violation
-	    rdf:type xsd:nonPositiveInteger .
-	
+    :DataIntersectionOf_L1
+        rdf:type rdfs:Literal ;
+        rdf:type :DataIntersectionOf_DT1 ;
+#       rdf:type xsd:nonNegativeInteger ; # commented --> constraint violation
+        rdf:type xsd:nonPositiveInteger .
+     
 # -----

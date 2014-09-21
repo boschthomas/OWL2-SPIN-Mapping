@@ -8,17 +8,17 @@
 # ---------------
 # ObjectHasSelf
 
-		
-	# concrete
-	# -----
-	# ObjectHasSelf( :likes )
-	:ObjectHasSelf_C1 
-		a owl:Restriction ;
-		owl:onProperty :likes ;
-		owl:hasSelf "true"^^xsd:boolean .
-	:Thomas
-#		:likes :Thomas ; # commented --> constraint violation
-		:likes :Angelina ; 
-		a :ObjectHasSelf_C1, owl:Thing .
+        
+    # concrete
+    # -----
+    # ObjectHasSelf( :likes )
+    :ObjectHasSelf_C1 
+        a owl:Restriction ;
+        owl:onProperty :likes ;
+        owl:hasSelf "true"^^xsd:boolean .
+    :Thomas
+#       :likes :Thomas ; # commented --> constraint violation
+        :likes :Angelina ; 
+        a :ObjectHasSelf_C1, owl:Thing .
 
 # -----

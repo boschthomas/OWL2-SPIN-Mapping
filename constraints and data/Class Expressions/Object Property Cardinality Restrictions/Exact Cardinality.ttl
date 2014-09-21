@@ -9,42 +9,37 @@
 # ObjectExactCardinality
 
 
-	# example ( owl:cardinality )
-	# -----		
-	# ObjectExactCardinality( 1 :hasPet )
-	# ObjectExactCardinality ( 1 :hasPet owl:Thing )
-	:ObjectExactCardinality_CE2 
-       rdf:type owl:Restriction ;
+    # example ( cardinality )
+    # -----        
+    # ObjectExactCardinality( 1 :hasPet )
+    :ObjectExactCardinality_CE2 
+       a owl:Restriction ;
        owl:cardinality "1"^^xsd:nonNegativeInteger ;
        owl:onProperty :hasPet . 
     :ObjectExactCardinality_I1
-		rdf:type owl:Thing ;
-	    rdf:type :ObjectExactCardinality_CE2 ;
+        a :ObjectExactCardinality_CE2 , owl:Thing ;
         :hasPet :ObjectExactCardinality_I2 ; # NOT commented --> constraint violation
-	    :hasPet :ObjectExactCardinality_I3 .
-	:ObjectExactCardinality_I2
-		rdf:type owl:Thing .
-	:ObjectExactCardinality_I3
-		rdf:type owl:Thing .
-	
-	# example ( owl:qualifiedCardinality )
-	# -----
+        :hasPet :ObjectExactCardinality_I3 .
+    :ObjectExactCardinality_I2
+        a owl:Thing .
+    :ObjectExactCardinality_I3
+        a owl:Thing .
+    
+    # example ( qualified cardinality )
+    # -----
     # ObjectExactCardinality ( 1 :hasPet :Dog ) 
     :ObjectExactCardinality_CE1 
-        rdf:type owl:Restriction ;
+        a owl:Restriction ;
         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
         owl:onProperty :hasPet ;
         owl:onClass :Dog . 
     :ObjectExactCardinality_I4
-		rdf:type owl:Thing ;
-	    rdf:type :ObjectExactCardinality_CE1 ;
+        a :ObjectExactCardinality_CE1 , owl:Thing ;
         :hasPet :ObjectExactCardinality_I5 ; # NOT commented --> constraint violation
-	    :hasPet :ObjectExactCardinality_I6 .
+        :hasPet :ObjectExactCardinality_I6 .
     :ObjectExactCardinality_I5
-		rdf:type owl:Thing ;
-        rdf:type :Dog .
+        a :Dog , owl:Thing .
     :ObjectExactCardinality_I6
-		rdf:type owl:Thing ;
-        rdf:type :Dog .
-	
+        a :Dog , owl:Thing .
+    
 # -----

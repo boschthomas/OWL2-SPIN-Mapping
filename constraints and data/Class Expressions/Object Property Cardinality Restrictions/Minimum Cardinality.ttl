@@ -9,48 +9,43 @@
 # ObjectMinCardinality
 
 
-	# example ( owl:minCardinality )
-	# -----		
-	# ObjectMinCardinality ( 3 :hasPet )
-	# ObjectMinCardinality ( 3 :hasPet owl:Thing )
+    # example ( cardinality )
+    # -----        
+    # ObjectMinCardinality ( 3 :hasPet )
     :ObjectMinCardinality_CE1 
-        rdf:type owl:Restriction ;
+        a owl:Restriction ;
         owl:minCardinality "3"^^xsd:nonNegativeInteger ;
         owl:onProperty :hasPet . 
     :ObjectMinCardinality_I1
-		rdf:type owl:Thing ;
-	    rdf:type :ObjectMinCardinality_CE1 ;
-	    :hasPet :ObjectMinCardinality_I2 ;
-#	    :hasPet :ObjectMinCardinality_I3 ; # commented --> constraint violation
-		:hasPet :ObjectMinCardinality_I4 .
-	:ObjectMinCardinality_I2
-		rdf:type owl:Thing .
-	:ObjectMinCardinality_I3
-		rdf:type owl:Thing .
-	:ObjectMinCardinality_I4
-		rdf:type owl:Thing .
-	
-	# example ( owl:minQualifiedCardinality )
-	# -----
+        a :ObjectMinCardinality_CE1 , owl:Thing ;
+        :hasPet :ObjectMinCardinality_I2 ;
+#       :hasPet :ObjectMinCardinality_I3 ; # commented --> constraint violation
+        :hasPet :ObjectMinCardinality_I4 .
+    :ObjectMinCardinality_I2
+        a owl:Thing .
+    :ObjectMinCardinality_I3
+        a owl:Thing .
+    :ObjectMinCardinality_I4
+        a owl:Thing .
+    
+    # example ( qualified cardinality )
+    # -----
     # ObjectMinCardinality ( 2 :fatherOf :Man ) 
     :ObjectMinCardinality_CE2 
-        rdf:type owl:Restriction ;
+        a owl:Restriction ;
         owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
         owl:onProperty :fatherOf ;
         owl:onClass :Man . 
     :ObjectMinCardinality_I5
-		rdf:type owl:Thing ;
-	    rdf:type :ObjectMinCardinality_CE2 ;
-	    :fatherOf :ObjectMinCardinality_I6 ;
-#		:fatherOf :ObjectMinCardinality_I7 ; # commented --> constraint violation
-		:fatherOf :ObjectMinCardinality_I8 .
+        a :ObjectMinCardinality_CE2 , owl:Thing ;
+        :fatherOf :ObjectMinCardinality_I6 ;
+#       :fatherOf :ObjectMinCardinality_I7 ; # commented --> constraint violation
+        :fatherOf :ObjectMinCardinality_I8 .
     :ObjectMinCardinality_I6
-		rdf:type owl:Thing ;
-        rdf:type :Man .
+        a :Man , owl:Thing .
     :ObjectMinCardinality_I7
-		rdf:type owl:Thing ;
-        rdf:type :Man .
+        a :Man , owl:Thing .
     :ObjectMinCardinality_I8
-		rdf:type owl:Thing .
-	
+        a owl:Thing .
+    
 # -----
