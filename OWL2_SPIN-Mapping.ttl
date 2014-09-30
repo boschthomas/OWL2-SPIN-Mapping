@@ -6493,7 +6493,11 @@ owl2spin:ObjectPropertyDomain
                     xsd:string( ?OPE ), 
                     \" \", 
                     xsd:string( ?CE ), 
-                    \" )\" ) 
+                    \" ) - The individual '\",
+                    xsd:string( ?this ), 
+                    \"' must be an instance of '\", 
+                    xsd:string( ?CE ), 
+                    \"'\") 
                     AS ?violationMessage ) . 
             }
             """ ;
@@ -6601,7 +6605,11 @@ owl2spin:ObjectPropertyRange
                     xsd:string( ?OPE ), 
                     \" \", 
                     xsd:string( ?CE ), 
-                    \" )\" ) 
+                    \" ) - The object '\",
+                    xsd:string( ?this ), 
+                    \"' must be an instance of '\", 
+                    xsd:string( ?CE ), 
+                    \"'\") 
                     AS ?violationMessage ) . 
             }
             """ ;
@@ -7153,8 +7161,12 @@ owl2spin:DataPropertyDomain
                     xsd:string( ?DPE ), 
                     \" \", 
                     xsd:string( ?CE ), 
-                    \" )\" ) 
-                    AS ?violationMessage ) . 
+                    \" ) - The individual '\",
+                    xsd:string( ?this ), 
+                    \"' must be an instance of '\", 
+                    xsd:string( ?CE ), 
+                    \"'\") 
+                    AS ?violationMessage ) .  
             }
             """ ;
     ] .
