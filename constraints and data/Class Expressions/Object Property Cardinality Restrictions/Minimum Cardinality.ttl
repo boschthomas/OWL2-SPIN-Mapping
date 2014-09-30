@@ -9,7 +9,7 @@
 # ObjectMinCardinality
 
 
-    # example ( cardinality )
+    # cardinality (concrete)
     # -----        
     # ObjectMinCardinality ( 3 :hasPet )
     :ObjectMinCardinality_CE1 
@@ -27,8 +27,21 @@
         a owl:Thing .
     :ObjectMinCardinality_I4
         a owl:Thing .
+        
+    # cardinality 1 (concrete) 
+    # -----  
+    # ObjectMinCardinality ( 1 :hasPet )
+    :ObjectMinCardinality_CE1_1 
+        a owl:Restriction ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty :hasPet . 
+    :ObjectMinCardinality_I1_1
+#       :hasPet :ObjectMinCardinality_I2_1 ; # commented --> constraint violation
+        a :ObjectMinCardinality_CE1_1 , owl:Thing .
+    :ObjectMinCardinality_I2_1
+        a owl:Thing .    
     
-    # example ( qualified cardinality )
+    # qualified cardinality (concrete)
     # -----
     # ObjectMinCardinality ( 2 :fatherOf :Man ) 
     :ObjectMinCardinality_CE2 
@@ -47,5 +60,19 @@
         a :Man , owl:Thing .
     :ObjectMinCardinality_I8
         a owl:Thing .
+        
+    # qualified cardinality 1 (concrete)
+    # -----
+    # ObjectMinCardinality ( 1 :fatherOf :Man ) 
+    :ObjectMinCardinality_CE2_1 
+        a owl:Restriction ;
+        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty :fatherOf ;
+        owl:onClass :Man . 
+    :ObjectMinCardinality_I5_1
+#       :fatherOf :ObjectMinCardinality_I6_1 ; # commented --> constraint violation
+        a :ObjectMinCardinality_CE2_1 , owl:Thing .
+    :ObjectMinCardinality_I6_1
+        a :Man , owl:Thing .   
     
 # -----

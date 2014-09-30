@@ -115,7 +115,9 @@ owl:Thing
 		# -----
 		# Minimum Cardinality 
 		[   a owl2spin:DataMinCardinality_Cardinality ] ,
+		[   a owl2spin:MinCardinality_Cardinality_1 ] ,
 		[   a owl2spin:DataMinCardinality_QualifiedCardinality ] ,
+		[   a owl2spin:MinCardinality_QualifiedCardinality_1 ] ,
 		# Maximum Cardinality
 		[   a owl2spin:DataMaxCardinality_Cardinality ] ,
 		[   a owl2spin:DataMaxCardinality_QualifiedCardinality ] ,
@@ -4051,6 +4053,49 @@ owl2spin:DataMinCardinality_Cardinality
             """ ;
     ] .
     
+owl2spin:MinCardinality_Cardinality_1
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Class Expressions - Object or Data Property Cardinality Restrictions - Minimum Cardinality" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            PREFIX owl2spin: <http://constraints.org/owl2#>
+        	CONSTRUCT {            
+                owl2spin:cv 
+            	    rdf:type spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?PE .
+        	}
+        	WHERE {
+#        	    FILTER NOT EXISTS { ?this ?PE ?l } .
+#               ?this rdf:type ?CE .
+#        	    -----
+                FILTER NOT EXISTS { ?this ?PE ?l } .
+                ?this rdf:type ?CE .
+ 
+#	            MinCardinality ( Minimum PE )
+#	            -----
+		        ?CE rdf:type owl:Restriction .
+		        ?CE owl:minCardinality '1'^^xsd:nonNegativeInteger .
+		        ?CE owl:onProperty ?PE .
+   
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"MinCardinality ( 1 \", 
+                    xsd:string( ?PE ), 
+                    \" ) | The individual '\", 
+                    xsd:string( ?this ), 
+                    \"' can only be connected by '\", 
+                    xsd:string( ?PE ), 
+                    \"' to at least 1 individual / literal, but is connected to 0 individuals / literals.\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
 owl2spin:DataMinCardinality_QualifiedCardinality
 	a spin:ConstructTemplate ;
     rdfs:subClassOf spin:ConstructTemplates ;
@@ -4108,6 +4153,54 @@ owl2spin:DataMinCardinality_QualifiedCardinality
                     \"', but is connected to \",
                     xsd:string( ?cardinality ),
                     \" literal(s).\" ) 
+                    AS ?violationMessage ) . 
+            }
+            """ ;
+    ] .
+    
+owl2spin:MinCardinality_QualifiedCardinality_1
+	a spin:ConstructTemplate ;
+    rdfs:subClassOf spin:ConstructTemplates ;
+    spin:labelTemplate "Class Expressions - Object or Data Property Cardinality Restrictions - Minimum Cardinality" ; # spin:violationSource
+    spin:body [
+        rdf:type sp:Construct ;
+        sp:text """
+            PREFIX owl2spin: <http://constraints.org/owl2#>
+        	CONSTRUCT {            
+                owl2spin:cv 
+            	    rdf:type spin:ConstraintViolation ;
+                    spin:violationRoot ?this ;
+                    rdfs:label ?violationMessage ;
+                    spin:violationPath ?PE .
+        	}
+        	WHERE {
+#        	    FILTER NOT EXISTS { ?this ?PE ?l } .
+#               ?this rdf:type ?CE .
+#        	    -----
+                FILTER NOT EXISTS { ?this ?PE ?l } .
+                ?this rdf:type ?CE .
+ 
+#	            MinCardinality ( Minimum PE DR )
+#	            -----
+		        ?CE rdf:type owl:Restriction .
+		        ?CE owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger .
+		        ?CE owl:onProperty ?PE .
+		        ?CE owl:onClass ?DR .	    
+   
+#               violation message
+#               -----
+                BIND ( CONCAT( 
+                    \"MinCardinality ( 1 \",  
+                    xsd:string( ?PE ), 
+                    \" \", 
+                    xsd:string( ?DR ), 
+                    \" ) | The individual '\", 
+                    xsd:string( ?this ), 
+                    \"' can only be connected by '\", 
+                    xsd:string( ?PE ), 
+                    \"' to at least 1 individual / literal in '\", 
+                    xsd:string( ?DR ),
+                    \"', but is connected to 0 individuals / literals.\" ) 
                     AS ?violationMessage ) . 
             }
             """ ;

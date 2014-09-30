@@ -8,7 +8,7 @@
 # ---------------
 # DataMinCardinality
 
-    # example ( owl:minCardinality )
+    # cardinality (concrete)
     # -----    
     # DataMinCardinality( 2 :hasName ) 
     :DataMinCardinality_CE1 
@@ -21,19 +21,44 @@
 #       :hasName "Thomas Bosch" ; # commented --> constraint violation
         :hasName "Thomas" .
         
-    # example ( owl:minQualifiedCardinality )
+    # cardinality 1 (concrete) 
+    # -----  
+    # DataMinCardinality( 2 :hasName )
+    :DataMinCardinality_CE2 
+        rdf:type owl:Restriction ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty :hasName . 
+    :DataMinCardinality_I2
+        rdf:type owl:Thing ;
+#       :hasName "Thomas Bosch" ; # commented --> constraint violation
+        rdf:type :DataMinCardinality_CE2 .   
+        
+    # qualified cardinality (concrete)
     # -----
     # DataMinCardinality( 2 :hasName xsd:string ) 
-    :DataMinCardinality_CE2 
+    :DataMinCardinality_CE3 
         rdf:type owl:Restriction ;
         owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
         owl:onProperty :hasName ;
         owl:onClass xsd:string .
-    :DataMinCardinality_I2
+    :DataMinCardinality_I3
         rdf:type owl:Thing ;
-        rdf:type :DataMinCardinality_CE2 ;
+        rdf:type :DataMinCardinality_CE3 ;
 #       :hasName "Thomas Bosch"^^xsd:string ; # commented --> constraint violation
         :hasName "123"^^xsd:nonNegativeInteger ;
         :hasName "Thomas"^^xsd:string .
+        
+    # qualified cardinality 1 (concrete)
+    # -----
+    # DataMinCardinality( 1 :hasName xsd:string ) 
+    :DataMinCardinality_CE4 
+        rdf:type owl:Restriction ;
+        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty :hasName ;
+        owl:onClass xsd:string .
+    :DataMinCardinality_I4
+        rdf:type owl:Thing ;
+#       :hasName "Thomas Bosch"^^xsd:string ; # commented --> constraint violation
+        rdf:type :DataMinCardinality_CE4 .   
         
 # -----
